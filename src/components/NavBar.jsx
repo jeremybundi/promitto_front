@@ -39,14 +39,14 @@ const Navbar = () => {
 
   return (
     <nav className="">
-      <div className="max-w-7xl w-full md:mx-auto px-4">
+      <div className="max-w-7xl w-full h-16 md:h-16 md:mx-auto px-4">
         <div className="flex justify-between items-center text-sm py-4">
           <div className="flex-shrink-0">
             <img src={logo} alt="Logo" className="h-100%" />
           </div>
 
           {/* Navigation links for large screens */}
-          <div className="hidden md:flex text-[707070] flex-grow justify-center space-x-12">
+          <div className="hidden md:flex text-[#707070] flex-grow justify-center space-x-12">
             <Link
               to="/"
               className={`font-medium transition duration-200 ${activeLink === '/' ? 'text-yellow-500' : 'text-gray-800 hover:underline hover:underline-yellow-700'}`}
