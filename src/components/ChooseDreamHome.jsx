@@ -3,12 +3,16 @@ import axios from 'axios';
 import sizeIcon from '../assets/images/icons8-full-screen-100.jpg';     
 import typeIcon from '../assets/images/key_4838168.jpg';     
 import bedroomsIcon from '../assets/images/icons8-bed-96.jpg'; 
-import ownhome from '../assets/images/ownhome.jpg'; // Import your image
+import ownhome from '../assets/images/ownhome.png'; // Import your image
+import enrollIcon from '../assets/images/enroll.jpg'; // Adjust the path as necessary
+
+
 
 
 const ChooseDreamHome = () => {
     const [houses, setHouses] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [visibleCount, setVisibleCount] = useState(4); // Controls how many houses to display
 
     useEffect(() => {
         const fetchHouses = async () => {
@@ -25,6 +29,33 @@ const ChooseDreamHome = () => {
 
         fetchHouses();
     }, []);
+  //done houses
+    const handleViewMore = () => {
+        setVisibleCount((prevCount) => prevCount + 4); // Increase visible houses by 4 on button click
+    };
+
+  //ongoing houses
+  const [visibleOngoingCount, setVisibleOngoingCount] = useState(8); 
+
+  const handleViewMoreOngoing = () => {
+      setVisibleOngoingCount((prevCount) => prevCount + 4); 
+  };
+    //fetching ongoingHouses fromapi
+    const [ongoingHouses, setOngoingHouses] = useState([]); 
+
+    useEffect(() => {
+        const fetchOngoingHouses = async () => {
+            try {
+                const response = await axios.get('/api/house_ongoing'); 
+                setOngoingHouses(response.data);
+                console.log(response.data);
+            } catch (error) {
+                console.error('Error fetching ongoing houses:', error);
+            }
+        };
+
+        fetchOngoingHouses();
+    }, []);
 
     if (loading) {
         return <div>Loading...</div>;
@@ -35,12 +66,9 @@ const ChooseDreamHome = () => {
             {/* First Row - All Homes and house details */}
             <div className="flex flex-col md:flex-row justify-between">
                 {/* First Column */}
-                <div className="md:w-[25%] md:mx-11 md:mt-[100px] p-4">
+                <div className="md:w-[25%] hidden md:block md:mx-11 md:mt-[100px] p-4">
                     <h2 className="md:text-2xl text-lg text-[#F2B807] font-sans font-bold mb-2">All Homes</h2>
-
-                    {/* Yellow line below "All Homes" */}
                     <hr className="border-t-2 border-[#F2B807] mb-4" />
-                    
                     {/* Links to bedroom types */}
                     <div className="mb-4">
                         <a href="#" className="text-sm font-semibold text-gray-600 block mb-4">2 Bedrooms</a>
@@ -51,7 +79,7 @@ const ChooseDreamHome = () => {
                         <hr className="border-t border-[#F8F8F8]" />
                         <a href="#" className="text-sm font-semibold text-gray-600 block mt-4 mb-4">3 Bedroom With Floor Plan</a>
                         <hr className="border-t border-[#F8F8F8]" />
-                        <a href="#" className="text-sm font-semibold text-gray-600 block mt-4 mb-4">Commercial Buildings </a>
+                        <a href="#" className="text-sm font-semibold text-gray-600 block mt-4 mb-4">Commercial Buildings</a>
                         <hr className="border-t border-[#F8F8F8]" />
                         <a href="#" className="text-sm font-semibold text-gray-600 block mt-4 mb-4">4 Bedroom With Floor Plan</a>
                         <hr className="border-t border-[#F8F8F8]" />
@@ -68,7 +96,7 @@ const ChooseDreamHome = () => {
                     <h3 className='font-semibold md:text-sm text-xs mb-2 md:mb-9'>Discover Your Dream Home in Kenya with Promitto Ltd.</h3>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {houses.map((house) => (
+                        {houses.slice(0, visibleCount).map((house) => (
                             <div key={house.id} className="rounded-xl md:w-[400px] shadow-md overflow-hidden">
                                 <img 
                                     src={house.image_url} 
@@ -92,7 +120,7 @@ const ChooseDreamHome = () => {
                                         </div>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <button className="bg-[#F2B807] text-white py-2 px-4 rounded">View House</button>
+                                        <button className="bg-[#F2B807] text-white py-2 px-4 rounded-xl">View House</button>
                                         <div className="flex flex-col items-end">
                                             <span className="mr-20 font-semibold">Pay</span>
                                             <span className="text-sm "> {house.price}/=  Per Month</span>
@@ -102,30 +130,89 @@ const ChooseDreamHome = () => {
                             </div>
                         ))}
                     </div>
+                    
+                    {/* "View More" Button */}
+                    {visibleCount < houses.length && (
+                        <div className="flex justify-center mt-6">
+                            <button 
+                                onClick={handleViewMore} 
+                                className="bg-[#F2B807] text-white py-2 px-6 rounded-xl"
+                            >
+                                View More Houses 
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
-            
-            {/* New Row for Two Columns at the Bottom */}
-            <div className="flex mt-12 w-full h-[350px] ">
-                {/* Column 1 - 60% Width */}
-                <div className="w-[60%] bg-[#F2B807] rounded-tl-2xl rounded-br-2xl p-4">
-                    <h3 className="text-xl font-bold mb-4">Column 1 - 60%</h3>
-                    <p>This is the content for the first column, which takes up 60% of the width.</p>
-                </div>
+          {/* New Row for Two Columns at the Bottom */}
+          <div className="flex h-[380px] md:mx-8">
+            {/* Column 1 - 60% Width */}
+            <div className="w-[55%] bg-[#F2B807] rounded-tl-2xl rounded-br-2xl p-5">
+              <h3 className="md:text-6xl md:mt-12 text-xl mt-3 font-lufga font-semibold mb-4">Become a home owner today by Enrolling as a member.</h3>
+              <p className='md:text-sm text-xs font-light font-poppins'>Here at Promitto Ltd we to turn your dreams into reality, as we pride ourselves on delivering extraordinary service, 
+                impeccable quality, and unforgettable living experiences.</p>
 
-                  {/* Column 2 - 40% Width with Image */}
-                  <div 
-                    className="w-[40%] rounded-bl-2xl rounded-tr-2xl bg-gray-100 p-4" 
-                    style={{
-                        backgroundImage: `url(${ownhome})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center',
-                    }}
-                >
-        
-                </div>
+
+                    {/* Enroll Now Button */}
+                    <button className="flex items-center border bg-gray-100 border-black text-black px-4 py-2 mt-5 rounded-lg">
+                    Enroll Now
+                    <img src={enrollIcon} alt="Enroll Icon" className="ml-2 w-5 h-5" /> 
+                  
+                  </button>
+              
+                
             </div>
+
+            {/* Column 2 - 40% Width with Image */}
+            <div 
+              className="w-[45%]  rounded-bl-2xl rounded-tr-2xl "
+              style={{
+                backgroundImage: `url(${ownhome})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+              }}
+            >
+          </div>
         </div>
+        <div className="flex flex-col items-center text-center">
+          <h3 className='text-[#F2B807] md:text-3xl text-2xl font-semibold mt-8 mb-3'> Our Ongoing Projects </h3>
+          <p className='text-sm'>Some of our ongoing projects at various stages</p>
+        </div>
+        {/* Ongoing Projects */}
+        <div className="mt-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:mx-11 md:grid-cols-4 gap-4">
+                {ongoingHouses.slice(0, visibleOngoingCount).map((house) => (
+                    <div key={house.id} className="rounded-xl shadow-md overflow-hidden">
+                        <img 
+                            src={house.image_url} 
+                            alt={house.description} 
+                            className="w-full h-56 md:h-64 lg:h-72 object-cover"
+                        />
+                        <div className="p-4">
+                            <p className="font-bold">{house.description}</p>
+                            <p className="text-sm text-gray-600">{house.location}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            {/* "View More" Button */}
+            {visibleOngoingCount < ongoingHouses.length && (
+                <div className="flex justify-center mt-8">
+                    <button 
+                        onClick={handleViewMoreOngoing} 
+                        className="bg-[#F2B807] text-white py-3 px-4 font-sans font-semibold rounded-2xl"
+                    >
+                        View More Ongoing Projects 
+                    </button>
+                </div>
+            )}
+        </div>
+
+
+        </div>
+
+        
     );
 };
 

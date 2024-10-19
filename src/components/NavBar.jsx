@@ -1,30 +1,35 @@
 import React, { useState } from 'react';
 import logo from '../assets/images/logo.jpg';
 import dropdownIcon from '../assets/icons/dropdown.svg';
-import { HiMenu } from 'react-icons/hi';
-import { HiX } from 'react-icons/hi';
+import { HiMenu, HiX } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const [isHomeDropdownOpen, setIsHomeDropdownOpen] = useState(false);
+  const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeLink, setActiveLink] = useState('/');
   let dropdownTimer;
 
-  const toggleDropdown = () => {
+  const toggleHomeDropdown = () => {
     clearTimeout(dropdownTimer);
-    setIsDropdownOpen(!isDropdownOpen);
+    setIsHomeDropdownOpen(!isHomeDropdownOpen);
   };
 
-  const handleMouseEnter = () => {
+  const toggleAboutDropdown = () => {
     clearTimeout(dropdownTimer);
-    setIsDropdownOpen(true);
+    setIsAboutDropdownOpen(!isAboutDropdownOpen);
   };
 
-  const handleMouseLeave = () => {
+  const handleMouseEnter = (setDropdownOpen) => {
+    clearTimeout(dropdownTimer);
+    setDropdownOpen(true);
+  };
+
+  const handleMouseLeave = (setDropdownOpen) => {
     dropdownTimer = setTimeout(() => {
-      setIsDropdownOpen(false);
-    }, 200); // Delay before closing the dropdown
+      setDropdownOpen(false);
+    }, 200);
   };
 
   const toggleMenu = () => {
@@ -33,16 +38,42 @@ const Navbar = () => {
 
   const handleLinkClick = (link) => {
     setActiveLink(link);
-    setIsDropdownOpen(false);
+    setIsHomeDropdownOpen(false);
+    setIsAboutDropdownOpen(false);
     setIsMenuOpen(false);
   };
 
   return (
-    <nav className="">
+    <nav className="relative">
       <div className="max-w-7xl w-full h-16 md:h-16 md:mx-auto px-4">
         <div className="flex justify-between items-center text-sm py-4">
           <div className="flex-shrink-0">
             <img src={logo} alt="Logo" className="h-100%" />
+          </div>
+
+          {/* Home Types dropdown centered for small screens */}
+          <div
+            className="flex md:hidden mx-auto"
+            onMouseEnter={() => handleMouseEnter(setIsHomeDropdownOpen)}
+            onMouseLeave={() => handleMouseLeave(setIsHomeDropdownOpen)}
+            onClick={toggleHomeDropdown}
+          >
+            <span className="font-medium text-gray-800 cursor-pointer hover:underline">
+              Home Types
+            </span>
+            <img src={dropdownIcon} alt="Dropdown" className="inline-block w-4 h-4 ml-1" />
+            {isHomeDropdownOpen && (
+              <div className="absolute mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-50">
+                <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">2 Bedrooms</a>
+                <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">3 Bedrooms</a>
+                <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Perimeter Walls</a>
+                <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">3 Bedroom With Floor Plan</a>
+                <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Commercial Buildings</a>
+                <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">4 Bedroom With Floor Plan</a>
+                <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Studio/DSQ</a>
+                <a href="#" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">Rentals/Commercial Buildings</a>
+              </div>
+            )}
           </div>
 
           {/* Navigation links for large screens */}
@@ -54,21 +85,6 @@ const Navbar = () => {
             >
               Home
             </Link>
-            <div className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-              <span
-                className={`font-medium transition duration-400 ${activeLink === '/about' ? 'text-yellow-500' : 'text-gray-800 hover:underline hover:underline-yellow'}`}
-              >
-                About Us
-              </span>
-              <img src={dropdownIcon} alt="Dropdown" className="inline-block w-4 h-4 ml-1 cursor-pointer" />
-              {isDropdownOpen && (
-                <div className="absolute mt-1 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                  <Link to="/board-members" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/board-members')}>Board Members</Link>
-                  <Link to="/menu-item-2" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/menu-item-2')}>Menu Item 2</Link>
-                  <Link to="/menu-item-3" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/menu-item-3')}>Menu Item 3</Link>
-                </div>
-              )}
-            </div>
             <Link
               to="/projects"
               className={`font-medium transition duration-200 ${activeLink === '/projects' ? 'text-yellow-500' : 'text-gray-800 hover:underline hover:underline-yellow'}`}
@@ -78,15 +94,31 @@ const Navbar = () => {
             </Link>
             <Link
               to="/dreams"
-              className={`font-medium transition duration-200 ${activeLink === '/how-to-own' ? 'text-yellow-500' : 'text-gray-800 hover:underline hover:underline-yellow'}`}
+              className={`font-medium transition duration-200 ${activeLink === '/dreams' ? 'text-yellow-500' : 'text-gray-800 hover:underline hover:underline-yellow'}`}
               onClick={() => handleLinkClick('/dreams')}
             >
               How To Own
             </Link>
+            <div className="relative" onMouseEnter={() => handleMouseEnter(setIsAboutDropdownOpen)} onMouseLeave={() => handleMouseLeave(setIsAboutDropdownOpen)}>
+              <span
+                className={`font-medium transition duration-400 ${activeLink === '/about' ? 'text-yellow-500' : 'text-gray-800 hover:underline hover:underline-yellow'}`}
+              >
+                About Us
+              </span>
+              <img src={dropdownIcon} alt="Dropdown" className="inline-block w-4 h-4 ml-1 cursor-pointer" />
+              {isAboutDropdownOpen && (
+                <div className="absolute mt-1 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                  <Link to="/board-members" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/board-members')}>Board Members</Link>
+                  <Link to="/menu-item-2" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/menu-item-2')}>Menu Item 2</Link>
+                    <Link to="/menu-item-3" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/menu-item-3')}>Menu Item 3</Link>
+                  {/* More dropdown items */}
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Hamburger Icon for small screens */}
-          <div className="md:hidden mr-7 flex items-center" onClick={toggleMenu}>
+          <div className="md:hidden mr-auto flex items-center" onClick={toggleMenu}>
             <HiMenu className="h-8 w-8 text-gray-800 cursor-pointer" />
           </div>
 
@@ -97,13 +129,12 @@ const Navbar = () => {
             onClick={() => handleLinkClick('/create-account')}
           >
             Create Account
-            <img src={dropdownIcon} alt="Dropdown" className="inline-block w-4 h-4 ml-1" />
           </Link>
         </div>
 
-        {/* Navigation links for small screens (hidden on md and up) */}
+        {/* Navigation links for small screens */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white shadow-lg tetx-[707070] rounded-md mt-2">
+          <div className="md:hidden bg-white shadow-lg rounded-md mt-2">
             <div className="flex justify-between items-center p-3">
               <h2 className="text-lg text-red-700 font-semibold">Menu</h2>
               <HiX className="h-6 w-6 text-gray-800 cursor-pointer" onClick={toggleMenu} />
@@ -115,15 +146,14 @@ const Navbar = () => {
               <div className="relative">
                 <span
                   className={`block text-gray-800 py-2 transition duration-200 ${activeLink === '/about' ? 'text-yellow-500' : 'hover:underline hover:underline-yellow'}`}
-                  onClick={toggleDropdown}
+                  onClick={toggleAboutDropdown}
                 >
                   About Us
                 </span>
-                {isDropdownOpen && (
+                {isAboutDropdownOpen && (
                   <div className="mt-1 w-48 bg-white">
                     <Link to="/board-members" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/board-members')}>Board Members</Link>
-                    <Link to="/menu-item-2" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/menu-item-2')}>Menu Item 2</Link>
-                    <Link to="/menu-item-3" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/menu-item-3')}>Menu Item 3</Link>
+                    {/* Other dropdown items */}
                   </div>
                 )}
               </div>
@@ -136,6 +166,7 @@ const Navbar = () => {
               <Link to="/create-account" className={`block text-gray-800 py-2 ${activeLink === '/create-account' ? 'text-yellow-500' : 'hover:underline hover:underline-yellow'}`} onClick={() => handleLinkClick('/create-account')}>
                 Create Account
               </Link>
+              {/* More links */}
             </div>
           </div>
         )}
