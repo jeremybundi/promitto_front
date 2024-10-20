@@ -5,7 +5,7 @@ import AppRoutes from './routes'; // Import your routes
 function App() {
   return (
     <>
-    <div className='bg-white min-h-screen w-full overflow-x-hidden relative"]'>
+    <div className='bg-white min-h-screen w-full overflow-x-hidden relative font-lufga"]'>
       <Navbar/>
       <AppRoutes /> {/* Render the routes below the Navbar */}
       <Footer/>

@@ -108,7 +108,7 @@ const Navbar = () => {
               <img src={dropdownIcon} alt="Dropdown" className="inline-block w-4 h-4 ml-1 cursor-pointer" />
               {isAboutDropdownOpen && (
                 <div className="absolute mt-1 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                  <Link to="/board-members" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/board-members')}>Board Members</Link>
+                  <Link to="/boardmembers" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/board-members')}>Board Members</Link>
                   <Link to="/menu-item-2" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/menu-item-2')}>Menu Item 2</Link>
                     <Link to="/menu-item-3" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/menu-item-3')}>Menu Item 3</Link>
                   {/* More dropdown items */}
@@ -118,7 +118,7 @@ const Navbar = () => {
           </div>
 
           {/* Hamburger Icon for small screens */}
-          <div className="md:hidden mr-auto flex items-center" onClick={toggleMenu}>
+          <div className="md:hidden mr-3 flex items-center" onClick={toggleMenu}>
             <HiMenu className="h-8 w-8 text-gray-800 cursor-pointer" />
           </div>
 
@@ -152,7 +152,7 @@ const Navbar = () => {
                 </span>
                 {isAboutDropdownOpen && (
                   <div className="mt-1 w-48 bg-white">
-                    <Link to="/board-members" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/board-members')}>Board Members</Link>
+                    <Link to="/boardmembers" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/board-members')}>Board Members</Link>
                     {/* Other dropdown items */}
                   </div>
                 )}

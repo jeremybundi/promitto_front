@@ -7,7 +7,7 @@ const AppRoutes = () => {
   return (
     <Routes>
       {/* Define your app routes below */}
-      <Route path="/dreams" element={<Dreams />} />  {/* Dreams route */}
+      <Route path="/" element={<Dreams />} />  {/* Dreams route */}
       <Route path="/boardmembers" element={<BoardMembers />} />  {/* Dreams route */}
 
       {/* Add more routes as needed */}
