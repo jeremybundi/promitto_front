@@ -3,8 +3,9 @@ import axios from 'axios';
 import sizeIcon from '../assets/images/icons8-full-screen-100.jpg';     
 import typeIcon from '../assets/images/key_4838168.jpg';     
 import bedroomsIcon from '../assets/images/icons8-bed-96.jpg'; 
-import ownhome from '../assets/images/ownhome.png'; // Import your image
-import enrollIcon from '../assets/images/enroll.jpg'; // Adjust the path as necessary
+import ownhome from '../assets/images/ownhome.png'; 
+import enrollIcon from '../assets/images/enroll.jpg'; 
+import dropdownIcon from '../assets/icons/dropdown.svg'; 
 
 
 
@@ -12,7 +13,9 @@ import enrollIcon from '../assets/images/enroll.jpg'; // Adjust the path as nece
 const ChooseDreamHome = () => {
     const [houses, setHouses] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [visibleCount, setVisibleCount] = useState(4); // Controls how many houses to display
+    const [visibleCount, setVisibleCount] = useState(4); 
+    const [isDropdownVisible, setDropdownVisible] = useState(false);
+    let hideTimeout;
 
     useEffect(() => {
         const fetchHouses = async () => {
@@ -29,9 +32,26 @@ const ChooseDreamHome = () => {
 
         fetchHouses();
     }, []);
+
+
+
+        // Show dropdown
+    const handleMouseEnter = () => {
+        if (hideTimeout) clearTimeout(hideTimeout);
+        setDropdownVisible(true);
+    };
+
+    // Delay hiding dropdown
+    const handleMouseLeave = () => {
+        hideTimeout = setTimeout(() => {
+        setDropdownVisible(false);
+        }, 300); 
+    };
+
+    
   //done houses
     const handleViewMore = () => {
-        setVisibleCount((prevCount) => prevCount + 4); // Increase visible houses by 4 on button click
+        setVisibleCount((prevCount) => prevCount + 4); 
     };
 
   //ongoing houses
@@ -94,7 +114,33 @@ const ChooseDreamHome = () => {
                 <div className="md:w-[75%] p-4">
                     <h2 className="md:text-4xl text-xl text-[#F2B807] font-lufga font-bold mt-0 mb-2 md:mb-4">Choose Your Dream Home</h2>
                     <h3 className='font-semibold md:text-sm text-xs mb-2 md:mb-9'>Discover Your Dream Home in Kenya with Promitto Ltd.</h3>
-                    
+
+                  {/* Sort Option */}
+                  <div className="flex justify-end mr-16 items-center mb-6 relative">
+                     <div
+                        className="relative group cursor-pointer flex items-center"
+                        onMouseEnter={handleMouseEnter}
+                        onMouseLeave={handleMouseLeave}
+                    >
+                        <span className="text-sm font-semibold md:mr-2">Sort</span>
+                        <img src={dropdownIcon} alt="Dropdown Icon" className="w-4 h-4" />
+                        
+                        {/* Dropdown content */}
+                        {isDropdownVisible && (
+                        <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg transition-opacity duration-300">
+                            <ul className="py-2 text-sm text-gray-700">
+                            <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer">Most popular</li>
+                            <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer">Best rating</li>
+                            <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer">Newest</li>
+                            <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer">Price: Low to high</li>
+                            <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer">Price: High to Low</li>
+                            </ul>
+                        </div>
+                        )}
+                    </div>
+                    </div>
+
+                    {/*choose dream home*/}
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {houses.slice(0, visibleCount).map((house) => (
                             <div key={house.id} className="rounded-xl md:w-[400px] shadow-md overflow-hidden">
