@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import PersonalDetails from './PersonalDetails';
+import NextOfKin from './NextOfKin';
+import Remittance from './Remittance';
 
 const Register = () => {
   const [activeTab, setActiveTab] = useState('personalDetails');
@@ -10,7 +12,7 @@ const Register = () => {
 
   return (
     <div className="flex flex-col  rounded-xl shadow-xl mx-40 p-8">
-      <h1 className="text-3xl font-bold text-center text-[#F2B807] mb-4">Register Now?</h1>
+      <h1 className="text-2xl font-bold text-center text-[#F2B807] mb-4">Register Now?</h1>
       <p className="text-lg font-semibold mb-4 text-center" data-aos="fade-up">Membership Registration Form</p>
 
       <div className="flex  flex-col">
@@ -44,14 +46,14 @@ const Register = () => {
         {/* Underline for the active tab */}
         <div className="h-1 transition-all duration-300" style={{
           backgroundColor: activeTab ? (activeTab === 'personalDetails' || activeTab === 'nextOfKin' || activeTab === 'remittanceDetails' || activeTab === 'review' ? '#F2B807' : '#F5F5F5') : '#F5F5F5',
-          width: activeTab === 'personalDetails' ? '250px' :
-                 activeTab === 'nextOfKin' ? '240px' :
-                 activeTab === 'remittanceDetails' ? '250px' :
-                 activeTab === 'review' ? '150px' : '180px', // Default width
-          marginLeft: activeTab === 'personalDetails' ? '115px' :
-                      activeTab === 'nextOfKin' ? '370px' :
+          width: activeTab === 'personalDetails' ? '230px' :
+                 activeTab === 'nextOfKin' ? '225px' :
+                 activeTab === 'remittanceDetails' ? '225px' :
+                 activeTab === 'review' ? '90px' : '180px', // Default width
+          marginLeft: activeTab === 'personalDetails' ? '165px' :
+                      activeTab === 'nextOfKin' ? '390px' :
                       activeTab === 'remittanceDetails' ? '615px' :
-                      activeTab === 'review' ? '860px' : '20px', // Default margin
+                      activeTab === 'review' ? '835px' : '20px', // Default margin
         }} />
       </div>
       <div className="text-left ml-40">Complete</div>
@@ -60,14 +62,13 @@ const Register = () => {
 
         {activeTab === 'nextOfKin' && (
           <div>
-            <h2 className="text-xl font-semibold">Next of Kin Details</h2>
-            {/* Next of kin details form fields go here */}
-          </div>
+      {activeTab === 'nextOfKin' && <NextOfKin />}
+      </div>
         )}
         {activeTab === 'remittanceDetails' && (
           <div>
-            <h2 className="text-xl font-semibold">Remittance Details</h2>
-            {/* Remittance details form fields go here */}
+         {activeTab === 'remittanceDetails' && <Remittance />}
+
           </div>
         )}
         {activeTab === 'review' && (
