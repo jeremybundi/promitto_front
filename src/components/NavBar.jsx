@@ -45,7 +45,7 @@ const Navbar = () => {
 
   return (
     <nav className="relative">
-      <div className="max-w-7xl w-full h-16 md:h-16 md:mx-auto px-4">
+      <div className="max-w-7xl w-full  h-auto  md:mx-auto px-4">
         <div className="flex justify-between items-center text-sm py-4">
           <div className="flex-shrink-0">
             <img src={logo} alt="Logo" className="h-100%" />
@@ -108,7 +108,7 @@ const Navbar = () => {
               <img src={dropdownIcon} alt="Dropdown" className="inline-block w-4 h-4 ml-1 cursor-pointer" />
               {isAboutDropdownOpen && (
                 <div className="absolute mt-1 w-40 bg-white border border-gray-200 rounded-md shadow-lg z-10">
-                  <Link to="/boardmembers" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/board-members')}>Board Members</Link>
+                  <Link to="/board-members" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/board-members')}>Board Members</Link>
                   <Link to="/menu-item-2" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/menu-item-2')}>Menu Item 2</Link>
                     <Link to="/menu-item-3" className="block px-4 py-2 text-gray-800 hover:bg-gray-100" onClick={() => handleLinkClick('/menu-item-3')}>Menu Item 3</Link>
                   {/* More dropdown items */}

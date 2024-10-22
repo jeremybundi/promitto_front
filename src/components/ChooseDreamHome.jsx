@@ -15,6 +15,8 @@ const ChooseDreamHome = () => {
     const [loading, setLoading] = useState(true);
     const [visibleCount, setVisibleCount] = useState(4); 
     const [isDropdownVisible, setDropdownVisible] = useState(false);
+    const [sortOption, setSortOption] = useState('newest'); // State to manage sorting
+
     let hideTimeout;
 
     useEffect(() => {
@@ -33,7 +35,26 @@ const ChooseDreamHome = () => {
         fetchHouses();
     }, []);
 
+ // Sort houses based on selected option
+ const sortHouses = (houses) => {
+    switch (sortOption) {
+        case 'newest':
+            return [...houses].sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+        case 'price-low-high':
+            return [...houses].sort((a, b) => parseFloat(a.price) - parseFloat(b.price));
+        case 'price-high-low':
+            return [...houses].sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+        default:
+            return houses;
+    }
+};
 
+const sortedHouses = sortHouses(houses); // Apply sorting
+
+const handleSortChange = (option) => {
+    setSortOption(option);
+    setDropdownVisible(false); // Hide dropdown after selecting an option
+};
 
         // Show dropdown
     const handleMouseEnter = () => {
@@ -112,37 +133,42 @@ const ChooseDreamHome = () => {
 
                 {/* Second Column */}
                 <div className="md:w-[75%] p-4">
-                    <h2 className="md:text-4xl text-xl text-[#F2B807] font-lufga font-bold mt-0 mb-2 md:mb-4">Choose Your Dream Home</h2>
-                    <h3 className='font-semibold md:text-sm text-xs mb-2 md:mb-9'>Discover Your Dream Home in Kenya with Promitto Ltd.</h3>
+                <h2 className="md:text-4xl text-xl text-[#F2B807] font-lufga font-bold mt-0 mb-2 md:mb-4" >
+                    Choose Your Dream Home
+                </h2>
+                <h3 className="font-semibold md:text-sm text-xs mb-2 md:mb-9" data-aos="fade-up">
+                    Discover Your Dream Home in Kenya with Promitto Ltd.
+                </h3>
 
                   {/* Sort Option */}
                   <div className="flex justify-end mr-16 items-center mb-6 relative">
-                     <div
-                        className="relative group cursor-pointer flex items-center"
-                        onMouseEnter={handleMouseEnter}
-                        onMouseLeave={handleMouseLeave}
-                    >
-                        <span className="text-sm font-semibold md:mr-2">Sort</span>
-                        <img src={dropdownIcon} alt="Dropdown Icon" className="w-4 h-4" />
-                        
-                        {/* Dropdown content */}
-                        {isDropdownVisible && (
-                        <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg transition-opacity duration-300">
-                            <ul className="py-2 text-sm text-gray-700">
-                            <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer">Most popular</li>
-                            <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer">Best rating</li>
-                            <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer">Newest</li>
-                            <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer">Price: Low to high</li>
-                            <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer">Price: High to Low</li>
-                            </ul>
+                        <div
+                            className="relative group cursor-pointer flex items-center"
+                            onMouseEnter={handleMouseEnter}
+                            onMouseLeave={handleMouseLeave}
+                        >
+                            <span className="text-sm font-semibold md:mr-2">Sort By</span>
+                            <img src={dropdownIcon} alt="Dropdown Icon" className="w-4 h-4" />
+                            
+                            {isDropdownVisible && (
+                            <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg transition-opacity duration-300">
+                                <ul className="py-2 text-sm text-gray-700">
+                                <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer">Most Popular</li>
+
+                                <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer" >Best Rating</li>
+
+                                    <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer" onClick={() => handleSortChange('newest')}>Newest</li>
+                                    <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer" onClick={() => handleSortChange('price-low-high')}>Price: Low to high</li>
+                                    <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer" onClick={() => handleSortChange('price-high-low')}>Price: High to low</li>
+                                </ul>
+                            </div>
+                            )}
                         </div>
-                        )}
-                    </div>
                     </div>
 
-                    {/*choose dream home*/}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {houses.slice(0, visibleCount).map((house) => (
+                         {/* Render sorted houses */}
+                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {sortedHouses.slice(0, visibleCount).map((house) => (
                             <div key={house.id} className="rounded-xl md:w-[400px] shadow-md overflow-hidden">
                                 <img 
                                     src={house.image_url} 
@@ -169,7 +195,7 @@ const ChooseDreamHome = () => {
                                         <button className="bg-[#F2B807] text-white py-2 px-4 rounded-xl">View House</button>
                                         <div className="flex flex-col items-end">
                                             <span className="mr-20 font-semibold">Pay</span>
-                                            <span className="text-sm "> {house.price}/=  Per Month</span>
+                                            <span className="text-sm"> {house.price}/= Per Month</span>
                                         </div>
                                     </div>
                                 </div>
@@ -182,7 +208,7 @@ const ChooseDreamHome = () => {
                         <div className="flex justify-center mt-6">
                             <button 
                                 onClick={handleViewMore} 
-                                className="bg-[#F2B807] text-white py-2 px-6 rounded-xl"
+                                className="bg-[#F2B807] text-white py-2 px-6 rounded-xl" data-aos="fade-up"
                             >
                                 View More Houses 
                             </button>
@@ -200,7 +226,7 @@ const ChooseDreamHome = () => {
 
 
                     {/* Enroll Now Button */}
-                    <button className="flex items-center border bg-gray-100 border-black text-black px-4 py-2 mt-5 rounded-lg">
+                    <button className="flex items-center border bg-gray-100 border-black text-black px-4 py-2 mt-5 rounded-lg"  data-aos="fade-up">
                     Enroll Now
                     <img src={enrollIcon} alt="Enroll Icon" className="ml-2 w-5 h-5" /> 
                   
@@ -221,8 +247,8 @@ const ChooseDreamHome = () => {
           </div>
         </div>
         <div className="flex flex-col items-center text-center">
-          <h3 className='text-[#F2B807] md:text-3xl text-2xl font-semibold mt-8 mb-3'> Our Ongoing Projects </h3>
-          <p className='text-sm'>Some of our ongoing projects at various stages</p>
+          <h3 className='text-[#F2B807] md:text-3xl text-2xl font-semibold mt-8 mb-3' data-aos="fade-down"> Our Ongoing Projects </h3>
+          <p className='text-sm' data-aos="fade-up">Some of our ongoing projects at various stages</p>
         </div>
         {/* Ongoing Projects */}
         <div className="mt-10">
@@ -247,7 +273,7 @@ const ChooseDreamHome = () => {
                 <div className="flex justify-center mt-8">
                     <button 
                         onClick={handleViewMoreOngoing} 
-                        className="bg-[#F2B807] text-white py-3 px-4 font-sans font-semibold rounded-2xl"
+                        className="bg-[#F2B807] text-white py-3 px-4 font-sans font-semibold rounded-2xl"  data-aos="fade-down"
                     >
                         View More Ongoing Projects 
                     </button>

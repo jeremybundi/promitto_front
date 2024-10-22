@@ -34,8 +34,8 @@ const BoardMembers = () => {
           >
             {/* Name and Role Section */}
             <div className="bg-white mb-4 p-4 rounded-lg">
-              <h2 className="text-xl text-[#F2B807] font-semibold">{member.name}</h2>
-              <p className="text-gray-600 font-bold">{member.role}</p>
+              <h2 className="text-xl text-[#F2B807] font-semibold" data-aos="fade-right">{member.name}</h2>
+              <p className="text-gray-600 font-bold" data-aos="fade-left">{member.role}</p>
             </div>
 
             {/* Image Section */}
@@ -94,8 +94,8 @@ const BoardMembers = () => {
             <div className={`w-full md:w-[70%] ${index % 2 === 1 ? 'pl-8' : 'pr-8'}`}>
               {/* Name and Role Section */}
               <div className="bg-white mb-4 p-4 rounded-lg">
-                <h2 className="text-xl text-[#F2B807] font-semibold">{member.name}</h2>
-                <p className="text-gray-600 font-bold">{member.role}</p>
+                <h2 className="text-xl text-[#F2B807] font-semibold"  data-aos="fade-right">{member.name}</h2>
+                <p className="text-gray-600 font-bold"  data-aos="fade-left">{member.role}</p>
               </div>
 
               {/* About Section */}
