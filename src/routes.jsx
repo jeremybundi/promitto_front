@@ -3,6 +3,7 @@ import Dreams from './components/ChooseDreamHome'; // Import your ChooseDreamHom
 import BoardMembers from './components/BoardMembers';
 import WelcomeMember from './components/WelcomeMember';
 import Register from './components/Register';
+import CardColor from './components/CardColor';
 
 // Define all your app routes here
 const AppRoutes = () => {
@@ -13,6 +14,8 @@ const AppRoutes = () => {
       <Route path="/boardmembers" element={<BoardMembers />} />  {/* Dreams route */}
       <Route path="/welcome" element={<WelcomeMember />} />  {/* Dreams route */}
       <Route path="/register" element={<Register />} />  {/* Dreams route */}
+      <Route path="/color" element={<CardColor />} />  {/* Dreams route */}
+
 
 
 

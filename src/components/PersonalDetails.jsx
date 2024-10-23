@@ -18,7 +18,7 @@ const PersonalDetails = () => {
       <div className="flex flex-col mb-4">
   <label htmlFor="name" className="relative text-gray-700 mb-1">
     Name.
-    <span className="text-[#F2B807] absolute top-[-4px] right-[410px]">*</span>
+    <span className="text-[#F2B807] absolute top-[-4px] right-[760px]">*</span>
   </label>
   <div className="flex space-x-16">
     <input
@@ -99,7 +99,7 @@ const PersonalDetails = () => {
         <div className="flex flex-col mb-4">
             <label htmlFor="dob" className="relative text-gray-700 mb-1">
             Date of Birth.
-            <span className="text-[#F2B807] absolute top-[-4px] right-[140px]">*</span>
+            <span className="text-[#F2B807] absolute top-[-4px] right-[100px]">*</span>
           </label>
           <input
             type="date"
@@ -175,7 +175,7 @@ const PersonalDetails = () => {
         <div className="flex flex-col mb-4">
         <label htmlFor="address" className="relative text-gray-700 mb-1">
             Address
-            <span className="text-[#F2B807] absolute top-[-4px] right-[395px]">*</span>
+            <span className="text-[#F2B807] absolute top-[-4px] right-[750px]">*</span>
         </label>
         <div className="flex space-x-16 py-2">
             <input
@@ -227,7 +227,7 @@ const PersonalDetails = () => {
         <div className="flex flex-col mb-4">
         <label htmlFor="contacts" className="relative text-gray-700 mb-1">
             Contacts.
-            <span className="text-[#F2B807] absolute top-[-4px] right-[390px]">*</span>
+            <span className="text-[#F2B807] absolute top-[-4px] right-[740px]">*</span>
         </label>
         <div className="flex space-x-16">
             <input

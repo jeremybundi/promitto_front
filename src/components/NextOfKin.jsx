@@ -33,7 +33,7 @@ const NextOfKin = () => {
         <div className="flex flex-col mb-4">
           <label htmlFor="name" className="relative text-gray-700 mb-1">
             Next of Kin Name.
-            <span className="text-[#F2B807] absolute top-[-4px] right-[345px]">*</span>
+            <span className="text-[#F2B807] absolute top-[-4px] right-[690px]">*</span>
           </label>
           <div className="flex space-x-16">
             {['firstName', 'middleName', 'lastName'].map((field, index) => (
@@ -126,7 +126,7 @@ const NextOfKin = () => {
         <div className="flex flex-col mb-4">
           <label htmlFor="dob" className="relative text-gray-700 mb-1">
             Date of Birth.
-            <span className="text-[#F2B807] absolute top-[-4px] right-[370px]">*</span>
+            <span className="text-[#F2B807] absolute top-[-4px] right-[720px]">*</span>
           </label>
           <input
             type="date"
