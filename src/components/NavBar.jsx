@@ -123,13 +123,22 @@ const Navbar = () => {
           </div>
 
           {/* Create Account Link (hidden on small screens) */}
+          <div className='flex'>
+         {/* <Link
+            to="/welcome"
+            className="hidden md:block bg-gray-200 text-gray-800 font-medium py-2 px-4 mr-4 rounded flex items-center hover:bg-gray-100 transition duration-200"
+            onClick={() => handleLinkClick('/welcome')}
+          >
+            Login
+          </Link> */}
           <Link
-            to="/create-account"
+            to="/register"
             className="hidden md:block bg-yellow-500 text-gray-800 font-medium py-2 px-4 rounded flex items-center hover:bg-yellow-600 transition duration-200"
-            onClick={() => handleLinkClick('/create-account')}
+            onClick={() => handleLinkClick('/register')}
           >
             Create Account
           </Link>
+          </div>
         </div>
 
         {/* Navigation links for small screens */}

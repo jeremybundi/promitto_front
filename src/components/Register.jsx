@@ -51,11 +51,11 @@ const Register = () => {
               backgroundColor: activeTab === 'personalDetails' || activeTab === 'nextOfKin' || activeTab === 'remittanceDetails' || activeTab === 'review' ? '#F2B807' : '#F5F5F5',
               width: activeTab === 'personalDetails' ? '200px' :
                      activeTab === 'nextOfKin' ? '200px' :
-                     activeTab === 'remittanceDetails' ? '210px' :
+                     activeTab === 'remittanceDetails' ? '200px' :
                      activeTab === 'review' ? '80px' : '180px', 
               marginLeft: activeTab === 'personalDetails' ? '165px' :
                            activeTab === 'nextOfKin' ? '375px' :
-                           activeTab === 'remittanceDetails' ? '610px' :
+                           activeTab === 'remittanceDetails' ? '575px' :
                            activeTab === 'review' ? '770px' : '20px', 
             }}
           />

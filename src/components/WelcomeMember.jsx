@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Register from './Register.jsx'; // Assuming this is your Register component
+import CardColor from './CardColor.jsx'; // Import CardColor
 
 const WelcomeMember = () => {
   const [isAccountLinkClicked, setIsAccountLinkClicked] = useState(false);
@@ -9,7 +10,7 @@ const WelcomeMember = () => {
   };
 
   return (
-    <div className="flex flex-col items-center h-auto rounded-xl justify-center">
+    <div className="flex flex-col items-center h-auto rounded-xl justify-center relative">
       <h1 className="text-3xl font-bold text-[#F2B807] mb-4">Welcome to Promitto Members Portal</h1>
       <p className="text-sm mt-3 text-gray-600 text-center" data-aos="fade-up">
         Please select an appropriate account profile and log into your Promitto Account
@@ -80,7 +81,7 @@ const WelcomeMember = () => {
           {/* Arrow with tail icon */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-9 w-6  mt-11 animate-bounce"
+            className="h-9 w-6 my-11 animate-bounce"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -93,10 +94,17 @@ const WelcomeMember = () => {
             />
           </svg>
 
-          {/* Register component */}
-          <div className="mt-4">
+          {/* CardColor component top of  Register */}
+          <div className="absolute w-[1300px] h-64 top-[575px]  left-">
+            <CardColor />
+          </div>
+
+          {/* Register component positioned on top of CardColor */}
+          <div className="mt-4 relative z-10">
             <Register />
           </div>
+            {/* CardColor component bottom of  Register */}
+        
         </>
       )}
     </div>
