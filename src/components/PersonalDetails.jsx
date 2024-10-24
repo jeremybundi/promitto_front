@@ -1,68 +1,106 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { savePersonalDetails } from '../formSlice'; // Adjust the path as necessary
 
+const PersonalDetails = ({ onNext }) => {
+  const dispatch = useDispatch();
+  const personalDetailsData = useSelector((state) => state.form.personalDetails);
 
-const PersonalDetails = () => {
-    const [selectedGender, setSelectedGender] = useState('');
-    const [isOpen, setIsOpen] = useState(false);
-  
-    const options = ['Male', 'Female', 'Other'];
-  
-    const handleSelect = (option) => {
-      setSelectedGender(option);
-      setIsOpen(false);
-    };
+  const [formData, setFormData] = useState({
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    gender: '',
+    dob: '',
+    idNumber: '',
+    kraPin: '',
+    validAddress: '',
+    postalCode: '',
+    city: '',
+    county: '',
+    country: '',
+    phoneNumber: '',
+    emailAddress: '',
+    idUpload: null,
+    kraUpload: null,
+  });
+
+  // Update the form data when personalDetailsData changes
+  useEffect(() => {
+    if (personalDetailsData) {
+      setFormData((prevData) => ({
+        ...prevData,
+        ...personalDetailsData,
+      }));
+    }
+  }, [personalDetailsData]);
+
+  const [selectedGender, setSelectedGender] = useState(formData.gender);
+  const [isOpen, setIsOpen] = useState(false);
+  const options = ['Male', 'Female', 'Other'];
+
+  const handleSelect = (option) => {
+    setSelectedGender(option);
+    setIsOpen(false);
+    setFormData((prevData) => ({ ...prevData, gender: option }));
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleFileChange = (e) => {
+    const { name, files } = e.target;
+    setFormData((prevData) => ({ ...prevData, [name]: files[0] }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(savePersonalDetails(formData));
+    console.log(formData);
+    onNext(); // Move to next tab
+  };
 
   return (
-    <div className="ml-[132px] p-6 text-xs font-semibold rounded-lg">
-      <form className="space-y-6 ">
-      <div className="flex flex-col mb-4">
-  <label htmlFor="name" className="relative text-gray-700 mb-1">
-    Name.
-    <span className="text-[#F2B807] absolute top-[-4px] right-[760px]">*</span>
-  </label>
-  <div className="flex space-x-16">
-    <input
-      type="text"
-      id="firstName"
-      name="firstName"
-      placeholder="First Name"
-      className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none flex-shrink-0"
-      required
-    />
-    <input
-      type="text"
-      id="middleName"
-      name="middleName"
-      placeholder="Middle Name"
-      className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none flex-shrink-0"
-      required
-    />
-    <input
-      type="text"
-      id="lastName"
-      name="lastName"
-      placeholder="Last Name"
-      className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none flex-shrink-0"
-      required
-    />
-  </div>
-</div>
+    <div className="md:ml-[132px] md:p-6 text-xs mx-1 font-semibold rounded-lg">
+      <form className="md:space-y-6 space-y-2" onSubmit={handleSubmit}>
+        {/* Personal Details Fields */}
+        <div className="flex flex-col mb-4">
+          <label htmlFor="name" className="relative text-gray-700 mb-1">
+            Name.
+            <span className="text-[#F2B807] absolute md:top-[-4px] md:right-[760px]">*</span>
+          </label>
+          <div className="flex space-x-3 md:space-x-16">
+            {['firstName', 'middleName', 'lastName'].map((field) => (
+              <input
+                key={field}
+                type="text"
+                id={field}
+                name={field}
+                placeholder={field === 'firstName' ? 'First Name' : field === 'middleName' ? 'Middle Name' : 'Last Name'}
+                className="p-3 md:w-[195px] w-[110px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none flex-shrink-0"
+                required
+                value={formData[field]} // Set the value from formData
+                onChange={handleChange}
+              />
+            ))}
+          </div>
+        </div>
 
-        
         {/* Gender, Date of Birth, National ID / Passport Fields */}
-        <div className="flex space-x-16 w-full items-center">
-          {/* Gender field */}
+        <div className="flex md:space-x-16 space-x-3 w-full items-center">
           <div className="flex flex-col">
             <label htmlFor="gender" className="relative text-gray-700 mb-1">
               Gender.
-              <span className="text-[#F2B807] absolute top-[-4px] right-[130px]">*</span>
+              <span className="text-[#F2B807] absolute md:top-[-4px] md:right-[130px]">*</span>
             </label>
             <div className="relative">
               <div
-                className="p-3 md:w-[190px] bg-gray-200 border border-gray-500 rounded-lg cursor-pointer flex items-center justify-between"
+                className="p-3 md:w-[190px] w-[110px] bg-gray-200 border border-gray-500 rounded-lg cursor-pointer flex items-center justify-between"
                 onClick={() => setIsOpen(!isOpen)}
               >
-                <span>{selectedGender || 'Select Gender'}</span>
+                <span>{selectedGender || 'Select '}</span>
                 <svg
                   className="ml-2"
                   width="12"
@@ -95,22 +133,23 @@ const PersonalDetails = () => {
               )}
             </div>
           </div>
-        {/* Date of Birth */}
-        <div className="flex flex-col mb-4">
-            <label htmlFor="dob" className="relative text-gray-700 mb-1">
-            Date of Birth.
-            <span className="text-[#F2B807] absolute top-[-4px] right-[100px]">*</span>
-          </label>
-          <input
-            type="date"
-            id="dob"
-            name="dob"
-            className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
-            required
-          />
-        </div>
 
-          {/* National ID / Passport number field */}
+          <div className="flex flex-col md:mb-4">
+            <label htmlFor="dob" className="relative text-gray-700 mb-1">
+              Date of Birth.
+              <span className="text-[#F2B807] absolute top-[-4px] right-[100px]">*</span>
+            </label>
+            <input
+              type="date"
+              id="dob"
+              name="dob"
+              className="p-3 md:w-[195px] w-[110px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
+              required
+              value={formData.dob} // Set the value from formData
+              onChange={handleChange}
+            />
+          </div>
+
           <div className="flex flex-col">
             <label htmlFor="idNumber" className="relative text-gray-700 mb-1">
               National ID/Passport
@@ -123,12 +162,14 @@ const PersonalDetails = () => {
               placeholder="National ID or Passport Number"
               className="p-3 md:w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
               required
+              value={formData.idNumber} // Set the value from formData
+              onChange={handleChange}
             />
           </div>
         </div>
-          {/* KRA Pin No. and Upload Fields */}
+
+        {/* KRA Pin No. and Upload Fields */}
         <div className="flex space-x-16 w-full ">
-          {/* KRA Pin No. */}
           <div className="flex flex-col">
             <label htmlFor="kraPin" className="relative text-gray-700 mb-1">
               KRA Pin No.
@@ -141,123 +182,178 @@ const PersonalDetails = () => {
               placeholder="KRA Pin Number"
               className="p-3 md:w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
               required
+              value={formData.kraPin} // Set the value from formData
+              onChange={handleChange}
             />
           </div>
 
-          {/* National ID / Passport Upload */}
           <div className="flex flex-col">
             <label htmlFor="idUpload" className="relative text-xs text-gray-700 mb-1">
               National ID/Passport Upload
               <span className="text-[#F2B807] absolute top-[-4px] right-[15px]">*</span>
             </label>
-            <div className="border-2 border-dashed md:w-[195px] border-gray-500 p-4 rounded-lg">
-            <p className="text-[#F2B807] text-[10px] font-light text-center">Drag and Drop a File here
-              or Click to Upload from your Computer</p>
-              <p className='text-center text-[10px] text-light'>Maximum Upload size:
-              20 MB</p>            </div>
+            <input
+              type="file"
+              id="idUpload"
+              name="idUpload"
+              className="border-2 border-dashed md:w-[195px] border-gray-500 p-4 rounded-lg"
+              onChange={handleFileChange}
+              required
+            />
           </div>
 
-          {/* KRA Pin Certificate Upload */}
           <div className="flex flex-col">
             <label htmlFor="kraUpload" className="relative text-gray-700 mb-1">
               KRA Pin Certificate Upload
-              <span className="text-[#F2B807] absolute top-[-4px] right-[17px]">*</span>
+              <span className="text-[#F2B807] absolute top-[-4px] right-[25px]">*</span>
             </label>
-            <div className="border-2 border-dashed md:w-[195px] border-gray-500 p-4 rounded-lg">
-              <p className="text-[#F2B807] text-[10px] font-light text-center">Drag and Drop a File here
-              or Click to Upload from your Computer</p>
-              <p className='text-center text-[10px] text-light'>Maximum Upload size:
-              20 MB</p>
-            </div>
+            <input
+              type="file"
+              id="kraUpload"
+              name="kraUpload"
+              className="border-2 border-dashed md:w-[195px] border-gray-500 p-4 rounded-lg"
+              onChange={handleFileChange}
+              required
+            />
           </div>
         </div>
-    {/*Adress section */}
-        <div className="flex flex-col mb-4">
-        <label htmlFor="address" className="relative text-gray-700 mb-1">
-            Address
-            <span className="text-[#F2B807] absolute top-[-4px] right-[750px]">*</span>
-        </label>
-        <div className="flex space-x-16 py-2">
-            <input
-            type="text"
-            id="validAddress"
-            name="validAddress"
-            placeholder="Enter a valid address"
-            className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none flex-shrink-0"
-            required
-            />
-            <input
-            type="text"
-            id="postalCode"
-            name="postalCode"
-            placeholder="Postal Code"
-            className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none flex-shrink-0"
-            required
-            />
-            <input
-            type="text"
-            id="city"
-            name="city"
-            placeholder="City"
-            className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none flex-shrink-0"
-            required
-            />
-        </div>
-        
-        <div className="flex space-x-16 mt-4">
-            <input
-            type="text"
-            id="county"
-            name="county"
-            placeholder="County"
-            className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none flex-shrink-0"
-            required
-            />
-            <input
-            type="text"
-            id="country"
-            name="country"
-            placeholder="Country"
-            className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none flex-shrink-0"
-            required
-            />
-        </div>
-        </div>
-        {/*contacts section*/}
-        <div className="flex flex-col mb-4">
-        <label htmlFor="contacts" className="relative text-gray-700 mb-1">
-            Contacts.
-            <span className="text-[#F2B807] absolute top-[-4px] right-[740px]">*</span>
-        </label>
-        <div className="flex space-x-16">
-            <input
-            type="tel"
-            id="phoneNumber"
-            name="phoneNumber"
-            placeholder="Enter a valid phone number"
-            className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
-            required
-            />
-            <input
-            type="email"
-            id="emailAddress"
-            name="emailAddress"
-            placeholder="Enter email address"
-            className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
-            required
-            />
-        </div>
-        </div>
-        <button type="submit" className="mt-4 bg-[#F2B807] py-2 px-4 text-xl rounded-xl flex items-center w-auto">
-            Next
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-5 h-5 ml-2">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 5l7 7-7 7M5 5l7 7-7 7" />
-            </svg>
-        </button>
 
+        {/* Address Fields */}
+        <div className="flex md:space-x-16 space-x-3 w-full ">
+          <div className="flex flex-col">
+            <label htmlFor="validAddress" className="relative text-gray-700 mb-1">
+              Address.
+              <span className="text-[#F2B807] absolute md:top-[-4px] md:right-[130px]">*</span>
+            </label>
+            <input
+              type="text"
+              id="validAddress"
+              name="validAddress"
+              placeholder="Valid Address"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
+              required
+              value={formData.validAddress} // Set the value from formData
+              onChange={handleChange}
+            />
+          </div>
 
+          <div className="flex flex-col">
+            <label htmlFor="postalCode" className="relative text-gray-700 mb-1">
+              Postal Code
+              <span className="text-[#F2B807] absolute top-[-4px] right-[70px]">*</span>
+            </label>
+            <input
+              type="text"
+              id="postalCode"
+              name="postalCode"
+              placeholder="Postal Code"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
+              required
+              value={formData.postalCode} // Set the value from formData
+              onChange={handleChange}
+            />
+          </div>
 
+          <div className="flex flex-col">
+            <label htmlFor="city" className="relative text-gray-700 mb-1">
+              City.
+              <span className="text-[#F2B807] absolute top-[-4px] right-[100px]">*</span>
+            </label>
+            <input
+              type="text"
+              id="city"
+              name="city"
+              placeholder="City"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
+              required
+              value={formData.city} // Set the value from formData
+              onChange={handleChange}
+            />
+          </div>
+        </div>
 
+        {/* County and Country Fields */}
+        <div className="flex md:space-x-16 space-x-3 w-full ">
+          <div className="flex flex-col">
+            <label htmlFor="county" className="relative text-gray-700 mb-1">
+              County.
+              <span className="text-[#F2B807] absolute md:top-[-4px] md:right-[130px]">*</span>
+            </label>
+            <input
+              type="text"
+              id="county"
+              name="county"
+              placeholder="County"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
+              required
+              value={formData.county} // Set the value from formData
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label htmlFor="country" className="relative text-gray-700 mb-1">
+              Country.
+              <span className="text-[#F2B807] absolute md:top-[-4px] md:right-[130px]">*</span>
+            </label>
+            <input
+              type="text"
+              id="country"
+              name="country"
+              placeholder="Country"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
+              required
+              value={formData.country} // Set the value from formData
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        {/* Contact Information */}
+        <div className="flex md:space-x-16 space-x-3 w-full ">
+          <div className="flex flex-col">
+            <label htmlFor="phoneNumber" className="relative text-gray-700 mb-1">
+              Phone Number
+              <span className="text-[#F2B807] absolute md:top-[-4px] md:right-[70px]">*</span>
+            </label>
+            <input
+              type="text"
+              id="phoneNumber"
+              name="phoneNumber"
+              placeholder="Phone Number"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
+              required
+              value={formData.phoneNumber} // Set the value from formData
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="flex flex-col">
+            <label htmlFor="emailAddress" className="relative text-gray-700 mb-1">
+              Email Address
+              <span className="text-[#F2B807] absolute md:top-[-4px] md:right-[70px]">*</span>
+            </label>
+            <input
+              type="email"
+              id="emailAddress"
+              name="emailAddress"
+              placeholder="Email Address"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
+              required
+              value={formData.emailAddress} // Set the value from formData
+              onChange={handleChange}
+            />
+          </div>
+        </div>
+
+        <div className="flex justify-center mt-6">
+          <button
+            type="submit"
+            className="p-3 px-6 bg-[#F2B807] ml-auto mr-24 rounded-lg text-white hover:bg-[#E2A306] focus:outline-none focus:ring-2 focus:ring-[#E2A306] focus:ring-opacity-50"
+          >
+             Next
+          </button>
+        </div>
       </form>
     </div>
   );

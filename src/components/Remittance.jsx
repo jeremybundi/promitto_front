@@ -1,9 +1,31 @@
 import React, { useState } from 'react';
 import userIcon from '../assets/icons/user.svg';
-import tickIcon from '../assets/icons/tick.svg';
+import tickIcon from '../assets/icons/dropdown.svg';
+import { useDispatch } from 'react-redux';
+import { saveRemittanceDetails } from '../formSlice';
 
-const Remittance = () => {
+const Remittance = ({ onNext, onPrevious }) => {
   const [showPaymentDetails, setShowPaymentDetails] = useState(false);
+  //const [paymentMethod, setPaymentMethod] = useState('Mpesa');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [transactionCode, setTransactionCode] = useState('');
+
+  const dispatch = useDispatch();
+
+  const handleConfirmPayment = () => {
+    const remittanceData = {
+     // paymentMethod,
+      phoneNumber,
+      transactionCode,
+    };
+
+    // Dispatch the action to save remittance details in Redux store
+    dispatch(saveRemittanceDetails(remittanceData));
+    console.log(remittanceData);
+
+    // Proceed to the next step
+    onNext();
+  };
 
   // Handler for M-Pesa button click
   const handleMpesaClick = () => {
@@ -122,6 +144,8 @@ const Remittance = () => {
               name="phoneNumber"
               placeholder="e.g. 0712345678"
               className="mt-1 block w-full border border-[#53C064] rounded-md shadow-sm focus:outline-none focus:border-2 focus:border-[#3AB54B] p-2"
+              value={phoneNumber}
+              onChange={(e) => setPhoneNumber(e.target.value)}
               required
             />
             </div>
@@ -136,11 +160,17 @@ const Remittance = () => {
               name="transactionCode"
               placeholder="e.g. RXCE45322P"
               className="mt-1 block w-full border border-[#53C064] rounded-md shadow-sm focus:outline-none focus:border-2 focus:border-[#3AB54B] p-2"
+              value={transactionCode}
+              onChange={(e) => setTransactionCode(e.target.value)}
               required
             />
 
             </div>
-            <button class=" bg-white border text-xs border-[#53C064] mt-8  font-bold py-3 px-4 rounded-3xl flex justify-center  text-[#3AB54B]">
+  
+           
+            <button class=" bg-white border text-xs border-[#53C064] mt-8  font-bold py-3 px-4 rounded-3xl flex justify-center  text-[#3AB54B]"
+                           onClick={handleConfirmPayment}
+             >
                 Confirm Payment
 
                 <img 
@@ -150,42 +180,25 @@ const Remittance = () => {
             />
             </button>
             </div>
-      )}
+
+            
+      )} 
+      <div className='flex mx-56 space-x-[350px]'>
+        <button class=" bg-gray-100 text-xs  mt-8  font-bold py-2 px-4 rounded flex justify-center  text-[#3AB54B]"
+                           onClick={onPrevious}
+             >
+                Back
+            </button>
+            <button class= " text-xs  bg-[#F2B807] mt-8 rounded font-bold py-2 px-4  flex justify-center  text-white"
+                           onClick={onNext}
+             >
+                Next
+            </button>
+        
+
+            </div>
     </div>
   );
 };
 
 export default Remittance;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

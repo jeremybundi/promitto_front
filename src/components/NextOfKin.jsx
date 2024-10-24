@@ -1,29 +1,62 @@
-import React, { useState } from 'react';
-import NavigationButtons from './NavigationButtons'; // Import NavigationButtons
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { saveNextOfKin } from '../formSlice'; // Import action to save form data
 
-const NextOfKin = () => {
+const NextOfKin = ({ onNext, onPrevious }) => {
+  const dispatch = useDispatch();
+
+  // Get data from the store
+  const nextOfKinData = useSelector((state) => state.form.nextOfKin);
+  const personalDetailsData = useSelector((state) => state.form.personalDetails); // Get personal details data
+
+  const [form, setForm] = useState({
+    firstName: '',
+    middleName: '',
+    lastName: '',
+    relationship: '',
+    phone: '',
+    nationalId: '',
+    dob: '',
+  });
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedRelationship, setSelectedRelationship] = useState('');
-  const [currentTab, setCurrentTab] = useState(1); // Track the current tab
-  const totalTabs = 4; // Define total number of tabs
 
   const relationships = ['Father', 'Mother', 'Sister', 'Brother'];
 
+  // Load data from store when component mounts or when nextOfKinData changes
+  useEffect(() => {
+    if (nextOfKinData) {
+      setForm(nextOfKinData);
+      setSelectedRelationship(nextOfKinData.relationship || '');
+    }
+  }, [nextOfKinData]);
+
+  // Handle input changes
+  const handleInputChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
   const handleSelect = (relationship) => {
     setSelectedRelationship(relationship);
+    setForm({ ...form, relationship });
     setIsOpen(false);
   };
 
-  const handlePrevious = () => {
-    if (currentTab > 1) {
-      setCurrentTab(currentTab - 1);
-    }
+  const handleNext = () => {
+    // Save data to store
+    dispatch(saveNextOfKin(form));
+    onNext(); // Proceed to the next step
   };
 
-  const handleNext = () => {
-    if (currentTab < totalTabs) { // Adjust according to your total tabs
-      setCurrentTab(currentTab + 1);
-    }
+  const handlePrevious = () => {
+    // Save data before going back (optional)
+    dispatch(saveNextOfKin(form));
+    //console.log(form)
+    onPrevious(); // Call the onPrevious function passed from Register
   };
 
   return (
@@ -43,6 +76,8 @@ const NextOfKin = () => {
                 id={field}
                 name={field}
                 placeholder={`${field.charAt(0).toUpperCase() + field.slice(1).replace(/Name/, ' Name')}`}
+                value={form[field]} // Load data from state
+                onChange={handleInputChange}
                 className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none flex-shrink-0"
                 required
               />
@@ -57,7 +92,10 @@ const NextOfKin = () => {
               Relationship.
               <span className="text-[#F2B807] absolute top-[-4px] right-[108px]">*</span>
             </label>
-            <div className="p-3 md:w-[195px] bg-gray-200 border border-gray-500 rounded-lg cursor-pointer flex items-center justify-between" onClick={() => setIsOpen(!isOpen)}>
+            <div
+              className="p-3 md:w-[195px] bg-gray-200 border border-gray-500 rounded-lg cursor-pointer flex items-center justify-between"
+              onClick={() => setIsOpen(!isOpen)}
+            >
               <span>{selectedRelationship || 'Select Relationship'}</span>
               <svg
                 className="ml-2"
@@ -101,6 +139,8 @@ const NextOfKin = () => {
               id="phone"
               name="phone"
               placeholder="Enter a valid phone number"
+              value={form.phone}
+              onChange={handleInputChange}
               className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
               required
             />
@@ -116,6 +156,8 @@ const NextOfKin = () => {
               id="nationalId"
               name="nationalId"
               placeholder="Enter National ID / Passport No."
+              value={form.nationalId}
+              onChange={handleInputChange}
               className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
               required
             />
@@ -132,14 +174,30 @@ const NextOfKin = () => {
             type="date"
             id="dob"
             name="dob"
+            value={form.dob}
+            onChange={handleInputChange}
             className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
             required
           />
         </div>
-      </form>
 
-      {/* Navigation Buttons */}
-      <NavigationButtons currentTab={currentTab} onPrevious={handlePrevious} onNext={handleNext} />
+        <div className="flex justify-between">
+          <button
+            type="button"
+            onClick={handlePrevious}
+            className="bg-gray-300 p-2 rounded-lg"
+          >
+            Previous
+          </button>
+          <button
+            type="button"
+            onClick={handleNext}
+            className="bg-[#F2B807] p-2 rounded-lg"
+          >
+            Next
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
