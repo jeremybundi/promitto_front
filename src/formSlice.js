@@ -3,7 +3,13 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   personalDetails: {},
   nextOfKin: {},
-  remittanceDetails: {}, // Add remittanceDetails to the initial state
+  remittanceDetails: {
+    phoneNumber: '',
+    transactionCode: '',
+  }, 
+  employmentDetails: {},
+  businessDetails: {},
+  propertyDetails: {},
 };
 
 const formSlice = createSlice({
@@ -14,14 +20,32 @@ const formSlice = createSlice({
       state.personalDetails = action.payload;
     },
     saveNextOfKin: (state, action) => {
-      state.nextOfKin = action.payload; // Save Next of Kin data
+      state.nextOfKin = action.payload; 
     },
     saveRemittanceDetails: (state, action) => {
-      state.remittanceDetails = action.payload; // Save Remittance details
+      // Save only accountNumber and transactionCode without the payment method
+      state.remittanceDetails = action.payload;
+  
+    },
+    saveEmploymentDetails: (state, action) => {
+      state.employmentDetails = action.payload; 
+    },
+    saveBusinessDetails: (state, action) => {
+      state.businessDetails = action.payload; 
+    },
+    savePropertyDetails: (state, action) => {
+      state.propertyDetails = action.payload; 
     },
   },
 });
 
-export const { savePersonalDetails, saveNextOfKin, saveRemittanceDetails } = formSlice.actions;
+export const { 
+  savePersonalDetails, 
+  saveNextOfKin, 
+  saveRemittanceDetails, 
+  saveEmploymentDetails,  
+  saveBusinessDetails,
+  savePropertyDetails 
+} = formSlice.actions;
 
 export default formSlice.reducer;

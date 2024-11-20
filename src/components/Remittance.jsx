@@ -190,7 +190,7 @@ const Remittance = ({ onNext, onPrevious }) => {
                 Back
             </button>
             <button class= " text-xs  bg-[#F2B807] mt-8 rounded font-bold py-2 px-4  flex justify-center  text-white"
-                           onClick={onNext}
+                           onClick={handleConfirmPayment}
              >
                 Next
             </button>

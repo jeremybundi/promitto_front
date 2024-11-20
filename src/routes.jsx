@@ -5,24 +5,40 @@ import WelcomeMember from './components/WelcomeMember';
 import Register from './components/Register';
 import CardColor from './components/CardColor';
 import Review from './components/Review';
+import EmploymentDetails from './components/EmploymentDetails';
+import BusinessDetails from './components/BusinessDetails';
+import Login from './components/Login';
+import ViewMembers from './components/ViewMembers';
+import PrivateRoute from './components/PrivateRoute'; // Import your PrivateRoute component
 
 // Define all your app routes here
 const AppRoutes = () => {
   return (
     <Routes>
       {/* Define your app routes below */}
-      <Route path="/" element={<Dreams />} />  {/* Dreams route */}
-      <Route path="/boardmembers" element={<BoardMembers />} />  {/* Dreams route */}
-      <Route path="/welcome" element={<WelcomeMember />} />  {/* Dreams route */}
-      <Route path="/register" element={<Register />} />  {/* Dreams route */}
-      <Route path="/color" element={<CardColor />} />  {/* Dreams route */}
-      <Route path="/review" element={<Review />} />  {/* Dreams route */}
-
-
-
-
-
-      {/* Add more routes as needed */}
+      <Route path="/" element={<Dreams />} />  
+      <Route path="/boardmembers" element={<BoardMembers />} /> 
+      <Route path="/welcome" element={<WelcomeMember />} /> 
+      <Route path="/register" element={<Register />} /> 
+      <Route path="/color" element={<CardColor />} />  
+      <Route path="/review" element={<Review />} /> 
+      <Route path="/employ" element={<EmploymentDetails />} />  
+      <Route path="/business" element={<BusinessDetails />} /> 
+      
+      {/* Public login route accessible to everyone */}
+      <Route path="/login" element={<Login />} />  
+      
+      {/* Protected view members route, accessible only when logged in */}
+      <Route 
+        path="/view/members" 
+        element={
+          <PrivateRoute>
+            <ViewMembers />
+          </PrivateRoute>
+        } 
+      /> 
+      
+      {/* Add more private routes as needed */}
     </Routes>
   );
 };

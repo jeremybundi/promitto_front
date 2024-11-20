@@ -15,14 +15,14 @@ const ChooseDreamHome = () => {
     const [loading, setLoading] = useState(true);
     const [visibleCount, setVisibleCount] = useState(4); 
     const [isDropdownVisible, setDropdownVisible] = useState(false);
-    const [sortOption, setSortOption] = useState('newest'); // State to manage sorting
+    const [sortOption, setSortOption] = useState('newest'); 
 
     let hideTimeout;
 
     useEffect(() => {
         const fetchHouses = async () => {
             try {
-                const response = await axios.get('/api/houses/done');
+                const response = await axios.get('http://api3.promittoltd.com/houses/done');
                 setHouses(response.data);
                 console.log(response.data); 
             } catch (error) {
@@ -87,7 +87,7 @@ const handleSortChange = (option) => {
     useEffect(() => {
         const fetchOngoingHouses = async () => {
             try {
-                const response = await axios.get('/api/house_ongoing'); 
+                const response = await axios.get('http://api3.promittoltd.com/house-ongoing'); 
                 setOngoingHouses(response.data);
                 console.log(response.data);
             } catch (error) {

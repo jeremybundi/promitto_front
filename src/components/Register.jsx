@@ -1,94 +1,124 @@
 import React, { useState } from 'react';
-import NextOfKin from './NextOfKin'; // Adjust the path as needed
-import PersonalDetails from './PersonalDetails'; // Example of another step
-import RemittanceDetails from './Remittance'; // Another step in the process
-import Review from './Review'
+import NextOfKin from './NextOfKin';
+import PersonalDetails from './PersonalDetails';
+import RemittanceDetails from './Remittance';
+import Review from './Review';
+import EmploymentDetails from './EmploymentDetails';
+import BusinessDetails from './BusinessDetails';
+import PropertyDetails from './PropertyDetails';
+import { useSelector } from 'react-redux';
 
 const Register = () => {
-  const [activeTab, setActiveTab] = useState('personalDetails'); // Initial tab
+  const [activeTab, setActiveTab] = useState('Personal Details');
 
-  const handleNext = (currentTab, nextTab) => {
-    setActiveTab(nextTab); // Set the active tab to the next one
+  // Get form data from Redux store
+  const { personalDetails, nextOfKin, employmentDetails, businessDetails, propertyDetails, remittanceDetails } = useSelector(state => state.form);
+
+  // Calculate form completion percentage
+  const calculateCompletionPercentage = () => {
+    let percentage = 0;
+
+    if (Object.keys(personalDetails).length > 0) {
+      percentage += 20; 
+    }
+
+    if (Object.keys(nextOfKin).length > 0) {
+      percentage += 10; 
+    }
+    if (Object.keys(employmentDetails).length > 0) {
+      percentage += 20; 
+    }
+    if (Object.keys(businessDetails).length > 0) {
+      percentage += 20; 
+    }
+    if (Object.keys(propertyDetails).length > 0) {
+      percentage += 20; 
+    }
+
+    if (Object.keys(remittanceDetails).length > 0) {
+      percentage += 10; 
+    }
+
+    return percentage;
   };
 
-  const handlePrevious = (currentTab, previousTab) => {
-    setActiveTab(previousTab); // Set the active tab to the previous one
-  };
-   // Function to handle tab switching
-   const handleTabSwitch = (tabName) => {
+  // Handle tab switching
+  const handleTabSwitch = (tabName) => {
     setActiveTab(tabName);
   };
 
-    return (
-      <div className="flex flex-col items-center mx-40">
-        <div className="bg-white rounded-xl shadow-2xl p-8 w-full ">
-          <h1 className="text-2xl font-bold text-center text-[#F2B807] mb-4">Register Now?</h1>
-          <p className="text-lg font-semibold mb-4 text-center" data-aos="fade-up">Membership Registration Form</p>
-  
-          <div className="flex flex-col">
-            <div className="flex space-x-12 font-light text-sm font-poppins mx-36 justify-between p-2 relative">
+  return (
+    <div className="flex flex-col items-center mx-40">
+      <div className="bg-white rounded-xl shadow-2xl p-8 md:w-full">
+        <h1 className="text-2xl font-bold text-center text-[#F2B807] mb-4">Register Now?</h1>
+        <p className="text-lg font-semibold mb-4 text-center" data-aos="fade-up">Membership Registration Form</p>
+
+        <div className="flex flex-col">
+          <div className="flex space-x-4 font-light text-sm font-poppins mx-36 justify-between p-2 relative">
+            {['Personal Details', 'Next Of Kin', 'Employment Details', 'Business Details','Property Details', 'Remittance Details', 'Review'].map(tab => (
               <button
-                className={`py-2 px-4 rounded-lg ${activeTab === 'personalDetails' ? 'text-[#F2B807]' : 'text-gray-700'} hover:text-[#F2B807] transition`}
-                onClick={() => handleTabClick('personalDetails')}
+                key={tab}
+                className={`py-2 px-4 rounded-lg ${activeTab === tab ? 'text-[#F2B807]' : 'text-gray-700'} hover:text-[#F2B807] transition`}
+                onClick={() => handleTabSwitch(tab)}
               >
-                Personal Information
+                {tab.replace(/([A-Z])/g, ' $1').trim()} 
               </button>
-              <button
-                className={`py-2 px-4 rounded-lg ${activeTab === 'nextOfKin' ? 'text-[#F2B807]' : 'text-gray-700'} hover:text-[#F2B807] transition`}
-                onClick={() => handleTabClick('nextOfKin')}
-              >
-                Next of Kin Details
-              </button>
-              <button
-                className={`py-2 px-4 rounded-lg ${activeTab === 'remittanceDetails' ? 'text-[#F2B807]' : 'text-gray-700'} hover:text-[#F2B807] transition`}
-                onClick={() => handleTabClick('remittanceDetails')}
-              >
-                Remittance Details
-              </button>
-              <button
-                className={`py-2 px-4 rounded-lg ${activeTab === 'review' ? 'text-[#F2B807]' : 'text-gray-700'} hover:text-[#F2B807] transition`}
-                onClick={() => handleTabClick('review')}
-              >
-                Review
-              </button>
-            </div>
+            ))}
+          </div>
 
-            <div className="text-left ml-40">Complete</div>
+          {/* Show Completion Percentage */}
+          <div className="text-left ml-40">
+            {calculateCompletionPercentage()}%
+            <span className="font-semibold ml-2">Complete</span>
+          </div>
 
+          {/* Conditional rendering based on activeTab */}
+          {activeTab === 'Personal Details' && (
+            <PersonalDetails onNext={() => handleTabSwitch('Next Of Kin')} />
+          )}
 
-      {/* Conditional rendering based on activeTab */}
-      {activeTab === 'personalDetails' && (
-        <PersonalDetails
-          onNext={() => handleNext('personalDetails', 'nextOfKin')}
-        />
-      )}
+          {activeTab === 'Next Of Kin' && (
+            <NextOfKin
+              onNext={() => handleTabSwitch('Employment Details')}
+              onPrevious={() => handleTabSwitch('Personal Details')}
+            />
+          )}
 
-      {activeTab === 'nextOfKin' && (
-        <NextOfKin
-          onNext={() => handleNext('nextOfKin', 'remittanceDetails')}
-          onPrevious={() => handlePrevious('nextOfKin', 'personalDetails')}
-        />
-      )}
+          {activeTab === 'Employment Details' && (
+            <EmploymentDetails
+              onNext={() => handleTabSwitch('Business Details')}
+              onPrevious={() => handleTabSwitch('Next Of Kin')}
+            />
+          )}
 
-      {activeTab === 'remittanceDetails' && (
-        <RemittanceDetails
-          onNext={() => handleNext('remittanceDetails', 'review')}
-          onPrevious={() => handlePrevious('remittanceDetails', 'nextOfKin')}
-        />
-      )}
-         {/* Review tab: Display saved data */}
-         {activeTab === 'review' && (
-         <Review 
+          {activeTab === 'Business Details' && (
+            <BusinessDetails
+              onNext={() => handleTabSwitch('Property Details')}
+              onPrevious={() => handleTabSwitch('Employment Details')}
+            />
+          )}
+             {activeTab === 'Property Details' && (
+            <PropertyDetails
+              onNext={() => handleTabSwitch('Remittance Details')}
+              onPrevious={() => handleTabSwitch('Business Details')}
+            />
+          )}
 
-         onPrevious={() => handlePrevious('review', 'remittanceDetails')}
-         onEditClick={handleTabSwitch}
+          {activeTab === 'Remittance Details' && (
+            <RemittanceDetails
+              onNext={() => handleTabSwitch('Review')}
+              onPrevious={() => handleTabSwitch('Property Details')}
+            />
+          )}
 
-         
-         />
-    )}
-
-    </div>
-    </div>
+          {activeTab === 'Review' && (
+            <Review
+              onPrevious={() => handleTabSwitch('Remittance Details')}
+              onEditClick={handleTabSwitch}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 };

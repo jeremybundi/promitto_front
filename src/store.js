@@ -1,25 +1,29 @@
-// store.js
 import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // Use localStorage for persistence
-import formReducer from './formSlice'; // Your form slice
+import storage from 'redux-persist/lib/storage';
+import formReducer from './formSlice';
+import authReducer from './loginSlice';
 
-// Persist config for redux-persist
-const persistConfig = {
-  key: 'root', // Key in storage
-  storage,     // Default storage is localStorage
+const formPersistConfig = {
+  key: 'form',
+  storage,
 };
 
-// Wrap formReducer with persistReducer
-const persistedReducer = persistReducer(persistConfig, formReducer);
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+};
+
+const persistedFormReducer = persistReducer(formPersistConfig, formReducer);
+const persistedAuthReducer = persistReducer(authPersistConfig, authReducer);
 
 const store = configureStore({
   reducer: {
-    form: persistedReducer, // Use the persisted reducer
+    form: persistedFormReducer,
+    auth: persistedAuthReducer,
   },
 });
 
-// Export the persistor object as well
-export const persistor = persistStore(store);
+const persistor = persistStore(store);
 
-export default store;
+export { store, persistor }; // Export both store and persistor
