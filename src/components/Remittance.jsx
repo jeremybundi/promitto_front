@@ -68,10 +68,10 @@ const Remittance = ({ onNext, onPrevious }) => {
 
       {/* Payment Details Section */}
       {showPaymentDetails && (
-        <div className="w-[600px] h-auto border border-[#53C064] items-center py-11 px-16 rounded-3xl mx-auto bg-[#f9f9f9]">
+        <div className="md:w-[600px] w-[300px] h-auto border border-[#53C064] items-center md:py-11 md:px-16 p-6 rounded-3xl mx-auto bg-[#f9f9f9]">
           <p className='text-start font-bold mb-2'>Payment Details</p>
           <div className='flex mb-3'>
-            <div className="h-12 w-52 mr-8 border border-[#53C064] bg-[#F1FCFB] py-7 rounded-md flex items-center justify-center">
+            <div className="md:h-12 md:w-52 md:mr-8 mr-4 border border-[#53C064] bg-[#F1FCFB] md:py-7 px-1 rounded-md flex items-center justify-center">
               <svg
                 width="32"
                 height="32"
@@ -143,7 +143,7 @@ const Remittance = ({ onNext, onPrevious }) => {
               id="phoneNumber"
               name="phoneNumber"
               placeholder="e.g. 0712345678"
-              className="mt-1 block w-full border border-[#53C064] rounded-md shadow-sm focus:outline-none focus:border-2 focus:border-[#3AB54B] p-2"
+              className="mt-1 block md:w-full w-2/3 border border-[#53C064] rounded-md shadow-sm focus:outline-none focus:border-2 focus:border-[#3AB54B] p-2"
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
               required
@@ -159,7 +159,7 @@ const Remittance = ({ onNext, onPrevious }) => {
               id="transactionCode"
               name="transactionCode"
               placeholder="e.g. RXCE45322P"
-              className="mt-1 block w-full border border-[#53C064] rounded-md shadow-sm focus:outline-none focus:border-2 focus:border-[#3AB54B] p-2"
+              className="mt-1 block md:w-full w-2/3 border border-[#53C064] rounded-md shadow-sm focus:outline-none focus:border-2 focus:border-[#3AB54B] p-2"
               value={transactionCode}
               onChange={(e) => setTransactionCode(e.target.value)}
               required
@@ -168,7 +168,7 @@ const Remittance = ({ onNext, onPrevious }) => {
             </div>
   
            
-            <button class=" bg-white border text-xs border-[#53C064] mt-8  font-bold py-3 px-4 rounded-3xl flex justify-center  text-[#3AB54B]"
+            <button class=" bg-white border text-xs border-[#53C064] mt-8  font-bold md:py-3 py-2 md:px-4 px-1 rounded-3xl flex justify-center  text-[#3AB54B]"
                            onClick={handleConfirmPayment}
              >
                 Confirm Payment
@@ -183,13 +183,13 @@ const Remittance = ({ onNext, onPrevious }) => {
 
             
       )} 
-      <div className='flex mx-56 space-x-[350px]'>
-        <button class=" bg-gray-100 text-xs  mt-8  font-bold py-2 px-4 rounded flex justify-center  text-[#3AB54B]"
+      <div className='flex md:mx-56 md:space-x-[350px] justify-between'>
+        <button class=" bg-gray-200 text-sm  mt-8  font-bold py-2 px-8 rounded flex justify-center  text-[#3AB54B]"
                            onClick={onPrevious}
              >
                 Back
             </button>
-            <button class= " text-xs  bg-[#F2B807] mt-8 rounded font-bold py-2 px-4  flex justify-center  text-white"
+            <button class= " text-sm  bg-[#F2B807] mt-8 rounded font-bold py-2 px-8  flex justify-center  text-white"
                            onClick={handleConfirmPayment}
              >
                 Next

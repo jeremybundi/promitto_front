@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrashAlt, FaDownload } from 'react-icons/fa';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
-import { saveAs } from 'file-saver';
+//import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx'; // Import the xlsx library
 import EditMemberForm from './EditMemberForm'; // Import the form component
 import { useSelector } from 'react-redux'; // Import useSelector
@@ -22,7 +22,7 @@ const ViewMembers = () => {
       try {
         console.log("Token before request:", token); // Debug token value
 
-        const response = await axios.get('http://api3.promittoltd.com/data', {
+        const response = await axios.get('https://api3.promittoltd.com/data', {
           headers: {
             Authorization: `Bearer ${token}`, // Use Bearer token
           },
@@ -63,7 +63,7 @@ const ViewMembers = () => {
   const handleUpdate = async (id, updatedData) => {
     try {
       // Include the token in the request headers
-      const response = await axios.put(`http://api3.promittoltd.com/update/${id}`, updatedData, {
+      const response = await axios.put(`https://api3.promittoltd.com/update/${id}`, updatedData, {
         headers: {
           Authorization: `Bearer ${token}`, // Use Bearer token
         },
@@ -93,7 +93,7 @@ const ViewMembers = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(`http://api3.promittoltd.com/data/${id}`, {
+      const response = await axios.delete(`https://api3.promittoltd.com/data/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`, // Include the token here
         },

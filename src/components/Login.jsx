@@ -17,7 +17,7 @@ function Login() {
 const handleSendOtp = async () => {
   setErrorMessage(''); 
   try {
-    const response = await axios.post('http://api3.promittoltd.com/users/login', 
+    const response = await axios.post('https://api3.promittoltd.com/users/login', 
       { email },
       {
         headers: {
@@ -41,7 +41,7 @@ const handleSendOtp = async () => {
 const handleVerifyOtp = async () => {
   setErrorMessage('');
   try {
-    const response = await axios.post('http://api3.promittoltd.com/users/verify-otp', 
+    const response = await axios.post('https://api3.promittoltd.com/users/verify-otp', 
       { email, otp },
       {
         headers: {
@@ -66,7 +66,7 @@ const handleVerifyOtp = async () => {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="flex bg-white rounded-2xl mt-6 shadow-lg mb-48 md:mb-0 overflow-hidden w-3/4 max-w-4xl">
+      <div className="flex bg-white rounded-2xl mt-6 shadow-lg mb-24 md:mb-0 overflow-hidden w-3/4 max-w-4xl">
         {/* Left Side - Form */}
         <div className="md:p-16 p-4 w-full ">
           <h2 className="text-lg  font-medium text-gray-600 mb-4">Login</h2>

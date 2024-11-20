@@ -114,12 +114,12 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
   };
 
   return (
-    <div className="employment-details-form p-6 bg-white shadow-lg rounded-lg">
-      <form className="grid grid-cols-1 md:grid-cols-2 gap-6 mx-36">
+    <div className="employment-details-form md:p-6 bg-white md:shadow-lg rounded-lg">
+      <form className="grid grid-cols-2 md:gap-6 md:mx-36">
         {Object.keys(formData).map((key) => (
           key !== 'termsOfEmployment' && (
             <div key={key}>
-              <label htmlFor={key} className="block text-sm font-medium text-gray-700">
+              <label htmlFor={key} className="block text-sm font-semibold mb-1 mt-3 text-gray-500">
                 {key === 'contractPeriod' ? 'Contract Period' : key.replace(/([A-Z])/g, ' $1').trim()}
                 <span className="text-[#F2B807] ml-2">*</span>
               </label>
@@ -129,7 +129,7 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
                 name={key}
                 value={formData[key]}
                 onChange={handleChange}
-                className="mt-1 input-field w-full md:w-[300px] border border-gray-300 rounded-md p-2"
+                className="mt-1 input-field w-[140px] md:w-[300px] border md:text-sm text-xs border-gray-300 rounded-md p-3"
                 required
               />
               {errors[key] && <p className="text-red-500 text-xs mt-1">{errors[key]}</p>}
@@ -139,7 +139,7 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
 
         {/* Terms of Employment Dropdown */}
         <div>
-          <label htmlFor="termsOfEmployment" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="termsOfEmployment" className="block text-sm font-semibold mt-3 mb-1 text-gray-600">
             Terms of Employment
             <span className="text-[#F2B807] ml-2">*</span>
           </label>
@@ -148,7 +148,7 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
             name="termsOfEmployment"
             value={formData.termsOfEmployment}
             onChange={handleChange}
-            className="mt-1 input-field w-full md:w-[300px] border border-gray-300 rounded-md p-2"
+            className="mt-1 input-field w-[140px] md:w-[300px] border border-gray-300 rounded-md p-3"
             required
           >
             <option value="">Select</option>
@@ -173,7 +173,7 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
               placeholder='Enter number of months'
               value={formData.contractPeriod}
               onChange={handleChange}
-              className="mt-1 input-field w-full md:w-[200px] border border-gray-300 rounded-md p-2"
+              className="mt-1 input-field w-[140px] md:w-[200px] border border-gray-300 rounded-md p-2"
               required
             />
             <span className='ml-2 text-emerald-700'>Months</span>
@@ -182,7 +182,7 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
         )}
       </form>
 
-      <div className='flex md:mx-56 md:space-x-[350px]'>
+      <div className='flex justify-between md:mx-56 md:space-x-[350px]'>
         <button 
           className="bg-gray-100 text-xs mt-8 font-bold py-2 px-4 rounded flex justify-center text-[#3AB54B]"
           onClick={handlePrevious}

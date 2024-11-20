@@ -64,139 +64,139 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg shadow-lg">
-      <form className="grid grid-cols-1 mx-4 md:grid-cols-2 gap-9">
+    <div className=" md:mx-36 p-6 bg-white rounded-lg ">
+      <form className="grid  md:mx-4 grid-cols-2 gap-6">
         
         {/* Name of Business */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 relative">
+        <div className='flex flex-col'>
+          <label className="relative text-sm text-gray-700 mb-1">
             Name of Business
-            <span className="absolute top-0 right-0 text-red-500">*</span>
+            <span className="text-[#F2B807] absolute top-[-4px] right-[5px] md:right-[190px]">*</span>
           </label>
           <input
             type="text"
             name="businessName"
             value={formData.businessName}
             onChange={handleInputChange}
-            className={`mt-1 w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.businessName ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-2/3 w-[140px] px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.businessName ? 'border-red-500' : ''}`}
             placeholder="Enter business name"
           />
           {errors.businessName && <p className="text-red-500 text-xs">{errors.businessName}</p>}
         </div>
 
         {/* Nature of Business */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 relative">
+        <div className='flex flex-col'>
+          <label className="relative text-sm text-gray-700 mb-1">
             Nature of Business
-            <span className="absolute top-0 right-0 text-red-500">*</span>
+            <span className="text-[#F2B807] absolute top-[-4px] right-[4px] md:right-[180px]">*</span>
           </label>
           <input
             type="text"
             name="natureOfBusiness"
             value={formData.natureOfBusiness}
             onChange={handleInputChange}
-            className={`mt-1 w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.natureOfBusiness ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-2/3 w-[140px]  px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.natureOfBusiness ? 'border-red-500' : ''}`}
             placeholder="Enter nature of business"
           />
           {errors.natureOfBusiness && <p className="text-red-500 text-xs">{errors.natureOfBusiness}</p>}
         </div>
 
         {/* Date of Registration */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 relative">
+        <div className='flex flex-col'>
+          <label className="relative text-sm text-gray-700 mb-1">
             Date of Registration
-            <span className="absolute top-0 right-0 text-red-500">*</span>
+            <span className="text-[#F2B807] absolute top-[-4px] right-[-5px] md:right-[180px]">*</span>
           </label>
           <input
             type="date"
             name="dateOfRegistration"
             value={formData.dateOfRegistration}
             onChange={handleInputChange}
-            className={`mt-1 w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.dateOfRegistration ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-2/3 w-[140px] px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.dateOfRegistration ? 'border-red-500' : ''}`}
           />
           {errors.dateOfRegistration && <p className="text-red-500 text-xs">{errors.dateOfRegistration}</p>}
         </div>
 
         {/* Postal Address */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 relative">
+        <div className='flex flex-col'>
+          <label className="relative text-sm text-gray-700 mb-1">
             Postal Address
-            <span className="absolute top-0 right-0 text-red-500">*</span>
+            <span className="text-[#F2B807] absolute top-[-4px] right-[20px] md:right-[210px]">*</span>
           </label>
           <input
             type="text"
             name="postalAddress"
             value={formData.postalAddress}
             onChange={handleInputChange}
-            className={`mt-1 w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.postalAddress ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-2/3 w-[140px] px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.postalAddress ? 'border-red-500' : ''}`}
             placeholder="Enter postal address"
           />
           {errors.postalAddress && <p className="text-red-500 text-xs">{errors.postalAddress}</p>}
         </div>
 
         {/* Postal Code */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 relative">
+        <div className='flex flex-col'>
+          <label className="relative text-sm text-gray-700 mb-1">
             Postal Code
-            <span className="absolute top-0 right-0 text-red-500">*</span>
+            <span className="text-[#F2B807] absolute top-[-4px] right-[40px] md:right-[230px]">*</span>
           </label>
           <input
             type="text"
             name="postalCode"
             value={formData.postalCode}
             onChange={handleInputChange}
-            className={`mt-1 w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.postalCode ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-2/3 w-[140px] px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.postalCode ? 'border-red-500' : ''}`}
             placeholder="Enter postal code"
           />
           {errors.postalCode && <p className="text-red-500 text-xs">{errors.postalCode}</p>}
         </div>
 
         {/* City/Town */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 relative">
+        <div className='flex flex-col'>
+          <label className="relative text-sm text-gray-700 mb-1">
             City/Town
-            <span className="absolute top-0 right-0 text-[#F2B807]">*</span>
+            <span className="text-[#F2B807] absolute top-[-4px] right-[50px] md:right-[250px]">*</span>
           </label>
           <input
             type="text"
             name="city"
             value={formData.city}
             onChange={handleInputChange}
-            className={`mt-1 w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.city ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-2/3 w-[140px] px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.city ? 'border-red-500' : ''}`}
             placeholder="Enter city or town"
           />
           {errors.city && <p className="text-red-500 text-xs">{errors.city}</p>}
         </div>
 
         {/* Email */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 relative">
+        <div className='flex flex-col'>
+          <label className="relative text-sm text-gray-700 mb-1">
             Email
-            <span className="absolute top-0 right-0 text-red-500">*</span>
+            <span className="text-[#F2B807] absolute top-[-4px] right-[80px] md:right-[280px]">*</span>
           </label>
           <input
             type="email"
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            className={`mt-1 w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.email ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-2/3 w-[140px] px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.email ? 'border-red-500' : ''}`}
             placeholder="Enter email address"
           />
           {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
         </div>
 
         {/* Telephone */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700 relative">
+        <div className='flex flex-col'>
+          <label className="relative text-sm text-gray-700 mb-1">
             Telephone
-            <span className="absolute top-0 right-0 text-red-500">*</span>
+            <span className="text-[#F2B807] absolute top-[-4px] right-[50px] md:right-[250px]">*</span>
           </label>
           <input
             type="tel"
             name="telephone"
             value={formData.telephone}
             onChange={handleInputChange}
-            className={`mt-1 w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.telephone ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-2/3 w-[140px]  px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.telephone ? 'border-red-500' : ''}`}
             placeholder="Enter telephone number"
           />
           {errors.telephone && <p className="text-red-500 text-xs">{errors.telephone}</p>}
@@ -204,7 +204,7 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
       </form>
 
       {/* Buttons */}
-      <div className="flex justify-between mx-56 mt-8">
+      <div className="flex justify-between md:ml-12  md:mr-32 mt-8">
         <button
           type="button"
           onClick={handleBack}

@@ -22,7 +22,7 @@ const ChooseDreamHome = () => {
     useEffect(() => {
         const fetchHouses = async () => {
             try {
-                const response = await axios.get('http://api3.promittoltd.com/houses/done');
+                const response = await axios.get('https://api3.promittoltd.com/houses/done');
                 setHouses(response.data);
                 console.log(response.data); 
             } catch (error) {
@@ -87,7 +87,7 @@ const handleSortChange = (option) => {
     useEffect(() => {
         const fetchOngoingHouses = async () => {
             try {
-                const response = await axios.get('http://api3.promittoltd.com/house-ongoing'); 
+                const response = await axios.get('https://api3.promittoltd.com/house-ongoing'); 
                 setOngoingHouses(response.data);
                 console.log(response.data);
             } catch (error) {
@@ -192,8 +192,8 @@ const handleSortChange = (option) => {
                                         </div>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <button className="bg-[#F2B807] text-white py-2 px-4 rounded-xl">View House</button>
-                                        <div className="flex flex-col items-end">
+                                        <button className="bg-[#F2B807] text-white py-2 mt-2 md:mt-0 px-4 md:py-2 text-xs md:text-sm font-semibold rounded-lg">View House</button>
+                                        <div className="flex flex-col ml-3 items-end">
                                             <span className="mr-20 font-semibold">Pay</span>
                                             <span className="text-sm"> {house.price}/= Per Month</span>
                                         </div>
@@ -273,7 +273,7 @@ const handleSortChange = (option) => {
                 <div className="flex justify-center mt-8">
                     <button 
                         onClick={handleViewMoreOngoing} 
-                        className="bg-[#F2B807] text-white py-3 px-4 font-sans font-semibold rounded-2xl"  data-aos="fade-down"
+                        className="bg-[#F2B807] text-white py-1 px-4 md:py-2 text-xs md:text-sm font-sans font-semibold rounded-2xl"  data-aos="fade-down"
                     >
                         View More Ongoing Projects 
                     </button>

@@ -55,18 +55,18 @@ const NextOfKin = ({ onNext, onPrevious }) => {
   const handlePrevious = () => {
     // Save data before going back (optional)
     dispatch(saveNextOfKin(form));
-    //console.log(form)
     onPrevious(); // Call the onPrevious function passed from Register
   };
 
   return (
-    <div className="ml-[132px] p-6 text-xs font-semibold rounded-lg">
-      <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
+    <div className="p-6 text-xs font-semibold rounded-lg">
+      <form className="space-y-6">
         {/* Name Section */}
+        <div className='hidden md:flex-col md:ml-32 md:flex'>
         <div className="flex flex-col mb-4">
           <label htmlFor="name" className="relative text-gray-700 mb-1">
             Next of Kin Name.
-            <span className="text-[#F2B807] absolute top-[-4px] right-[760px]">*</span>
+            <span className="text-[#F2B807] absolute top-[-4px] right-[890px]">*</span>
           </label>
           <div className="flex space-x-16">
             {['firstName', 'middleName', 'lastName'].map((field, index) => (
@@ -168,7 +168,7 @@ const NextOfKin = ({ onNext, onPrevious }) => {
         <div className="flex flex-col mb-4">
           <label htmlFor="dob" className="relative text-gray-700 mb-1">
             Date of Birth.
-            <span className="text-[#F2B807] absolute top-[-4px] right-[790px]">*</span>
+            <span className="text-[#F2B807] absolute top-[-4px] right-[920px]">*</span>
           </label>
           <input
             type="date"
@@ -181,7 +181,8 @@ const NextOfKin = ({ onNext, onPrevious }) => {
           />
         </div>
 
-        <div className="flex justify-between">
+        {/* Buttons for large screens */}
+        <div className="hidden md:flex justify-between">
           <button
             type="button"
             onClick={handlePrevious}
@@ -196,6 +197,147 @@ const NextOfKin = ({ onNext, onPrevious }) => {
           >
             Next
           </button>
+        </div>
+        </div>
+        
+        {/* Small screen layout */}
+        <div className="md:hidden space-y-6">
+          {/* Name Section */}
+          <div className="flex flex-col  mb-4">
+            <label htmlFor="name" className="relative text-gray-600 text-sm font-lufga mb-2">
+              Next of Kin Name.
+              <span className="text-[#F2B807] absolute top-[-4px] right-[150px]">*</span>
+            </label>
+            <div className="flex flex-col space-y-4">
+              {['firstName', 'middleName', 'lastName'].map((field, index) => (
+                <input
+                  key={index}
+                  type="text"
+                  id={field}
+                  name={field}
+                  placeholder={`${field.charAt(0).toUpperCase() + field.slice(1).replace(/Name/, ' Name')}`}
+                  value={form[field]} // Load data from state
+                  onChange={handleInputChange}
+                  className="p-4 border border-gray-500 my-2 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
+                  required
+                />
+              ))}
+            </div>
+          </div>
+
+          {/* Relationship, Phone Number, National ID / Passport */}
+          <div className="flex flex-col space-y-4 mb-4">
+            <div className="flex flex-col relative">
+              <label htmlFor="relationship" className="relative text-sm text-gray-600 mb-2">
+                Relationship.
+                <span className="text-[#F2B807] absolute top-[-4px] right-[180px]">*</span>
+              </label>
+              <div
+                className="p-4 bg-gray-200 border border-gray-500 rounded-lg cursor-pointer flex items-center justify-between"
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <span>{selectedRelationship || 'Select Relationship'}</span>
+                <svg
+                  className="ml-2"
+                  width="12"
+                  height="12"
+                  viewBox="0 0 12 12"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M3 4.5L6 7.5L9 4.5"
+                    stroke="#6B7280"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+              {isOpen && (
+                <ul className="relative z-10 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg">
+                  {relationships.map((relationship, index) => (
+                    <li
+                      key={index}
+                      onClick={() => handleSelect(relationship)}
+                      className="p-2 hover:bg-[#F2B807] text-sm cursor-pointer"
+                    >
+                      {relationship}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+
+            <div className="flex flex-col">
+              <label htmlFor="phone" className="relative font-lufga text-sm text-gray-600 mb-2">
+                Phone Number.
+                <span className="text-[#F2B807] absolute top-[-4px] right-[165px]">*</span>
+              </label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="Enter a valid phone number"
+                value={form.phone}
+                onChange={handleInputChange}
+                className="p-4 border border-gray-500 rounded-lg text-sm focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
+                required
+              />
+            </div>
+
+            <div className="flex flex-col">
+              <label htmlFor="nationalId" className="relative text-gray-600 mb-2 text-sm">
+                National ID / Passport No.
+                <span className="text-[#F2B807] absolute top-[-4px] right-[95px]">*</span>
+              </label>
+              <input
+                type="text"
+                id="nationalId"
+                name="nationalId"
+                placeholder="Enter National ID / Passport No."
+                value={form.nationalId}
+                onChange={handleInputChange}
+                className="p-4 text-sm border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
+                required
+              />
+            </div>
+          </div>
+
+          {/* Date of Birth */}
+          <div className="flex flex-col mb-4">
+            <label htmlFor="dob" className="relative text-gray-600 text-sm mb-2 font-lufga">
+              Date of Birth.
+              <span className="text-[#F2B807] absolute top-[-4px] right-[180px]">*</span>
+            </label>
+            <input
+              type="date"
+              id="dob"
+              name="dob"
+              value={form.dob}
+              onChange={handleInputChange}
+              className="p-4 text-sm border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
+              required
+            />
+          </div>
+
+          {/* Navigation */}
+          <div className="flex justify-between">
+            <button
+              type="button"
+              onClick={handlePrevious}
+              className="bg-gray-300 px-3 py-2 text-sm rounded-lg"
+            >
+              Previous
+            </button>
+            <button
+              type="button"
+              onClick={handleNext}
+              className="bg-[#F2B807] py-2 px-5 text-sm rounded-lg"
+            >
+              Next
+            </button>
+          </div>
         </div>
       </form>
     </div>

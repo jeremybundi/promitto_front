@@ -71,10 +71,11 @@ const PersonalDetails = ({ onNext }) => {
   return (
     <div className="md:p-6 text-xs font-semibold rounded-lg">
       <form className="md:space-y-6 space-y-2" onSubmit={handleSubmit}>
-        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 md:gap-6">
           {/* First Name */}
+          
           <div className="flex flex-col mb-4">
-            <label htmlFor="firstName" className="text-gray-700 mb-1">
+            <label htmlFor="firstName" className="text-gray-700 ml-6 mb-1">
               First Name <span className="text-[#F2B807]">*</span>
             </label>
             <input
@@ -82,7 +83,7 @@ const PersonalDetails = ({ onNext }) => {
               id="firstName"
               name="firstName"
               placeholder="First Name"
-              className="p-3 border border-gray-500  rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none max-w-full sm:max-w-xs md:max-w-md"
+              className="p-3 border border-gray-500  rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-36  "
               required
               value={formData.firstName}
               onChange={handleChange}
@@ -99,7 +100,7 @@ const PersonalDetails = ({ onNext }) => {
               id="middleName"
               name="middleName"
               placeholder="Middle Name"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none max-w-full sm:max-w-xs md:max-w-md"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-36"
               required
               value={formData.middleName}
               onChange={handleChange}
@@ -116,7 +117,7 @@ const PersonalDetails = ({ onNext }) => {
               id="lastName"
               name="lastName"
               placeholder="Last Name"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none max-w-full sm:max-w-xs md:max-w-md"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-36"
               required
               value={formData.lastName}
               onChange={handleChange}
@@ -130,13 +131,13 @@ const PersonalDetails = ({ onNext }) => {
             </label>
             <div className="relative">
               <div
-                className="p-3 bg-gray-200 border border-gray-500 rounded-lg cursor-pointer"
+                className="p-3 bg-gray-200 border border-gray-500 rounded-lg md:w-full w-36 cursor-pointer"
                 onClick={() => setIsGenderOpen(!isGenderOpen)}
               >
                 <span>{formData.gender || 'Select'}</span>
               </div>
               {isGenderOpen && (
-                <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg ">
+                <ul className="absolute z-10 mt-1 md:w-full w-36  bg-white border border-gray-300 rounded-lg shadow-lg ">
                   {genderOptions.map((option) => (
                     <li
                       key={option}
@@ -158,13 +159,13 @@ const PersonalDetails = ({ onNext }) => {
             </label>
             <div className="relative">
               <div
-                className="p-3 bg-gray-200 border border-gray-500 rounded-lg cursor-pointer"
+                className="p-3 bg-gray-200 border border-gray-500 md:w-full w-36 rounded-lg cursor-pointer"
                 onClick={() => setIsMaritalOpen(!isMaritalOpen)}
               >
                 <span>{formData.marital || 'Select'}</span>
               </div>
               {isMaritalOpen && (
-                <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg">
+                <ul className="absolute z-10 mt-1 md:w-full w-36 bg-white border border-gray-300 rounded-lg shadow-lg">
                   {maritalOptions.map((option) => (
                     <li
                       key={option}
@@ -188,7 +189,7 @@ const PersonalDetails = ({ onNext }) => {
               type="date"
               id="dob"
               name="dob"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none max-w-full sm:max-w-xs md:max-w-md"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-36"
               required
               value={formData.dob}
               onChange={handleChange}
@@ -205,7 +206,7 @@ const PersonalDetails = ({ onNext }) => {
               id="idNumber"
               name="idNumber"
               placeholder="National ID/Passport"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none max-w-full sm:max-w-xs md:max-w-md"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-36"
               required
               value={formData.idNumber}
               onChange={handleChange}
@@ -222,7 +223,7 @@ const PersonalDetails = ({ onNext }) => {
               id="kraPin"
               name="kraPin"
               placeholder="KRA PIN"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none max-w-full sm:max-w-xs md:max-w-md"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-36"
               required
               value={formData.kraPin}
               onChange={handleChange}
@@ -239,7 +240,7 @@ const PersonalDetails = ({ onNext }) => {
               id="validAddress"
               name="validAddress"
               placeholder="Valid Address"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none max-w-full sm:max-w-xs md:max-w-md"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-36"
               required
               value={formData.validAddress}
               onChange={handleChange}
@@ -256,7 +257,7 @@ const PersonalDetails = ({ onNext }) => {
               id="postalCode"
               name="postalCode"
               placeholder="Postal Code"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none max-w-full sm:max-w-xs md:max-w-md"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-36"
               required
               value={formData.postalCode}
               onChange={handleChange}
@@ -273,7 +274,7 @@ const PersonalDetails = ({ onNext }) => {
               id="city"
               name="city"
               placeholder="City"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none max-w-full sm:max-w-xs md:max-w-md"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-36"
               required
               value={formData.city}
               onChange={handleChange}
@@ -290,7 +291,7 @@ const PersonalDetails = ({ onNext }) => {
               id="county"
               name="county"
               placeholder="County"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none max-w-full sm:max-w-xs md:max-w-md"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-36"
               required
               value={formData.county}
               onChange={handleChange}
@@ -307,7 +308,7 @@ const PersonalDetails = ({ onNext }) => {
               id="country"
               name="country"
               placeholder="Country"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none max-w-full sm:max-w-xs md:max-w-md"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-36"
               required
               value={formData.country}
               onChange={handleChange}
@@ -324,7 +325,7 @@ const PersonalDetails = ({ onNext }) => {
               id="phoneNumber"
               name="phoneNumber"
               placeholder="Phone Number"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none max-w-full sm:max-w-xs md:max-w-md"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-36"
               required
               value={formData.phoneNumber}
               onChange={handleChange}
@@ -341,7 +342,7 @@ const PersonalDetails = ({ onNext }) => {
               id="emailAddress"
               name="emailAddress"
               placeholder="Email Address"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none max-w-full sm:max-w-xs md:max-w-md"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-36"
               required
               value={formData.emailAddress}
               onChange={handleChange}
@@ -356,18 +357,18 @@ const PersonalDetails = ({ onNext }) => {
           </label>
           <div className="relative">
             <div
-      className="p-3 bg-gray-200 border border-gray-500 rounded-lg cursor-pointer w-full sm:w-auto"
+      className="p-3 bg-gray-200 border border-gray-500 rounded-lg cursor-pointer w-36  md:w-[320px]"
       onClick={() => setIsHousingOpen(!isHousingOpen)}
             >
               <span>{formData.housingDetails || 'Select'}</span>
             </div>
             {isHousingOpen && (
-      <ul className="relative z-10 mt-1 sm:w-[150px] bg-white border border-gray-300 rounded-lg shadow-lg">
+      <ul className="relative z-10 mt-1 md:w-[320px] w-36 bg-white border border-gray-300 rounded-lg shadow-lg">
                 {housingOptions.map((option) => (
                   <li
                     key={option}
                     onClick={() => handleSelectHousing(option)}
-                    className="p-2 hover:bg-[#F2B807] md:w-1/3  cursor-pointer"
+                    className="p-2 hover:bg-[#F2B807] rounded-md cursor-pointer"
                   >
                     {option}
                   </li>
@@ -376,15 +377,16 @@ const PersonalDetails = ({ onNext }) => {
             )}
           </div>
         </div>
-     <div className=' ml-auto'>
+     <div className=''>
         <button
           type="submit"
-          className="w-aut px-6 bg-[#F2B807] text-white py-2 rounded-lg hover:bg-yellow-600 transition-colors"
+          className="w-auto px-8 bg-[#F2B807] text-white py-3 text-center rounded-lg hover:bg-yellow-600 transition-colors"
         >
           Save and Continue
         </button>
         </div>
       </form>
+      
     </div>
   );
 };

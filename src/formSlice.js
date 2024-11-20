@@ -25,7 +25,6 @@ const formSlice = createSlice({
     saveRemittanceDetails: (state, action) => {
       // Save only accountNumber and transactionCode without the payment method
       state.remittanceDetails = action.payload;
-  
     },
     saveEmploymentDetails: (state, action) => {
       state.employmentDetails = action.payload; 
@@ -36,6 +35,10 @@ const formSlice = createSlice({
     savePropertyDetails: (state, action) => {
       state.propertyDetails = action.payload; 
     },
+    // New reducer to clear the form data
+    clearFormData: (state) => {
+      return initialState; // Reset the state to its initial values
+    },
   },
 });
 
@@ -45,7 +48,8 @@ export const {
   saveRemittanceDetails, 
   saveEmploymentDetails,  
   saveBusinessDetails,
-  savePropertyDetails 
+  savePropertyDetails,
+  clearFormData, // Export the clearFormData action
 } = formSlice.actions;
 
 export default formSlice.reducer;

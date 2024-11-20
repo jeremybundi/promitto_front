@@ -5,24 +5,40 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React</title>
-     <!-- Add AOS CSS -->
-     <link
-     rel="stylesheet"
-     href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
-   />
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-     <!-- Add AOS JS -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-     <script>
-       AOS.init({
-         duration: 2000, // Animation duration in milliseconds
-         easing: 'ease-in-out', // Animation easing style
-         once: false,
 
-       });
-     </script>
+    <!-- Add AOS CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+    />
+
+    <!-- Add Lufga Font via Google Fonts (or your preferred provider) -->
+    <link 
+      href="https://fonts.googleapis.com/css2?family=Lufga:wght@400;500;700&display=swap" 
+      rel="stylesheet" 
+    />
+
+     <!-- Global Font Styling -->
+     <style>
+      body {
+        font-family: 'Lufga', sans-serif;
+      }
+    </style>
+    
+  </head>
+  <body class="font-sans">
+    <div id="root"></div>
+
+    <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Add AOS JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+      AOS.init({
+        duration: 2000, // Animation duration in milliseconds
+        easing: 'ease-in-out', // Animation easing style
+        once: false,
+      });
+    </script>
   </body>
 </html>

@@ -64,59 +64,69 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white rounded-lg">
-      <form className="grid grid-cols-1 mx-4 md:grid-cols-2 gap-9">
+    <div className="mx-auto md:p-6 bg-white rounded-lg">
+      <form className="grid grid-cols-2 gap-6 p-4">
         {/* Location of Property */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700">Location of Property</label>
+        <div className='ml-o'>
+          <label className="block text-gray-700 font-lufga mb-1">Location of Property
+            <span className="text-[#F2B807] md:ml-2">*</span>
+          </label>
           <input
             type="text"
             name="location"
             value={formData.location}
             onChange={handleInputChange}
-            className={`mt-1 w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.location ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-[250px] w-[150px] px-4 py-2 border rounded-lg text-gray-600 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.location ? 'border-red-500' : ''}`}
             placeholder="Enter location of property"
           />
           {errors.location && <p className="text-red-500 text-xs">{errors.location}</p>}
         </div>
 
-        {/* Title Number */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700">Title Number</label>
-          <input
-            type="text"
-            name="titleNumber"
-            value={formData.titleNumber}
-            onChange={handleInputChange}
-            className={`mt-1 w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.titleNumber ? 'border-red-500' : ''}`}
-            placeholder="Enter title number"
-          />
-          {errors.titleNumber && <p className="text-red-500 text-xs">{errors.titleNumber}</p>}
-        </div>
-
-        {/* Land Reference No */}
-        <div>
-          <label className="block text-sm font-semibold text-gray-700">Land Reference No.</label>
+         {/* Land Reference No */}
+         <div>
+          <label className="block text-gray-700 font-lufga mb-1">Land Reference No.
+            <span className="text-[#F2B807] mml-2">*</span>
+          </label>
           <input
             type="text"
             name="landReferenceNo"
             value={formData.landReferenceNo}
             onChange={handleInputChange}
-            className={`mt-1 w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.landReferenceNo ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-[250px] w-[150px] px-4 py-2 border space-x-16 rounded-lg text-gray-600 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.landReferenceNo ? 'border-red-500' : ''}`}
             placeholder="Enter land reference number"
           />
           {errors.landReferenceNo && <p className="text-red-500 text-xs">{errors.landReferenceNo}</p>}
         </div>
 
+        {/* Title Number */}
+        <div>
+          <label className="block text-gray-700 font-lufga mb-1">Title Number
+            <span className="text-[#F2B807] ml-2">*</span>
+          </label>
+          <input
+            type="text"
+            name="titleNumber"
+            value={formData.titleNumber}
+            onChange={handleInputChange}
+            className={`mt-1 md:w-[250px] w-[150px] px-4 py-2 border rounded-lg text-gray-600 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.titleNumber ? 'border-red-500' : ''}`}
+            placeholder="Enter title number"
+          />
+          {errors.titleNumber && <p className="text-red-500 text-xs">{errors.titleNumber}</p>}
+        </div>
+
+       
+
         {/* Size of Project */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700">Size of Project</label>
+          <label className="block text-gray-700 font-lufga mb-1">Size of Project
+            <span className="text-[#F2B807] ml-2">*</span>
+          </label>
           <input
             type="text"
             name="sizeOfProject"
             value={formData.sizeOfProject}
             onChange={handleInputChange}
-            className={`mt-1 w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.sizeOfProject ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-[250px] w-[150px] px-4 py-2 border rounded-lg text-gray-600 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.sizeOfProject ? 'border-red-500' : ''}`}
             placeholder="Enter size of project"
           />
           {errors.sizeOfProject && <p className="text-red-500 text-xs">{errors.sizeOfProject}</p>}
@@ -124,12 +134,14 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
 
         {/* Type of Project */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700">Type of Project</label>
+          <label className="block text-gray-700 font-lufga mb-1">Type of Project
+            <span className="text-[#F2B807] ml-2">*</span>
+          </label>
           <select
             name="typeOfProject"
             value={formData.typeOfProject}
             onChange={handleInputChange}
-            className={`mt-1 w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.typeOfProject ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-[250px] w-[150px] px-4 py-2 border rounded-lg text-gray-600 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.typeOfProject ? 'border-red-500' : ''}`}
           >
             <option value="Residential">Residential</option>
             <option value="Commercial">Commercial</option>
@@ -139,13 +151,15 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
 
         {/* County */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700">County</label>
+          <label className="block text-gray-700 font-lufga mb-1">County
+            <span className="text-[#F2B807] ml-2">*</span>
+          </label>
           <input
             type="text"
             name="county"
             value={formData.county}
             onChange={handleInputChange}
-            className={`mt-1 w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.county ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-[250px] w-[150px] px-4 py-2 border rounded-lg text-gray-600 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.county ? 'border-red-500' : ''}`}
             placeholder="Enter county"
           />
           {errors.county && <p className="text-red-500 text-xs">{errors.county}</p>}
@@ -153,13 +167,15 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
 
         {/* Ward */}
         <div>
-          <label className="block text-sm font-semibold text-gray-700">Ward</label>
+          <label className="block text-gray-700  font-lufga mb-1">Ward
+            <span className="text-[#F2B807] ml-2">*</span>
+          </label>
           <input
             type="text"
             name="ward"
             value={formData.ward}
             onChange={handleInputChange}
-            className={`mt-1 w-full px-4 py-2 border rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.ward ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-[250px] w-[150px] px-4 py-2 border rounded-lg text-gray-600 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.ward ? 'border-red-500' : ''}`}
             placeholder="Enter ward"
           />
           {errors.ward && <p className="text-red-500 text-xs">{errors.ward}</p>}
@@ -167,18 +183,18 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
       </form>
 
       {/* Buttons */}
-      <div className="flex mx-56 space-x-[350px]">
+      <div className="flex justify-between mx-auto md:mt-8 mt-3  space-y-0 space-x-4">
         <button
           type="button"
           onClick={handleBack}
-          className="bg-gray-100 text-xs mt-8 font-bold py-2 px-4 rounded flex justify-center text-[#3AB54B]"
+          className="bg-gray-200  font-bold py-2 px-6 text-sm rounded text-[#3AB54B]"
         >
           Back
         </button>
         <button
           type="button"
           onClick={handleSave}
-          className="text-xs bg-[#F2B807] mt-8 rounded font-bold py-2 px-4 flex justify-center text-white"
+          className="text-sm bg-[#F2B807] rounded font-bold py-2 px-6 text-white"
         >
           Next
         </button>

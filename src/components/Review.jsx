@@ -1,8 +1,14 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';  
+import { useSelector, useDispatch } from 'react-redux'; 
 import axios from 'axios';
+import { clearFormData } from '../formSlice'; 
+import { useNavigate } from "react-router-dom"; // Import the useNavigate hook
+
 
 const Review = ({ onEditClick }) => {
+  const dispatch = useDispatch();
+  const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate(); 
   const personalDetails = useSelector((state) => state.form.personalDetails);
   const nextOfKin = useSelector((state) => state.form.nextOfKin);
   const remittanceDetails = useSelector((state) => state.form.remittanceDetails);
@@ -10,52 +16,62 @@ const Review = ({ onEditClick }) => {
   const businessDetails = useSelector((state) => state.form.businessDetails) || {}; 
   const propertyDetails = useSelector((state) => state.form.propertyDetails) || {}; 
 
+  // Function to handle submission
+  const handleSubmit = async () => {
+    const formData = {
+      personalDetails,
+      nextOfKin,
+      remittanceDetails,
+      employmentDetails,
+      businessDetails,
+      propertyDetails,
+    };
 
-    // Function to handle submission
-    const handleSubmit = async () => {
-      const formData = {
-
-        personalDetails,
-        nextOfKin,
-        remittanceDetails,
-        employmentDetails,
-        businessDetails,
-        propertyDetails,
-      };
-
-      try {
-        const response = await axios.post('http://api3.promittoltd.com/all-details', formData, {
-          headers: {
-              'Content-Type': 'application/json', 
-          }
-      });        
-        console.log('The data to be saved:', formData);
-        console.log('Data submitted successfully:', response.data);
-        // Handle successful submission (e.g., show a success message or redirect)
-    } catch (error) {
-        console.error('Error submitting data:', error);
-        console.log('The data to be saved:', formData);
-    
-        // Check if the error has a response property (to get more information from the server)
-        if (error.response) {
-            console.error('Server responded with status:', error.response.status);
-            console.error('Server response data:', error.response.data);
-        } else if (error.request) {
-            // The request was made, but no response was received
-            console.error('No response received:', error.request);
-        } else {
-            // Something happened in setting up the request that triggered an Error
-            console.error('Error setting up request:', error.message);
+    try {
+      const response = await axios.post('https://api3.promittoltd.com/all-details', formData, {
+        headers: {
+            'Content-Type': 'application/json', 
         }
+      });
+      
+      console.log('The data to be saved:', formData);
+      console.log('Data submitted successfully:', response.data);
+
+     
+      dispatch(clearFormData());  
+
+      // Show a success message
+      setSuccessMessage('Data submitted successfully!');
+
+      setTimeout(() => {
+        navigate("https://account.promittoltd.com/");
+      }, 2000); 
     
-        // Optional: Display a user-friendly error message
-        alert('An error occurred while submitting the data. Please try again.');
+
+
+    } catch (error) {
+      console.error('Error submitting data:', error);
+      console.log('The data to be saved:', formData);
+
+      // Check if the error has a response property (to get more information from the server)
+      if (error.response) {
+        console.error('Server responded with status:', error.response.status);
+        console.error('Server response data:', error.response.data);
+      } else if (error.request) {
+        // The request was made, but no response was received
+        console.error('No response received:', error.request);
+      } else {
+        // Something happened in setting up the request that triggered an Error
+        console.error('Error setting up request:', error.message);
+      }
+
+      // Optional: Display a user-friendly error message
+      alert('An error occurred while submitting the data. Please try again.');
     }
-    
-};
+  };
 
   return (
-    <div className="flex flex-col mx-24 text-xs items-center">
+    <div className="flex flex-col md:mx-24 text-xs items-center">
       <div className="bg-white rounded-xl p-8 w-full shadow-lg">
         <h2 className="text-xl font-bold text-gray-800 mb-4">Review Your Details</h2>
 
@@ -266,10 +282,17 @@ const Review = ({ onEditClick }) => {
         </div>
     
          {/* Submit Button */}
-         <div className="mt-4 flex justify-end">
-          <button 
-            onClick={handleSubmit} 
-            className="bg-[#F2B807] text-white font-bold py-2 px-4 rounded"
+       
+         <div className="mt-4 flex-col ml-auto  items-center justify-end">
+            {/* Success Message */}
+            {successMessage && (
+              <div className="my-4 text-green-500 italic">
+                {successMessage}
+              </div>
+            )}
+          <button
+            className="bg-yellow-500 text-white md:px-6 px-3 md:py-2 py-1 font-poppins rounded-md hover:bg-yellow-700"
+            onClick={handleSubmit}
           >
             Submit
           </button>

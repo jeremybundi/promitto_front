@@ -48,26 +48,27 @@ const Register = () => {
   };
 
   return (
-    <div className="flex flex-col items-center mx-40">
-      <div className="bg-white rounded-xl shadow-2xl p-8 md:w-full">
+    <div className="flex flex-col items-center mx-2 md:mx-40">
+      <div className="bg-white rounded-xl shadow-2xl p-8 w-full">
         <h1 className="text-2xl font-bold text-center text-[#F2B807] mb-4">Register Now?</h1>
         <p className="text-lg font-semibold mb-4 text-center" data-aos="fade-up">Membership Registration Form</p>
 
         <div className="flex flex-col">
-          <div className="flex space-x-4 font-light text-sm font-poppins mx-36 justify-between p-2 relative">
-            {['Personal Details', 'Next Of Kin', 'Employment Details', 'Business Details','Property Details', 'Remittance Details', 'Review'].map(tab => (
+          {/* Scrollable Tabs */}
+          <div className="flex flex-nowrap overflow-x-auto space-x-4 md:font-light font-semibold md:text-sm text-[12px] font-poppins md:mx-36 justify-start md:p-2 relative">
+            {['Personal Details', 'Next Of Kin', 'Employment Details', 'Business Details', 'Property Details', 'Remittance Details', 'Review'].map(tab => (
               <button
                 key={tab}
                 className={`py-2 px-4 rounded-lg ${activeTab === tab ? 'text-[#F2B807]' : 'text-gray-700'} hover:text-[#F2B807] transition`}
                 onClick={() => handleTabSwitch(tab)}
               >
-                {tab.replace(/([A-Z])/g, ' $1').trim()} 
+                {tab.replace(/([A-Z])/g, ' $1').trim()}
               </button>
             ))}
           </div>
 
           {/* Show Completion Percentage */}
-          <div className="text-left ml-40">
+          <div className="text-left mb-2 md:ml-40">
             {calculateCompletionPercentage()}%
             <span className="font-semibold ml-2">Complete</span>
           </div>
@@ -97,7 +98,7 @@ const Register = () => {
               onPrevious={() => handleTabSwitch('Employment Details')}
             />
           )}
-             {activeTab === 'Property Details' && (
+          {activeTab === 'Property Details' && (
             <PropertyDetails
               onNext={() => handleTabSwitch('Remittance Details')}
               onPrevious={() => handleTabSwitch('Business Details')}
