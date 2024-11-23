@@ -59,8 +59,9 @@ const Register = () => {
             {['Personal Details', 'Next Of Kin', 'Employment Details', 'Business Details', 'Property Details', 'Remittance Details', 'Review'].map(tab => (
               <button
                 key={tab}
-                className={`py-2 px-4 rounded-lg ${activeTab === tab ? 'text-[#F2B807]' : 'text-gray-700'} hover:text-[#F2B807] transition`}
-                onClick={() => handleTabSwitch(tab)}
+                className={`py-2 px-4 rounded-lg ${activeTab === tab ? 'text-[#F2B807]' : 'text-gray-700'} transition`}
+                onClick={activeTab === tab ? () => {} : null} // Disable click for inactive tabs
+                disabled={activeTab !== tab} // Disable button for inactive tabs
               >
                 {tab.replace(/([A-Z])/g, ' $1').trim()}
               </button>

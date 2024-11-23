@@ -5,10 +5,8 @@ import { saveEmploymentDetails } from '../formSlice';
 const EmploymentDetails = ({ onNext, onPrevious }) => {
   const dispatch = useDispatch();
 
-  // Access employment details from Redux state
   const employmentData = useSelector((state) => state.form.employmentDetails);
 
-  // Local state for form data, initialized from Redux state
   const [formData, setFormData] = useState({
     employerName: '',
     postalAddress: '',
@@ -22,10 +20,8 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
     contractPeriod: '',
   });
 
-  // State for tracking errors
   const [errors, setErrors] = useState({});
 
-  // Update formData when employmentData changes
   useEffect(() => {
     if (employmentData) {
       setFormData({
@@ -43,104 +39,87 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
     }
   }, [employmentData]);
 
-  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
       [name]: value,
     });
-    // Clear error message for the field being modified
     setErrors({
       ...errors,
       [name]: '',
     });
   };
 
-  // Handle validation and next button click
   const handleNext = () => {
     const newErrors = {};
-
-    // Validate required fields
     Object.keys(formData).forEach((key) => {
       if (!formData[key] && key !== 'contractPeriod') {
-        newErrors[key] = `${key} is required`;
+        newErrors[key] = `${key.replace(/([A-Z])/g, ' $1').trim()} is required`;
       }
     });
 
-    // Check if contractPeriod is required based on termsOfEmployment
     if (formData.termsOfEmployment === 'Contract' && !formData.contractPeriod) {
       newErrors.contractPeriod = 'Contract period is required';
     }
 
-    // If there are errors, set the errors state and don't proceed
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
-    // If validation passes, save data to Redux and move to the next step
     dispatch(saveEmploymentDetails(formData));
-    console.log(formData);
     onNext();
   };
 
-  // Handle validation and previous button click
   const handlePrevious = () => {
-    const newErrors = {};
-
-    // Validate required fields
-    Object.keys(formData).forEach((key) => {
-      if (!formData[key] && key !== 'contractPeriod') {
-        newErrors[key] = `${key} is required`;
-      }
-    });
-
-    // Check if contractPeriod is required based on termsOfEmployment
-    if (formData.termsOfEmployment === 'Contract' && !formData.contractPeriod) {
-      newErrors.contractPeriod = 'Contract period is required';
-    }
-
-    // If there are errors, set the errors state and don't proceed
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
-
-    // If validation passes, save data to Redux and move to the previous step
     dispatch(saveEmploymentDetails(formData));
-    console.log(formData);
     onPrevious();
   };
 
   return (
-    <div className="employment-details-form md:p-6 bg-white md:shadow-lg rounded-lg">
+    <div className="employment-details-form md:p-6 bg-white  rounded-lg">
       <form className="grid grid-cols-2 md:gap-6 md:mx-36">
         {Object.keys(formData).map((key) => (
           key !== 'termsOfEmployment' && (
-            <div key={key}>
-              <label htmlFor={key} className="block text-sm font-semibold mb-1 mt-3 text-gray-500">
-                {key === 'contractPeriod' ? 'Contract Period' : key.replace(/([A-Z])/g, ' $1').trim()}
-                <span className="text-[#F2B807] ml-2">*</span>
+            <div key={key} className="flex flex-col">
+              <label
+                htmlFor={key}
+                className="font-semibold text-xs text-gray-700 mt-2 md:mb-1"
+              >
+                {key === 'contractPeriod'
+                  ? 'Contract Period'
+                  : key
+                      .replace(/([A-Z])/g, ' $1')
+                      .trim()
+                      .replace(/\b\w/g, (c) => c.toUpperCase())}
+                {key !== 'contractPeriod' && <span className="text-[#F2B807] ml-2">*</span>}
               </label>
               <input
                 type="text"
                 id={key}
                 name={key}
                 value={formData[key]}
+                placeholder={`Enter ${key
+                  .replace(/([A-Z])/g, ' $1')
+                  .trim()
+                  .toLowerCase()}`}
                 onChange={handleChange}
-                className="mt-1 input-field w-[140px] md:w-[300px] border md:text-sm text-xs border-gray-300 rounded-md p-3"
-                required
+                className="text-xs  input-field w-[90%] md:w-[300px] border border-gray-300 rounded-md p-3"
               />
-              {errors[key] && <p className="text-red-500 text-xs mt-1">{errors[key]}</p>}
+              {errors[key] && (
+                <p className="text-red-500 text-xs mt-1">{errors[key]}</p>
+              )}
             </div>
           )
         ))}
 
-        {/* Terms of Employment Dropdown */}
-        <div>
-          <label htmlFor="termsOfEmployment" className="block text-sm font-semibold mt-3 mb-1 text-gray-600">
-            Terms of Employment
+        <div className="flex mt-2 flex-col">
+          <label
+            htmlFor="termsOfEmployment"
+            className="font-semibold text-xs text-gray-700 md:mb-1"
+          >
+            Terms Of Employment
             <span className="text-[#F2B807] ml-2">*</span>
           </label>
           <select
@@ -148,49 +127,57 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
             name="termsOfEmployment"
             value={formData.termsOfEmployment}
             onChange={handleChange}
-            className="mt-1 input-field w-[140px] md:w-[300px] border border-gray-300 rounded-md p-3"
-            required
+            className="text-xs  input-field w-[90%] md:w-[300px] border border-gray-300 rounded-md p-3"
           >
             <option value="">Select</option>
             <option value="Permanent">Permanent</option>
             <option value="Probation">Probation</option>
             <option value="Contract">Contract</option>
           </select>
-          {errors.termsOfEmployment && <p className="text-red-500 text-xs mt-1">{errors.termsOfEmployment}</p>}
+          {errors.termsOfEmployment && (
+            <p className="text-red-500 text-xs mt-1">
+              {errors.termsOfEmployment}
+            </p>
+          )}
         </div>
 
-        {/* Conditionally render Contract Period field */}
         {formData.termsOfEmployment === 'Contract' && (
-          <div className="col-span-1 md:col-span-2">
-            <label htmlFor="contractPeriod" className="block text-sm font-medium text-gray-700">
+          <div className="flex flex-col col-span-1 md:col-span-2">
+            <label
+              htmlFor="contractPeriod"
+              className="font-semibold text-xs text-gray-700 mb-1"
+            >
               Contract Period
               <span className="text-[#F2B807] ml-2">*</span>
-            </label>
+              </label>
             <input
               type="text"
               id="contractPeriod"
               name="contractPeriod"
-              placeholder='Enter number of months'
+              placeholder="Enter number of months"
               value={formData.contractPeriod}
               onChange={handleChange}
-              className="mt-1 input-field w-[140px] md:w-[200px] border border-gray-300 rounded-md p-2"
-              required
+              className="text-xs mt-1 input-field w-[90%] md:w-[200px] border border-gray-300 rounded-md p-3"
             />
-            <span className='ml-2 text-emerald-700'>Months</span>
-            {errors.contractPeriod && <p className="text-red-500 text-xs mt-1">{errors.contractPeriod}</p>}
+            <span className="ml-2 text-emerald-700">Months</span>
+            {errors.contractPeriod && (
+              <p className="text-red-500 text-xs mt-1">
+                {errors.contractPeriod}
+              </p>
+            )}
           </div>
         )}
       </form>
 
-      <div className='flex justify-between md:mx-56 md:space-x-[350px]'>
-        <button 
-          className="bg-gray-100 text-xs mt-8 font-bold py-2 px-4 rounded flex justify-center text-[#3AB54B]"
+      <div className="flex justify-between md:mx-56 md:space-x-[350px]">
+        <button
+          className="bg-gray-100 text-xs mt-8 font-bold py-2 px-4 rounded text-[#3AB54B]"
           onClick={handlePrevious}
         >
           Back
         </button>
-        <button 
-          className="text-xs bg-[#F2B807] mt-8 rounded font-bold py-2 px-4 flex justify-center text-white"
+        <button
+          className="bg-[#F2B807] text-xs mt-8 font-bold py-2 px-4 rounded text-white"
           onClick={handleNext}
         >
           Next

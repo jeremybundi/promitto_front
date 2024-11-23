@@ -16,7 +16,7 @@ const Footer = () => {
   };
 
   return (
-    <footer className="rounded-t-3xl mt-11 mb-0  bg-[#010440] mx-5 md:mx-16 flex flex-col text-white">
+    <footer className="rounded-t-3xl mt-auto bg-[#010440] mx-5 md:mx-16 flex flex-col text-white">
       <div className="flex flex-col  md:flex-row w-full max-w-[1747px] md:h-[360px] h-full">
         {/* First Column */}
         <div className="flex-1 md:mt-16 ml-6 font-lufga p-4 md:mb-16 min-w-[300px]">

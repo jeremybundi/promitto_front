@@ -6,6 +6,7 @@ import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
 import * as XLSX from 'xlsx'; // Import the xlsx library
 import EditMemberForm from './EditMemberForm'; // Import the form component
 import { useSelector } from 'react-redux'; // Import useSelector
+import { useNavigate } from "react-router-dom";
 
 
 const ViewMembers = () => {
@@ -13,6 +14,8 @@ const ViewMembers = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isEditing, setIsEditing] = useState(false);
   const [selectedMember, setSelectedMember] = useState(null);
+  const navigate = useNavigate();
+
   const recordsPerPage = 10;
   // Get the token from the Redux store
   const token = useSelector((state) => state.auth.token);
@@ -20,7 +23,6 @@ const ViewMembers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log("Token before request:", token); // Debug token value
 
         const response = await axios.get('https://api3.promittoltd.com/data', {
           headers: {
@@ -28,11 +30,10 @@ const ViewMembers = () => {
           },
         });
 
-        console.log("API Response:", response.data);
 
         if (response.data.status === 'success') {
           setMembers(response.data.data);
-          console.log("Members updated:", response.data.data);
+          console.log("Member updated:");
         } else {
           console.error("Failed to fetch members:", response.data.message);
         }
@@ -239,7 +240,15 @@ const ViewMembers = () => {
 
   return (
     <div className="p-4 relative"> {/* Set relative position on the parent */}
-      <h1 className="md:text-2xl text-sm text-center font-bold mb-4">View Membership Information</h1>
+    <div className='flex'>
+      <h1 className=" text-xl text-yellow-500 text-center  mb-4">View Membership Information</h1>
+      <button
+          onClick={() => navigate("/admin")}
+          className="bg-yellow-700 hover:bg-yelow-600 text-white px-4 py-2 ml-auto mb-1 rounded-lg shadow-md"
+        >
+          Go to Dashboard
+        </button>
+        </div>
      
       <div className="overflow-auto">
         <table className="md:min-w-full w-auto  bg-white shadow-md rounded-lg overflow-hidden">

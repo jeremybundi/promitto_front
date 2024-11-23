@@ -34,8 +34,8 @@ const Review = ({ onEditClick }) => {
         }
       });
       
-      console.log('The data to be saved:', formData);
-      console.log('Data submitted successfully:', response.data);
+      //console.log('The data to be saved:', formData);
+      //console.log('Data submitted successfully:', response.data);
 
      
       dispatch(clearFormData());  
@@ -51,7 +51,7 @@ const Review = ({ onEditClick }) => {
 
     } catch (error) {
       console.error('Error submitting data:', error);
-      console.log('The data to be saved:', formData);
+      //console.log('The data to be saved:', formData);
 
       // Check if the error has a response property (to get more information from the server)
       if (error.response) {

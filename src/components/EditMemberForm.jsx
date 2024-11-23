@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Import Axios
-import { useSelector } from 'react-redux'; // Import useSelector to access the store
-
+import axios from 'axios';
+import { useSelector } from 'react-redux';
 
 const EditMemberForm = ({ member, onUpdate, onClose }) => {
   const [formData, setFormData] = useState({
@@ -10,8 +9,10 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
     employmentDetails: [],
     businessDetails: [],
     propertyDetails: [],
-    remittanceDetails: []
+    remittanceDetails: [],
   });
+  const [statusMessage, setStatusMessage] = useState(null); // State for success or error message
+  const [isError, setIsError] = useState(false); // State to track if the message is an error
 
   useEffect(() => {
     if (member) {
@@ -21,7 +22,7 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
         employmentDetails: member.employment_details,
         businessDetails: member.business_details,
         propertyDetails: member.property_details,
-        remittanceDetails: member.remittance_details
+        remittanceDetails: member.remittance_details,
       });
     }
   }, [member]);
@@ -30,7 +31,7 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
-      personalDetails: { ...prev.personalDetails, [name]: value }
+      personalDetails: { ...prev.personalDetails, [name]: value },
     }));
   };
 
@@ -68,28 +69,39 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
     updatedRemittance[index] = { ...updatedRemittance[index], [name]: value };
     setFormData((prev) => ({ ...prev, remittanceDetails: updatedRemittance }));
   };
-  const token = useSelector((state) => state.auth.token); // Get the token from the Redux store
+
+  const token = useSelector((state) => state.auth.token);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.put(`https://api3.promittoltd.com/update/${formData.personalDetails.id}`, {
-        personal_details: formData.personalDetails,
-        next_of_kin: formData.nextOfKin,
-        employment_details: formData.employmentDetails,
-        business_details: formData.businessDetails,
-        property_details: formData.propertyDetails,
-        remittance_details: formData.remittanceDetails
-      }, {
-        headers: {
-          Authorization: `Bearer ${token}`, // Include the token here
+      const response = await axios.put(
+        `https://api3.promittoltd.com/update/${formData.personalDetails.id}`,
+        {
+          personal_details: formData.personalDetails,
+          next_of_kin: formData.nextOfKin,
+          employment_details: formData.employmentDetails,
+          business_details: formData.businessDetails,
+          property_details: formData.propertyDetails,
+          remittance_details: formData.remittanceDetails,
         },
-      });
-      
-      console.log(response.data); // Handle the response as needed
-      onUpdate(response.data); // Optionally pass updated data to the parent component
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setStatusMessage('Member updated successfully!');
+      setIsError(false);
+      setTimeout(() => {
+        onUpdate(response.data);
+        onClose();
+      }, 3000); 
     } catch (error) {
-      console.error("Error updating member:", error);
+      setStatusMessage('Failed to update member. Please try again.');
+      setIsError(true);
+      console.error('Error updating member:', error);
     }
   };
 
@@ -264,9 +276,32 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
           </div>
         ))}
 
-        <div className="flex justify-between">
-          <button type="button" onClick={onClose} className="bg-gray-300 px-4 py-2 rounded">Cancel</button>
-          <button type="submit" className="bg-[#F2B807]  text-white px-4 py-2 rounded-xl">Update Member</button>
+          {/* Submit and Cancel Buttons */}
+        <div className="flex justify-between mt-4">
+          <button
+            type="button"
+            onClick={onClose}
+            className="bg-gray-300 px-4 py-2 rounded"
+          >
+            Cancel
+          </button>
+         <div className='flex flex-col'>
+          {statusMessage && (
+        <div
+            className={`mb-1   ${
+              isError ? 'text-[9px] text-red-700' : ' text-[9px] text-green-700'
+            }`}
+          >
+            {statusMessage}
+          </div>
+        )}
+          <button
+            type="submit"
+            className="bg-[#F2B807] text-white px-4 py-2 rounded-xl hover:bg-yellow-300"
+          >
+            Update Member
+          </button>
+          </div>
         </div>
       </form>
     </div>

@@ -1,5 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
-import Dreams from './components/ChooseDreamHome'; // Import your ChooseDreamHome component
+import Dreams from './components/ChooseDreamHome'; 
 import BoardMembers from './components/BoardMembers';
 import WelcomeMember from './components/WelcomeMember';
 import Register from './components/Register';
@@ -9,13 +9,21 @@ import EmploymentDetails from './components/EmploymentDetails';
 import BusinessDetails from './components/BusinessDetails';
 import Login from './components/Login';
 import ViewMembers from './components/ViewMembers';
-import PrivateRoute from './components/PrivateRoute'; // Import your PrivateRoute component
+import PrivateRoute from './components/PrivateRoute'; 
+import AdminDashboard from './components/AdminDashboard';
+import AddHouseDone from './components/AddHouseDone';
+import AddOngoingHouse from './components/AddOngoingHouse';
+import DeleteHousesDone from './components/DeleteHousesDone';
+import DeleteHousesOngoing from './components/DeleteOngoing';
+import AddUser from './components/AddUser';
+import UserTable from './components/UserTable';
+import PublicView from './components/PublicMembers'
 
 // Define all your app routes here
 const AppRoutes = () => {
   return (
     <Routes>
-      {/* Define your app routes below */}
+      {/* Public routes */}
       <Route path="/" element={<Dreams />} />  
       <Route path="/boardmembers" element={<BoardMembers />} /> 
       <Route path="/welcome" element={<WelcomeMember />} /> 
@@ -24,11 +32,74 @@ const AppRoutes = () => {
       <Route path="/review" element={<Review />} /> 
       <Route path="/employ" element={<EmploymentDetails />} />  
       <Route path="/business" element={<BusinessDetails />} /> 
-      
-      {/* Public login route accessible to everyone */}
       <Route path="/login" element={<Login />} />  
-      
-      {/* Protected view members route, accessible only when logged in */}
+
+
+      {/* Protected routes */}
+      <Route 
+        path="/house/done" 
+        element={
+          <PrivateRoute>
+            <AddHouseDone />
+          </PrivateRoute>
+        } 
+      /> 
+      <Route 
+        path="/house/ongoing" 
+        element={
+          <PrivateRoute>
+            <AddOngoingHouse />
+          </PrivateRoute>
+        } 
+      /> 
+      <Route 
+        path="/delete/done" 
+        element={
+          <PrivateRoute>
+            <DeleteHousesDone />
+          </PrivateRoute>
+        } 
+      /> 
+      <Route 
+        path="/delete/ongoing" 
+        element={
+          <PrivateRoute>
+            <DeleteHousesOngoing />
+          </PrivateRoute>
+        } 
+      /> 
+      <Route 
+        path="/add/user" 
+        element={
+          <PrivateRoute>
+            <AddUser />
+          </PrivateRoute>
+        } 
+      /> 
+      <Route 
+        path="/user/data" 
+        element={
+          <PrivateRoute>
+            <UserTable />
+          </PrivateRoute>
+        } 
+      /> 
+      <Route 
+        path="/admin" 
+        element={
+          <PrivateRoute>
+            <AdminDashboard />
+          </PrivateRoute>
+        } 
+      /> 
+      <Route 
+        path="/public/view" 
+        element={
+          <PrivateRoute>
+            <PublicView />
+          </PrivateRoute>
+        } 
+      /> 
       <Route 
         path="/view/members" 
         element={
@@ -37,8 +108,6 @@ const AppRoutes = () => {
           </PrivateRoute>
         } 
       /> 
-      
-      {/* Add more private routes as needed */}
     </Routes>
   );
 };

@@ -27,7 +27,7 @@ const handleSendOtp = async () => {
     );
     
     if (response.data.status === 'success') {
-      console.log('OTP sent successfully:', response.data);
+      //console.log('OTP sent successfully:', response.data);
       setShowOtpForm(true);
     } else {
       setErrorMessage(response.data.message || 'Failed to send OTP');
@@ -37,7 +37,6 @@ const handleSendOtp = async () => {
   }
 };
 
-// Function to handle OTP verification
 const handleVerifyOtp = async () => {
   setErrorMessage('');
   try {
@@ -53,8 +52,15 @@ const handleVerifyOtp = async () => {
     if (response.data.status === 'success') {
       const { token, user, message } = response.data;
       dispatch(loginSuccess({ token, user, message }));
-      navigate('/view/members');
-      console.log(token)
+
+      // Redirect based on user role
+      if (user.role === 'Account Manager') {
+        navigate('/admin');  
+      } else {
+        navigate('/public/view');  
+      }
+
+      console.log(response.data);
     } else {
       setErrorMessage(response.data.message || 'OTP verification failed');
     }
@@ -66,7 +72,7 @@ const handleVerifyOtp = async () => {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="flex bg-white rounded-2xl mt-6 shadow-lg mb-24 md:mb-0 overflow-hidden w-3/4 max-w-4xl">
+      <div className="flex bg-white rounded-2xl mt-6 shadow-lg mb-36 md:mb-0 overflow-hidden w-3/4 max-w-4xl">
         {/* Left Side - Form */}
         <div className="md:p-16 p-4 w-full ">
           <h2 className="text-lg  font-medium text-gray-600 mb-4">Login</h2>
@@ -112,7 +118,7 @@ const handleVerifyOtp = async () => {
               <div className="flex mt-4">
                 <button
                   onClick={handleVerifyOtp}
-                  className="md:px-16 px-4 py-1 bg-[#F2B807] font-bold text-black rounded-xl text-xs hover:bg-blue-600 transition-colors"
+                  className="md:px-16 px-4 py-1 bg-[#F2B807] font-bold text-black rounded-xl text-xs hover:bg-yellow-300 transition-colors"
                 >
                   Verify OTP
                 </button>

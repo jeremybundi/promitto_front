@@ -38,7 +38,7 @@ const Remittance = ({ onNext, onPrevious }) => {
   };
 
   return (
-    <div className="p-6 text-center items-center w-auto space-y-3 font-poppins rounded-lg">
+    <div className="md:p-6 p-2 text-center items-center w-auto space-y-3 font-poppins rounded-lg">
       <p className="text-xl font-semibold mb-4">Choose your desired Payment method</p>
       <p className="text-xs">Kindly proceed to pay KES 30,000 for your account application fees to cater for NEEMA,</p>
       <p className="text-xs">site visit, bill of quantities, county charges, valuation, physical planning, NCA, and other</p>
@@ -68,7 +68,7 @@ const Remittance = ({ onNext, onPrevious }) => {
 
       {/* Payment Details Section */}
       {showPaymentDetails && (
-        <div className="md:w-[600px] w-[300px] h-auto border border-[#53C064] items-center md:py-11 md:px-16 p-6 rounded-3xl mx-auto bg-[#f9f9f9]">
+        <div className="md:w-[600px] w-full h-auto border border-[#53C064] items-center md:py-11 md:px-16 p-3 rounded-3xl md:mx-auto bg-[#f9f9f9]">
           <p className='text-start font-bold mb-2'>Payment Details</p>
           <div className='flex mb-3'>
             <div className="md:h-12 md:w-52 md:mr-8 mr-4 border border-[#53C064] bg-[#F1FCFB] md:py-7 px-1 rounded-md flex items-center justify-center">
@@ -107,7 +107,7 @@ const Remittance = ({ onNext, onPrevious }) => {
               <img src={userIcon} alt="User Icon" className="h-6 w-6" />
               <div className='ml-2 font-semibold text-xs text-start'>
                 <p className='text-[#3AB54B]'>Account Number</p>
-                <p>Your ID/Passport Number</p>
+                <p className='text-xs'> ID/Passport Number</p>
               </div>
             </div>
           </div>

@@ -136,7 +136,7 @@ const Navbar = () => {
                 { label: 'How To Own', path: 'https://promittoltd.com/how-to-own' },
                 { label: 'Contact Us', path: 'https://promittoltd.com/contact-us' },
                 { label: 'Login', path: '/login' },
-                { label: 'Create Account', path: '/register' },
+                { label: 'Create Account', path: 'https://account.promittoltd.com/register' },
 
               ].map(({ label, path }) => (
                 <Link
