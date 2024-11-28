@@ -63,13 +63,20 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
     onPrevious();
   };
 
+    // Helper function to get yesterday's date in YYYY-MM-DD format
+    const getYesterdayDate = () => {
+      const today = new Date();
+      today.setDate(today.getDate() - 1); // Subtract 1 day
+      return today.toISOString().split('T')[0]; // Get date in YYYY-MM-DD format
+    };
+
   return (
-    <div className=" md:ml-28 md:p-6 bg-white rounded-lg ">
+    <div className=" md:ml-28 md:p-6 bg-gray-50 rounded-lg ">
       <form className="grid  md:mx-4 grid-cols-2 gap-6">
         
         {/* Name of Business */}
-        <div className='flex flex-col'>
-        <label className="font-semibold text-xs text-gray-700  mb-1">
+        <div className='flex flex-col font-poppins md:mb-8'>
+        <label className="font-semibold md:text-sm text-xs text-gray-600  mb-2">
             Name of Business
             <span className="text-[#F2B807] mml-2">*</span>
           </label>
@@ -78,7 +85,7 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
             name="businessName"
             value={formData.businessName}
             onChange={handleInputChange}
-            className={`mt-1 md:w-2/3 w-[140px] px-4 py-2 border rounded-lg text-xs  text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.businessName ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-2/3 w-[140px] px-4 py-3 border   border-gray-500 rounded-lg text-sm text-gray-600 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.businessName ? 'border-red-500' : ''}`}
             placeholder="Enter business name"
           />
           {errors.businessName && <p className="text-red-500 text-xs">{errors.businessName}</p>}
@@ -86,7 +93,7 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
 
         {/* Nature of Business */}
         <div className='flex flex-col'>
-          <label className="font-semibold text-xs text-gray-700  mb-1">
+          <label className="font-semibold md:text-sm text-xs text-gray-600  mb-2">
             Nature of Business
             <span className="text-[#F2B807] mml-2">*</span>
           </label>
@@ -95,7 +102,7 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
             name="natureOfBusiness"
             value={formData.natureOfBusiness}
             onChange={handleInputChange}
-            className={`mt-1 md:w-2/3 w-[140px]  px-4 py-2 border rounded-lg text-xs  text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.natureOfBusiness ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-2/3 w-[140px]  px-4 py-3 border border-gray-500 rounded-lg text-sm  text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.natureOfBusiness ? 'border-red-500' : ''}`}
             placeholder="Enter nature of business"
           />
           {errors.natureOfBusiness && <p className="text-red-500 text-xs">{errors.natureOfBusiness}</p>}
@@ -103,7 +110,7 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
 
         {/* Date of Registration */}
         <div className='flex flex-col'>
-          <label className="font-semibold text-xs text-gray-700  mb-1">
+          <label className="font-semibold md:text-sm text-xs text-gray-600  mb-2">
             Date of Registration
             <span className="text-[#F2B807] mml-2">*</span>
           </label>
@@ -112,14 +119,15 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
             name="dateOfRegistration"
             value={formData.dateOfRegistration}
             onChange={handleInputChange}
-            className={`mt-1 md:w-2/3 w-[140px] px-4 py-2 border rounded-lg text-xs  text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.dateOfRegistration ? 'border-red-500' : ''}`}
+            max={getYesterdayDate()}
+            className={`mt-1 md:w-2/3 w-[140px] px-4 py-3 border  border-gray-500  rounded-lg text-sm text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.dateOfRegistration ? 'border-red-500' : ''}`}
           />
           {errors.dateOfRegistration && <p className="text-red-500 text-xs">{errors.dateOfRegistration}</p>}
         </div>
 
         {/* Postal Address */}
         <div className='flex flex-col'>
-        <label className="font-semibold text-xs text-gray-700  mb-1">
+        <label className="font-semibold md:text-sm text-xs text-gray-600  mb-2">
             Postal Address
             <span className="text-[#F2B807] mml-2">*</span>
           </label>
@@ -128,7 +136,7 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
             name="postalAddress"
             value={formData.postalAddress}
             onChange={handleInputChange}
-            className={`mt-1 md:w-2/3 w-[140px] px-4 py-2 border rounded-lg text-xs  text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.postalAddress ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-2/3 w-[140px] px-4 py-3  border-gray-500  border rounded-lg text-sm text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.postalAddress ? 'border-red-500' : ''}`}
             placeholder="Enter postal address"
           />
           {errors.postalAddress && <p className="text-red-500 text-xs">{errors.postalAddress}</p>}
@@ -136,7 +144,7 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
 
         {/* Postal Code */}
         <div className='flex flex-col'>
-        <label className="font-semibold text-xs text-gray-700  mb-1">
+        <label className="font-semibold md:text-sm text-xs text-gray-600  mb-2">
             Postal Code
             <span className="text-[#F2B807] mml-2">*</span>
           </label>
@@ -145,7 +153,7 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
             name="postalCode"
             value={formData.postalCode}
             onChange={handleInputChange}
-            className={`mt-1 md:w-2/3 w-[140px] px-4 py-2 border rounded-lg text-xs  text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.postalCode ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-2/3 w-[140px] px-4 py-3  border-gray-500 border rounded-lg text-sm  text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.postalCode ? 'border-red-500' : ''}`}
             placeholder="Enter postal code"
           />
           {errors.postalCode && <p className="text-red-500 text-xs">{errors.postalCode}</p>}
@@ -153,7 +161,7 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
 
         {/* City/Town */}
         <div className='flex flex-col'>
-        <label className="font-semibold text-xs text-gray-700  mb-1">
+        <label className="font-semibold md:text-sm text-xs text-gray-600  mb-2">
             City/Town
             <span className="text-[#F2B807] mml-2">*</span>
           </label>
@@ -162,7 +170,7 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
             name="city"
             value={formData.city}
             onChange={handleInputChange}
-            className={`mt-1 md:w-2/3 w-[140px] px-4 py-2 border rounded-lg text-xs  text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.city ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-2/3 w-[140px] px-4 py-3  border-gray-500  border rounded-lg text-sm  text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.city ? 'border-red-500' : ''}`}
             placeholder="Enter city or town"
           />
           {errors.city && <p className="text-red-500 text-xs">{errors.city}</p>}
@@ -170,7 +178,7 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
 
         {/* Email */}
         <div className='flex flex-col'>
-          <label className="font-semibold text-xs text-gray-700  mb-1">
+          <label className="font-semibold md:text-sm text-xs text-gray-600  mb-2">
             Email
             <span className="text-[#F2B807] mml-2">*</span>
           </label>
@@ -179,7 +187,7 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            className={`mt-1 md:w-2/3 w-[140px] px-4 py-2 border rounded-lg text-xs  text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.email ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-2/3 w-[140px] px-4 py-3  border-gray-500 border rounded-lg text-sm  text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.email ? 'border-red-500' : ''}`}
             placeholder="Enter email address"
           />
           {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
@@ -187,7 +195,7 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
 
         {/* Telephone */}
         <div className='flex flex-col'>
-        <label className="font-semibold text-xs text-gray-700  mb-1">
+        <label className="font-semibold md:text-sm text-xs text-gray-600  mb-2">
             Telephone
             <span className="text-[#F2B807] mml-2">*</span>
           </label>
@@ -196,7 +204,7 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
             name="telephone"
             value={formData.telephone}
             onChange={handleInputChange}
-            className={`mt-1 md:w-2/3 w-[140px]  px-4 py-2 border text-xs rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.telephone ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-2/3 w-[140px]  px-4 py-3  border-gray-500  border text-sm rounded-lg text-gray-700 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.telephone ? 'border-red-500' : ''}`}
             placeholder="Enter telephone number"
           />
           {errors.telephone && <p className="text-red-500 text-xs">{errors.telephone}</p>}
@@ -208,16 +216,16 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
         <button
           type="button"
           onClick={handleBack}
-          className="bg-gray-100 text-xs font-bold py-2 px-4 rounded flex justify-center text-[#3AB54B]"
+          className="bg-gray-300 text-sm font-bold py-2 px-4 rounded flex justify-center "
         >
-          Back
+          Previous
         </button>
         <button
           type="button"
           onClick={handleSave}
-          className="text-xs bg-[#F2B807] rounded font-bold py-2 px-4 flex justify-center text-white"
+          className="text-sm bg-[#F2B807] rounded font-bold py-2 px-4 flex justify-center text-white"
         >
-          Next
+          Save & Continue
         </button>
       </div>
     </div>

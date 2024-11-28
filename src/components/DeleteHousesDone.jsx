@@ -56,7 +56,7 @@ const DeleteHousesDone = () => {
       <h1 className="text-xl text-yellow-500 font-bold mb-4">Houses Done</h1>
       <button
           onClick={() => navigate("/admin")}
-          className="bg-yellow-700 hover:bg-yelow-600 text-white px-4 py-2 ml-auto mb-1 rounded-lg shadow-md"
+          className="bg-yellow-700 hover:bg-yelow-600 text-white md:px-4 px-2 md:py-2 ml-auto mb-1 rounded-lg shadow-md"
         >
           Go to Dashboard
         </button>

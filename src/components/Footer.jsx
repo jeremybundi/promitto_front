@@ -29,50 +29,50 @@ const Footer = () => {
         </div>
 
         {/* Second Column - Help Desk */}
-        <div className="flex-1 border-t md:mt-36 font-poppins md:ml-11 border-yellow-500 p-2 min-w-[200px]">
+        <div className="flex-1 border-t md:mt-36  md:ml-11 border-yellow-500 p-2 min-w-[200px]">
           <h2
-            className="text-lg font-semibold mb-2 ml-8 cursor-pointer text-[#F2B807] md:cursor-default"
+            className="text-lg font-semibold mb-2 cursor-pointer text-[#F2B807] md:cursor-default"
             onClick={() => toggleSection('helpDesk')}
           >
             Help Desk
           </h2>
-          <div className={`text-sm transition-all ml-6 duration-300 ${activeSection === 'helpDesk' ? 'max-h-screen' : 'max-h-0 overflow-hidden md:max-h-full'}`}>
-            <p>Email</p>
-            <p className='text-[10px] font-light'>info@promittoltd.com</p>
-            <p >Telephone</p>
-            <p className='text-[10px] font-light'>(+254) 729 506 506</p>
+          <div className={`text-sm transition-all  duration-300 ${activeSection === 'helpDesk' ? 'max-h-screen' : 'max-h-0 overflow-hidden md:max-h-full'}`}>
+            <p className='font-lufga font-semibold mb-1'>Email</p>
+            <p className='text-[11px] font-poppins font-light'>info@promittoltd.com</p>
+            <p  className='font-lufga font-semibold my-1'>Telephone</p>
+            <p className='text-[11px] font-poppins font-light'>(+254) 729 506 506</p>
           </div>
         </div>
 
         {/* Third Column - Location */}
         <div className="flex-1 border-t md:mt-36 font-poppins border-yellow-500 p-2 min-w-[200px]">
           <h2
-            className="text-lg font-semibold mb-2 ml-8 cursor-pointer text-[#F2B807] md:cursor-default"
+            className="text-lg font-semibold mb-2  cursor-pointer text-[#F2B807] md:cursor-default"
             onClick={() => toggleSection('location')}
           >
             Location
           </h2>
-          <div className={`text-sm transition-all ml-6 duration-300 ${activeSection === 'location' ? 'max-h-screen' : 'max-h-0 overflow-hidden md:max-h-full'}`}>
-            <p>Head Office</p>
-            <p className='text-[10px] font-light'>Pension Towers, Mezzanine Floor,</p>
-            <p className='text-[10px] font-light'>Loita Street, Nairobi.</p>
-            <p>Address</p>
-            <p className='text-[10px] font-light'>P. O. Box 9388, 00100</p>
-            <p className='text-[10px] font-light'>Nairobi, Kenya</p>
+          <div className={`text-sm transition-all  duration-300 ${activeSection === 'location' ? 'max-h-screen' : 'max-h-0 overflow-hidden md:max-h-full'}`}>
+            <p className='font-lufga mb-1 font-semibold'>Head Office</p>
+            <p className='text-[11px] font-poppins  font-light'>Pension Towers, Mezzanine Floor,</p>
+            <p className='text-[11px] font-poppins  font-light'>Loita Street, Nairobi.</p>
+            <p className='font-lufga my-1 font-semibold'>Address</p>
+            <p className='text-[11px] font-poppins  font-light'>P. O. Box 9388, 00100</p>
+            <p className='text-[11px] font-poppins  font-light'>Nairobi, Kenya</p>
           </div>
         </div>
 
         {/* Fourth Column - Socials */}
         <div className="flex-1 border-t md:mt-36 mr-3 font-poppins border-yellow-500 p-2 min-w-[200px]">
           <h2
-            className="text-lg font-semibold mb-2 ml-8 cursor-pointer text-[#F2B807] md:cursor-default"
+            className="text-lg font-semibold mb-2  cursor-pointer text-[#F2B807] md:cursor-default"
             onClick={() => toggleSection('socials')}
           >
             Socials
           </h2>
-          <div className={`text-sm transition-all ml-6 duration-300 ${activeSection === 'socials' ? 'max-h-screen' : 'max-h-0 overflow-hidden md:max-h-full'}`}>
-            <p>Find us on</p>
-            <p className='text-[10px] font-light'>Follow us, like, and get updates on investment opportunities!</p>
+          <div className={`text-sm transition-all duration-300 ${activeSection === 'socials' ? 'max-h-screen' : 'max-h-0 overflow-hidden md:max-h-full'}`}>
+            <p className='mb-1 font-semibold font-lufga'>Find us on</p>
+            <p className='text-[11px]  font-poppins font-light'>Follow us, like, and get updates on investment opportunities!</p>
             <div className="flex space-x-4 mt-4">
                 <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer">
                     <img src={facebookIcon} alt="Facebook" className="w-6 h-6 hover:text-blue-500" />

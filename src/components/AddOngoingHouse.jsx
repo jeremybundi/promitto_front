@@ -79,7 +79,7 @@ const AddOngoingHouse = () => {
       <h2 className="text-xl font-semibold text-yellow-500 mb-4">Add Ongoing Projects</h2>
       <button
           onClick={() => navigate("/admin")}
-          className="bg-yellow-700 hover:bg-yelow-600 text-white px-4 py-2 ml-auto mb-1 rounded-lg shadow-md"
+          className="bg-yellow-700 hover:bg-yelow-600 text-white md:px-4 px-2 md:py-2 ml-auto mb-1 rounded-lg shadow-md"
         >
           Go to Dashboard
         </button>

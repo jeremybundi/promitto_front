@@ -80,7 +80,7 @@ const UserTable = () => {
       <h1 className="text-xl text-yellow-500 font-semibold mb-4">Users List</h1>
       <button
           onClick={() => navigate("/admin")}
-          className="bg-yellow-700 hover:bg-yelow-600 font-semibold text-white md:px-4 px-2 text-xs md:text-sm py-2 ml-auto mb-4 rounded-lg shadow-md"
+          className="bg-yellow-700 hover:bg-yelow-600 font-semibold text-white md:px-4 px-2 md:py-2 text-xs md:text-sm  ml-auto mb-4 rounded-lg shadow-md"
         >
           Go to Dashboard
         </button>

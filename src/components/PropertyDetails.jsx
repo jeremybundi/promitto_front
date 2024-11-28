@@ -64,11 +64,11 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
   };
 
   return (
-    <div className="md:ml-28 md:p-6 bg-white rounded-lg">
+    <div className="md:ml-28 md:p-6 bg-gray-50 rounded-lg">
       <form className="grid grid-cols-2 md:gap-6 gap-2 md:p-4">
         {/* Location of Property */}
         <div className='flex flex-col'>
-          <label className="font-semibold text-xs text-gray-700  mb-1">Location of Property
+          <label className="font-semibold text-sm font-poppins text-gray-600  mb-1">Location of Property
             <span className="text-[#F2B807] md:ml-2">*</span>
           </label>
           <input
@@ -76,7 +76,7 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
             name="location"
             value={formData.location}
             onChange={handleInputChange}
-            className={`mt-1 md:w-[250px] w-[90%] px-4 py-2 border rounded-lg text-gray-600 text-xs focus:outline-none focus:ring focus:ring-yellow-500 ${errors.location ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-[250px] w-[90%] px-4 py-2 border border-gray-500 rounded-lg text-gray-600 text-sm focus:outline-none focus:ring focus:ring-yellow-500 ${errors.location ? 'border-red-500' : ''}`}
             placeholder="Enter location of property"
           />
           {errors.location && <p className="text-red-500 text-xs">{errors.location}</p>}
@@ -84,7 +84,7 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
 
          {/* Land Reference No */}
          <div className='flex flex-col'>
-         <label className="font-semibold text-xs text-gray-700  mb-1">Land Reference No.
+         <label className="font-semibold text-sm font-poppins text-gray-600  mb-1">Land Reference No.
             <span className="text-[#F2B807] mml-2">*</span>
           </label>
           <input
@@ -92,7 +92,7 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
             name="landReferenceNo"
             value={formData.landReferenceNo}
             onChange={handleInputChange}
-            className={`mt-1 md:w-[250px] w-[90%] px-4 py-2 border space-x-16 rounded-lg text-gray-600 text-xs focus:outline-none focus:ring focus:ring-yellow-500 ${errors.landReferenceNo ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-[250px] w-[90%] px-4 py-2 border border-gray-500 space-x-16 rounded-lg text-gray-600 text-sm focus:outline-none focus:ring focus:ring-yellow-500 ${errors.landReferenceNo ? 'border-red-500' : ''}`}
             placeholder="Enter land reference number"
           />
           {errors.landReferenceNo && <p className="text-red-500 text-xs">{errors.landReferenceNo}</p>}
@@ -100,7 +100,7 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
 
         {/* Title Number */}
         <div className='flex flex-col'>
-        <label className="font-semibold text-xs text-gray-700  mb-1">Title Number
+        <label className="font-semibold text-sm font-poppins text-gray-600  mb-1">Title Number
             <span className="text-[#F2B807] ml-2">*</span>
           </label>
           <input
@@ -108,7 +108,7 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
             name="titleNumber"
             value={formData.titleNumber}
             onChange={handleInputChange}
-            className={`mt-1 md:w-[250px] w-[90%] px-4 py-2 border rounded-lg text-gray-600 text-xs focus:outline-none focus:ring focus:ring-yellow-500 ${errors.titleNumber ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-[250px] w-[90%] px-4 py-2 border border-gray-500 rounded-lg text-gray-600 text-sm focus:outline-none focus:ring focus:ring-yellow-500 ${errors.titleNumber ? 'border-red-500' : ''}`}
             placeholder="Enter title number"
           />
           {errors.titleNumber && <p className="text-red-500 text-xs">{errors.titleNumber}</p>}
@@ -118,7 +118,7 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
 
         {/* Size of Project */}
         <div className='flex flex-col'>
-        <label className="font-semibold text-xs text-gray-700  mb-1">Size of Project
+        <label className="font-semibold text-sm font-poppins text-gray-600  mb-1">Size of Project
             <span className="text-[#F2B807] ml-2">*</span>
           </label>
           <input
@@ -126,7 +126,7 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
             name="sizeOfProject"
             value={formData.sizeOfProject}
             onChange={handleInputChange}
-            className={`mt-1 md:w-[250px] w-[90%] px-4 py-2 border rounded-lg text-gray-600 text-xs focus:outline-none focus:ring focus:ring-yellow-500 ${errors.sizeOfProject ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-[250px] w-[90%] px-4 py-2 border rounded-lg text-gray-600 text-sm border-gray-500 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.sizeOfProject ? 'border-red-500' : ''}`}
             placeholder="Enter size of project"
           />
           {errors.sizeOfProject && <p className="text-red-500 text-xs">{errors.sizeOfProject}</p>}
@@ -134,14 +134,14 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
 
         {/* Type of Project */}
         <div className='flex flex-col'>
-          <label className="font-semibold text-xs text-gray-700  mb-1">Type of Project
+          <label className="font-semibold text-sm font-poppins text-gray-600  mb-1">Type of Project
             <span className="text-[#F2B807] ml-2">*</span>
           </label>
           <select
             name="typeOfProject"
             value={formData.typeOfProject}
             onChange={handleInputChange}
-            className={`mt-1 md:w-[250px] w-[90%] px-4 py-2 border rounded-lg text-xs text-gray-600 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.typeOfProject ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-[250px] w-[90%] px-4 py-2 border rounded-lg text-sm border-gray-500 text-gray-600 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.typeOfProject ? 'border-red-500' : ''}`}
           >
             <option value="Residential">Residential</option>
             <option value="Commercial">Commercial</option>
@@ -151,7 +151,7 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
 
         {/* County */}
         <div className='flex flex-col'>
-          <label className="font-semibold text-xs text-gray-700  mb-1">County
+          <label className="font-semibold text-sm font-poppins text-gray-600  mb-1">County
             <span className="text-[#F2B807] ml-2">*</span>
           </label>
           <input
@@ -159,7 +159,7 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
             name="county"
             value={formData.county}
             onChange={handleInputChange}
-            className={`mt-1 md:w-[250px] w-[90%] px-4 py-2 border text-xs rounded-lg text-gray-600 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.county ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-[250px] w-[90%] px-4 py-2 border text-sm border-gray-500 rounded-lg text-gray-600 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.county ? 'border-red-500' : ''}`}
             placeholder="Enter county"
           />
           {errors.county && <p className="text-red-500 text-xs">{errors.county}</p>}
@@ -167,7 +167,7 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
 
         {/* Ward */}
         <div className='flex flex-col'>
-        <label className="font-semibold text-xs text-gray-700  mb-1">Ward
+        <label className="font-semibold text-sm font-poppins text-gray-600  mb-1">Ward
             <span className="text-[#F2B807] ml-2">*</span>
           </label>
           <input
@@ -175,7 +175,7 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
             name="ward"
             value={formData.ward}
             onChange={handleInputChange}
-            className={`mt-1 md:w-[250px] w-[90%] px-4 py-2 border text-xs rounded-lg text-gray-600 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.ward ? 'border-red-500' : ''}`}
+            className={`mt-1 md:w-[250px] w-[90%] px-4 py-2 border text-sm border-gray-500 rounded-lg text-gray-600 focus:outline-none focus:ring focus:ring-yellow-500 ${errors.ward ? 'border-red-500' : ''}`}
             placeholder="Enter ward"
           />
           {errors.ward && <p className="text-red-500 text-xs">{errors.ward}</p>}
@@ -187,16 +187,16 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
         <button
           type="button"
           onClick={handleBack}
-          className="bg-gray-200  font-bold py-2 px-6 text-sm rounded text-[#3AB54B]"
+          className="bg-gray-300  font-bold py-2 px-6 text-sm rounded "
         >
-          Back
+          Previous
         </button>
         <button
           type="button"
           onClick={handleSave}
           className="text-sm bg-[#F2B807] rounded font-bold py-2 px-6 text-white"
         >
-          Next
+          Save & Continue
         </button>
       </div>
     </div>

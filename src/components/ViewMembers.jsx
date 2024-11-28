@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { FaEdit, FaTrashAlt, FaDownload } from 'react-icons/fa';
 import { MdChevronLeft, MdChevronRight } from 'react-icons/md';
+import { useNavigate } from "react-router-dom";
 //import { saveAs } from 'file-saver';
 import * as XLSX from 'xlsx'; // Import the xlsx library
 import EditMemberForm from './EditMemberForm'; // Import the form component
 import { useSelector } from 'react-redux'; // Import useSelector
-import { useNavigate } from "react-router-dom";
 
 
 const ViewMembers = () => {
@@ -14,7 +14,7 @@ const ViewMembers = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [isEditing, setIsEditing] = useState(false);
   const [selectedMember, setSelectedMember] = useState(null);
-  const navigate = useNavigate();
+    const navigate = useNavigate();
 
   const recordsPerPage = 10;
   // Get the token from the Redux store
@@ -23,59 +23,46 @@ const ViewMembers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-
         const response = await axios.get('https://api3.promittoltd.com/data', {
           headers: {
-            Authorization: `Bearer ${token}`, // Use Bearer token
+            Authorization: `Bearer ${token}`,
           },
         });
-
-
+  
         if (response.data.status === 'success') {
+          // Clear the state before setting the new data
+          setMembers([]);
           setMembers(response.data.data);
-          console.log("Member updated:");
+          console.log("Members fetched:", response.data.data);
         } else {
           console.error("Failed to fetch members:", response.data.message);
         }
       } catch (error) {
-        if (error.response) {
-          // Server responded with a status other than 200 range
-          console.error("Error Response:", error.response);
-          console.error("Response Status:", error.response.status);
-          console.error("Response Data:", error.response.data);
-        } else if (error.request) {
-          // Request was made but no response received
-          console.error("No Response Received:", error.request);
-        } else {
-          // Something happened setting up the request
-          console.error("Error Setting Up Request:", error.message);
-        }
+        console.error("Error fetching data:", error);
       }
     };
-
+  
     if (token) {
       fetchData();
     } else {
       console.warn("No token found. Fetching data aborted.");
     }
   }, [token]);
-
+  
 
   const handleUpdate = async (id, updatedData) => {
     try {
-      // Include the token in the request headers
       const response = await axios.put(`https://api3.promittoltd.com/update/${id}`, updatedData, {
         headers: {
-          Authorization: `Bearer ${token}`, // Use Bearer token
+          Authorization: `Bearer ${token}`,
         },
       });
-
+  
       if (response.data.status === 'success') {
         console.log('Data updated');
-        // Update the local state
         setMembers((prev) =>
           prev.map((member) =>
-            member.personal_details.id === id ? updatedData : member
+            member.personal_details.id === id ? { ...member, ...updatedData } : member
           )
         );
       } else {
@@ -84,8 +71,8 @@ const ViewMembers = () => {
     } catch (error) {
       console.error("Error updating member:", error);
     }
-  
   };
+  
 
   const handleEditClick = (member) => {
     setSelectedMember(member);
@@ -159,34 +146,34 @@ const ViewMembers = () => {
       UpdatedAt: personal_details.updated_at,
     };
   
-    // Add Next of Kin details
+    // Add Next of Kin details - Make sure to append a unique index to each key
     if (next_of_kin.length > 0) {
       next_of_kin.forEach((kin, index) => {
-        dataToExport[`NextOfKin_ID`] = kin.id;
-        dataToExport[`NextOfKin_FirstName`] = kin.first_name;
-        dataToExport[`NextOfKin_MiddleName`] = kin.middle_name;
-        dataToExport[`NextOfKin_LastName`] = kin.last_name;
-        dataToExport[`NextOfKin_Relationship`] = kin.relationship;
-        dataToExport[`NextOfKin_Phone`] = kin.phone;
-        dataToExport[`NextOfKin_NationalID`] = kin.national_id;
-        dataToExport[`NextOfKin_DOB`] = kin.dob;
+        dataToExport[`NextOfKin_${index + 1}_ID`] = kin.id;
+        dataToExport[`NextOfKin_${index + 1}_FirstName`] = kin.first_name;
+        dataToExport[`NextOfKin_${index + 1}_MiddleName`] = kin.middle_name;
+        dataToExport[`NextOfKin_${index + 1}_LastName`] = kin.last_name;
+        dataToExport[`NextOfKin_${index + 1}_Relationship`] = kin.relationship;
+        dataToExport[`NextOfKin_${index + 1}_Phone`] = kin.phone;
+        dataToExport[`NextOfKin_${index + 1}_NationalID`] = kin.national_id;
+        dataToExport[`NextOfKin_${index + 1}_DOB`] = kin.dob;
       });
     }
   
     // Add Employment details
     if (employment_details.length > 0) {
       employment_details.forEach((employment, index) => {
-        dataToExport[`Employment_ID`] = employment.id;
-        dataToExport[`Employment_EmployerName`] = employment.employer_name;
-        dataToExport[`Employment_PostalAddress`] = employment.postal_address;
-        dataToExport[`Employment_PostalCode`] = employment.postal_code;
-        dataToExport[`Employment_Location`] = employment.location;
-        dataToExport[`Employment_Email`] = employment.email;
-        dataToExport[`Employment_Telephone`] = employment.telephone;
-        dataToExport[`Employment_JobTitle`] = employment.job_title;
-        dataToExport[`Employment_LengthOfService`] = employment.length_of_service;
-        dataToExport[`Employment_TermsOfEmployment`] = employment.terms_of_employment;
-        dataToExport[`Employment_ContractPeriod`] = employment.contract_period;
+        dataToExport[`Employment_${index + 1}_ID`] = employment.id;
+        dataToExport[`Employment_${index + 1}_EmployerName`] = employment.employer_name;
+        dataToExport[`Employment_${index + 1}_PostalAddress`] = employment.postal_address;
+        dataToExport[`Employment_${index + 1}_PostalCode`] = employment.postal_code;
+        dataToExport[`Employment_${index + 1}_Location`] = employment.location;
+        dataToExport[`Employment_${index + 1}_Email`] = employment.email;
+        dataToExport[`Employment_${index + 1}_Telephone`] = employment.telephone;
+        dataToExport[`Employment_${index + 1}_JobTitle`] = employment.job_title;
+        dataToExport[`Employment_${index + 1}_LengthOfService`] = employment.length_of_service;
+        dataToExport[`Employment_${index + 1}_TermsOfEmployment`] = employment.terms_of_employment;
+        dataToExport[`Employment_${index + 1}_ContractPeriod`] = employment.contract_period;
       });
     }
   
@@ -237,14 +224,15 @@ const ViewMembers = () => {
     XLSX.writeFile(workbook, `${personal_details.first_name}_${personal_details.last_name}_Data.xlsx`);
   };
   
+  
 
   return (
-    <div className="p-4 relative"> {/* Set relative position on the parent */}
+    <div className="p-4 font-poppins relative"> {/* Set relative position on the parent */}
     <div className='flex'>
       <h1 className=" text-xl text-yellow-500 text-center  mb-4">View Membership Information</h1>
       <button
           onClick={() => navigate("/admin")}
-          className="bg-yellow-700 hover:bg-yelow-600 text-white px-4 py-2 ml-auto mb-1 rounded-lg shadow-md"
+          className="bg-yellow-700 hover:bg-yelow-600 text-white md:px-4 px-2 md:py-2 ml-auto mb-1 rounded-lg shadow-md"
         >
           Go to Dashboard
         </button>

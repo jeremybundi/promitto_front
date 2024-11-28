@@ -44,14 +44,14 @@ const Review = ({ onEditClick }) => {
       setSuccessMessage('Data submitted successfully!');
 
       setTimeout(() => {
-        navigate("https://account.promittoltd.com/");
+        navigate("/");
       }, 2000); 
     
 
 
     } catch (error) {
       console.error('Error submitting data:', error);
-      //console.log('The data to be saved:', formData);
+      console.log('The data to be saved:', formData);
 
       // Check if the error has a response property (to get more information from the server)
       if (error.response) {

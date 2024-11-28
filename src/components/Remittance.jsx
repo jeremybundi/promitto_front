@@ -183,16 +183,16 @@ const Remittance = ({ onNext, onPrevious }) => {
 
             
       )} 
-      <div className='flex md:mx-56 md:space-x-[350px] justify-between'>
-        <button class=" bg-gray-200 text-sm  mt-8  font-bold py-2 px-8 rounded flex justify-center  text-[#3AB54B]"
+      <div className='flex md:mx-56 md:space-x-[200px] justify-between'>
+        <button class=" bg-gray-200 text-sm  mt-8  font-bold py-2 px-4 rounded flex justify-center  "
                            onClick={onPrevious}
              >
-                Back
+                Previous
             </button>
-            <button class= " text-sm  bg-[#F2B807] mt-8 rounded font-bold py-2 px-8  flex justify-center  text-white"
+            <button class= " text-sm  bg-[#F2B807] mt-8 rounded font-bold py-2 px-4  flex justify-center  text-white"
                            onClick={handleConfirmPayment}
              >
-                Next
+                Save & Continue
             </button>
         
 

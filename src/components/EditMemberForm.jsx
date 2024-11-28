@@ -17,12 +17,12 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
   useEffect(() => {
     if (member) {
       setFormData({
-        personalDetails: member.personal_details,
-        nextOfKin: member.next_of_kin,
-        employmentDetails: member.employment_details,
-        businessDetails: member.business_details,
-        propertyDetails: member.property_details,
-        remittanceDetails: member.remittance_details,
+        personalDetails: { ...member.personal_details },
+        nextOfKin: [...member.next_of_kin],
+        employmentDetails: [...member.employment_details],
+        businessDetails: [...member.business_details],
+        propertyDetails: [...member.property_details],
+        remittanceDetails: [...member.remittance_details],
       });
     }
   }, [member]);
@@ -37,36 +37,41 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
 
   const handleNextOfKinChange = (index, e) => {
     const { name, value } = e.target;
-    const updatedKin = [...formData.nextOfKin];
-    updatedKin[index] = { ...updatedKin[index], [name]: value };
+    const updatedKin = formData.nextOfKin.map((kin, idx) =>
+      idx === index ? { ...kin, [name]: value } : kin
+    );
     setFormData((prev) => ({ ...prev, nextOfKin: updatedKin }));
   };
 
   const handleEmploymentChange = (index, e) => {
     const { name, value } = e.target;
-    const updatedEmployment = [...formData.employmentDetails];
-    updatedEmployment[index] = { ...updatedEmployment[index], [name]: value };
+    const updatedEmployment = formData.employmentDetails.map((employment, idx) =>
+      idx === index ? { ...employment, [name]: value } : employment
+    );
     setFormData((prev) => ({ ...prev, employmentDetails: updatedEmployment }));
   };
 
   const handleBusinessChange = (index, e) => {
     const { name, value } = e.target;
-    const updatedBusiness = [...formData.businessDetails];
-    updatedBusiness[index] = { ...updatedBusiness[index], [name]: value };
+    const updatedBusiness = formData.businessDetails.map((business, idx) =>
+      idx === index ? { ...business, [name]: value } : business
+    );
     setFormData((prev) => ({ ...prev, businessDetails: updatedBusiness }));
   };
 
   const handlePropertyChange = (index, e) => {
     const { name, value } = e.target;
-    const updatedProperty = [...formData.propertyDetails];
-    updatedProperty[index] = { ...updatedProperty[index], [name]: value };
+    const updatedProperty = formData.propertyDetails.map((property, idx) =>
+      idx === index ? { ...property, [name]: value } : property
+    );
     setFormData((prev) => ({ ...prev, propertyDetails: updatedProperty }));
   };
 
   const handleRemittanceChange = (index, e) => {
     const { name, value } = e.target;
-    const updatedRemittance = [...formData.remittanceDetails];
-    updatedRemittance[index] = { ...updatedRemittance[index], [name]: value };
+    const updatedRemittance = formData.remittanceDetails.map((remittance, idx) =>
+      idx === index ? { ...remittance, [name]: value } : remittance
+    );
     setFormData((prev) => ({ ...prev, remittanceDetails: updatedRemittance }));
   };
 
@@ -91,13 +96,13 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
           },
         }
       );
-
+      console.log('Member Updated');
       setStatusMessage('Member updated successfully!');
       setIsError(false);
       setTimeout(() => {
         onUpdate(response.data);
         onClose();
-      }, 3000); 
+      }, 3000);
     } catch (error) {
       setStatusMessage('Failed to update member. Please try again.');
       setIsError(true);
@@ -129,7 +134,7 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
             { name: 'email_address', label: 'Email Address', type: 'email' }
           ].map(({ name, label, type = 'text' }) => (
             <div key={name}>
-              <label className="block font-mono mb-1">{label}</label>
+              <label className="block font-poppins gray-600 font-semibold mb-1">{label}</label>
               <input
                 type={type}
                 name={name}
@@ -147,11 +152,16 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
           <div key={index} className="grid grid-cols-2 ml-2 md:mb-4 md:flex md:space-x-24 border md:p-4 rounded">
             {[
               { name: 'first_name', label: 'First Name' },
+              { name: 'middle_name', label: 'Middle Name' },
+              { name: 'last_name', label: 'Last Name' },
+              { name: 'national_id', label: 'National ID' },
+              { name: 'dob', label: 'Date of Birth', type: 'date' },
               { name: 'relationship', label: 'Relationship' },
+
               { name: 'phone', label: 'Phone' }
             ].map(({ name, label }) => (
               <div key={name}>
-                <label className="block font-mono text-xs mb-1">{label}</label>
+                <label className="block font-poppins gray-600 font-semibold text-xs mb-1">{label}</label>
                 <input
                   type="text"
                   name={name}
@@ -181,7 +191,7 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
               { name: 'contract_period', label: 'Contract Period' }
             ].map(({ name, label }) => (
               <div key={name}>
-                <label className="block mb-1">{label}</label>
+                <label className="block font-poppins gray-600 font-semibold mb-1">{label}</label>
                 <input
                   type="text"
                   name={name}
@@ -214,7 +224,7 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
 
             ].map(({ name, label }) => (
               <div key={name}>
-                <label className="block mb-1">{label}</label>
+                <label className="block font-poppins gray-600 font-semibold mb-1">{label}</label>
                 <input
                   type="text"
                   name={name}
@@ -241,7 +251,7 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
               { name: 'ward', label: 'Ward' }
             ].map(({ name, label }) => (
               <div key={name}>
-                <label className="block font-mono mb-1">{label}</label>
+                <label className="block font-poppins gray-600 font-semibold mb-1">{label}</label>
                 <input
                   type="text"
                   name={name}
@@ -263,7 +273,7 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
               { name: 'transaction_code', label: 'Transaction Code' }
             ].map(({ name, label }) => (
               <div key={name}>
-                <label className="block text-xs font-mono mb-1">{label}</label>
+                <label className="block text-xs font-poppins gray-600 font-semibold mb-1">{label}</label>
                 <input
                   type="text"
                   name={name}

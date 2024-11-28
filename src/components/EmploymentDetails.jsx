@@ -78,14 +78,14 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
   };
 
   return (
-    <div className="employment-details-form md:p-6 bg-white  rounded-lg">
+    <div className="employment-details-form md:p-6 bg-gray-50  rounded-lg">
       <form className="grid grid-cols-2 md:gap-6 md:mx-36">
         {Object.keys(formData).map((key) => (
           key !== 'termsOfEmployment' && (
             <div key={key} className="flex flex-col">
               <label
                 htmlFor={key}
-                className="font-semibold text-xs text-gray-700 mt-2 md:mb-1"
+                className="font-semibold text-sm mt-4 md:mt-3 font-poppins text-gray-600 "
               >
                 {key === 'contractPeriod'
                   ? 'Contract Period'
@@ -105,7 +105,7 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
                   .trim()
                   .toLowerCase()}`}
                 onChange={handleChange}
-                className="text-xs  input-field w-[90%] md:w-[300px] border border-gray-300 rounded-md p-3"
+                className="font-poppins input-field w-[90%] md:w-[300px] border mt-2 text-sm font-poppins focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none border-gray-500 rounded-md p-3"
               />
               {errors[key] && (
                 <p className="text-red-500 text-xs mt-1">{errors[key]}</p>
@@ -114,10 +114,10 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
           )
         ))}
 
-        <div className="flex mt-2 flex-col">
+        <div className="flex md:mt-3 mt-5 md:mb-0 mb-2 flex-col">
           <label
             htmlFor="termsOfEmployment"
-            className="font-semibold text-xs text-gray-700 md:mb-1"
+            className="font-semibold md:text-sm text-xs text-gray-600 md:mb-"
           >
             Terms Of Employment
             <span className="text-[#F2B807] ml-2">*</span>
@@ -127,7 +127,7 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
             name="termsOfEmployment"
             value={formData.termsOfEmployment}
             onChange={handleChange}
-            className="text-xs  input-field w-[90%] md:w-[300px] border border-gray-300 rounded-md p-3"
+            className="text-sm font-poppins input-field w-[90%] md:w-[300px] mt-2 border  focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none border-gray-500 rounded-md p-3"
           >
             <option value="">Select</option>
             <option value="Permanent">Permanent</option>
@@ -169,18 +169,18 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
         )}
       </form>
 
-      <div className="flex justify-between md:mx-56 md:space-x-[350px]">
+      <div className="flex justify-between md:mx-48 md:space-x-[350px]">
         <button
-          className="bg-gray-100 text-xs mt-8 font-bold py-2 px-4 rounded text-[#3AB54B]"
+          className="bg-gray-300 text-sm mt-8 font-bold py-2 px-4 rounded "
           onClick={handlePrevious}
         >
-          Back
+          Previous
         </button>
         <button
-          className="bg-[#F2B807] text-xs mt-8 font-bold py-2 px-4 rounded text-white"
+          className="bg-[#F2B807] text-sm mt-8 font-bold py-2 px-4 rounded text-white"
           onClick={handleNext}
         >
-          Next
+          Save & Continue
         </button>
       </div>
     </div>

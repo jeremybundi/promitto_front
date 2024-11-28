@@ -57,16 +57,22 @@ const NextOfKin = ({ onNext, onPrevious }) => {
     dispatch(saveNextOfKin(form));
     onPrevious(); // Call the onPrevious function passed from Register
   };
+   // Helper function to get yesterday's date in YYYY-MM-DD format
+   const getYesterdayDate = () => {
+    const today = new Date();
+    today.setDate(today.getDate() - 1); // Subtract 1 day
+    return today.toISOString().split('T')[0]; // Get date in YYYY-MM-DD format
+  };
 
   return (
-    <div className="p-6 text-xs font-semibold rounded-lg">
+    <div className="p-6 text-sm font-poppins bg-gray-50 rounded-lg">
       <form className="space-y-6">
         {/* Name Section */}
         <div className='hidden md:flex-col md:ml-32 md:flex'>
-        <div className="flex flex-col mb-4">
-          <label htmlFor="name" className="relative text-gray-700 mb-1">
+        <div className="flex flex-col mb-6">
+          <label htmlFor="name" className="relative text-gray-600 mb-2 font-semibold">
             Next of Kin Name.
-            <span className="text-[#F2B807] absolute top-[-4px] right-[10px]">*</span>
+            <span className="text-[#F2B807] mml-2">*</span>
           </label>
           <div className="flex space-x-16">
             {['firstName', 'middleName', 'lastName'].map((field, index) => (
@@ -78,7 +84,7 @@ const NextOfKin = ({ onNext, onPrevious }) => {
                 placeholder={`${field.charAt(0).toUpperCase() + field.slice(1).replace(/Name/, ' Name')}`}
                 value={form[field]} // Load data from state
                 onChange={handleInputChange}
-                className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none flex-shrink-0"
+                className="p-3 w-[195px] border border-gray-500 rounded-lg font-poppins focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none flex-shrink-0"
                 required
               />
             ))}
@@ -86,14 +92,14 @@ const NextOfKin = ({ onNext, onPrevious }) => {
         </div>
 
         {/* Relationship, Phone Number, National ID / Passport */}
-        <div className="flex space-x-16 mb-4">
+        <div className="flex space-x-16 mb-6">
           <div className="flex flex-col relative">
-            <label htmlFor="relationship" className="relative text-gray-700 mb-1">
+            <label htmlFor="relationship" className="relative  text-gray-600 mb-2 font-semibold">
               Relationship.
-              <span className="text-[#F2B807] absolute top-[-4px] right-[108px]">*</span>
-            </label>
+              <span className="text-[#F2B807] mml-2">*</span>
+              </label>
             <div
-              className="p-3 md:w-[195px] bg-gray-200 border border-gray-500 rounded-lg cursor-pointer flex items-center justify-between"
+              className="p-3 md:w-[195px] bg-gray-200 border border-gray-500 font-poppins rounded-lg cursor-pointer flex items-center justify-between"
               onClick={() => setIsOpen(!isOpen)}
             >
               <span>{selectedRelationship || 'Select Relationship'}</span>
@@ -115,7 +121,7 @@ const NextOfKin = ({ onNext, onPrevious }) => {
               </svg>
             </div>
             {isOpen && (
-              <ul className="absolute z-10 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg">
+              <ul className="absolute z-10 mt-1 w-full bg-white border font-poppins border-gray-300 rounded-lg shadow-lg">
                 {relationships.map((relationship, index) => (
                   <li
                     key={index}
@@ -130,10 +136,10 @@ const NextOfKin = ({ onNext, onPrevious }) => {
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="phone" className="relative text-gray-700 mb-1">
+            <label htmlFor="phone" className="relative  text-gray-600 mb-2 font-semibold">
               Phone Number.
-              <span className="text-[#F2B807] absolute top-[-4px] right-[95px]">*</span>
-            </label>
+              <span className="text-[#F2B807] mml-2">*</span>
+              </label>
             <input
               type="tel"
               id="phone"
@@ -141,16 +147,16 @@ const NextOfKin = ({ onNext, onPrevious }) => {
               placeholder="Enter a valid phone number"
               value={form.phone}
               onChange={handleInputChange}
-              className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
+              className="p-3 w-[195px] border border-gray-500 rounded-lg font-poppins focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
               required
             />
           </div>
 
           <div className="flex flex-col">
-            <label htmlFor="nationalId" className="relative text-gray-700 mb-1">
+            <label htmlFor="nationalId" className="relative  text-gray-600 mb-2 font-semibold">
               National ID / Passport No.
-              <span className="text-[#F2B807] absolute top-[-4px] right-[36px]">*</span>
-            </label>
+              <span className="text-[#F2B807] mml-2">*</span>
+              </label>
             <input
               type="text"
               id="nationalId"
@@ -158,17 +164,17 @@ const NextOfKin = ({ onNext, onPrevious }) => {
               placeholder="Enter National ID / Passport No."
               value={form.nationalId}
               onChange={handleInputChange}
-              className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
+              className="p-3 w-[195px] border border-gray-500 rounded-lg font-poppins focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
               required
             />
           </div>
         </div>
 
         {/* Date of Birth */}
-        <div className="flex flex-col mb-4">
-          <label htmlFor="dob" className="relative text-gray-700 mb-1">
+        <div className="flex flex-col mb-12">
+          <label htmlFor="dob" className="relative  text-gray-600 mb-2 font-semibold">
             Date of Birth.
-            <span className="text-[#F2B807] absolute top-[-4px] right-[920px]">*</span>
+            <span className="text-[#F2B807] mml-2">*</span>
           </label>
           <input
             type="date"
@@ -176,8 +182,9 @@ const NextOfKin = ({ onNext, onPrevious }) => {
             name="dob"
             value={form.dob}
             onChange={handleInputChange}
-            className="p-3 w-[195px] border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
+            className="p-3 w-[195px] border border-gray-500 rounded-lg font-poppins focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
             required
+            max={getYesterdayDate()}
           />
         </div>
 
@@ -193,9 +200,9 @@ const NextOfKin = ({ onNext, onPrevious }) => {
           <button
             type="button"
             onClick={handleNext}
-            className="bg-[#F2B807] p-2 rounded-lg"
+            className="bg-[#F2B807] text-white font-semibold p-2  px-4 rounded-lg"
           >
-            Next
+           Save & Continue
           </button>
         </div>
         </div>
@@ -204,7 +211,7 @@ const NextOfKin = ({ onNext, onPrevious }) => {
         <div className="md:hidden space-y-6">
           {/* Name Section */}
           <div className="flex flex-col  mb-4">
-            <label htmlFor="name" className="relative text-gray-600 text-sm font-lufga mb-2">
+            <label htmlFor="name" className="relative text-gray-600 font-semibold  text-sm font-lufga mb-2">
               Next of Kin Name.
               <span className="text-[#F2B807] mml-2">*</span>
               </label>
@@ -228,7 +235,7 @@ const NextOfKin = ({ onNext, onPrevious }) => {
           {/* Relationship, Phone Number, National ID / Passport */}
           <div className="flex flex-col space-y-4 mb-4">
             <div className="flex flex-col relative">
-              <label htmlFor="relationship" className="relative text-sm text-gray-600 mb-2">
+              <label htmlFor="relationship" className="relative text-sm font-semibold  text-gray-600 mb-2">
                 Relationship.
                 <span className="text-[#F2B807] mml-2">*</span>
                 </label>
@@ -270,7 +277,7 @@ const NextOfKin = ({ onNext, onPrevious }) => {
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="phone" className="relative font-lufga text-sm text-gray-600 mb-2">
+              <label htmlFor="phone" className="relative font-lufga text-sm font-semibold  text-gray-600 mb-2">
                 Phone Number.
                 <span className="text-[#F2B807] mml-2">*</span>
                 </label>
@@ -287,7 +294,7 @@ const NextOfKin = ({ onNext, onPrevious }) => {
             </div>
 
             <div className="flex flex-col">
-              <label htmlFor="nationalId" className="relative text-gray-600 mb-2 text-sm">
+              <label htmlFor="nationalId" className="relative text-gray-600 font-semibold  mb-2 text-sm">
                 National ID / Passport No.
                 <span className="text-[#F2B807] mml-2">*</span>
                 </label>
@@ -304,25 +311,29 @@ const NextOfKin = ({ onNext, onPrevious }) => {
             </div>
           </div>
 
-          {/* Date of Birth */}
-          <div className="flex flex-col mb-4">
-            <label htmlFor="dob" className="relative text-gray-600 text-sm mb-2 font-lufga">
-              Date of Birth.
-              <span className="text-[#F2B807] mml-2">*</span>
-              </label>
-            <input
-              type="date"
-              id="dob"
-              name="dob"
-              value={form.dob}
-              onChange={handleInputChange}
-              className="p-3 text-sm border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
-              required
-            />
-          </div>
+    {/* Date of Birth */}
+<div className="flex flex-col mb-8">
+  <label htmlFor="dob" className="relative text-gray-600 text-sm mb-2 font-semibold font-lufga">
+    Date of Birth.
+    <span className="text-[#F2B807] mml-2">*</span>
+  </label>
+  <input
+    type="date"
+    id="dob"
+    name="dob"
+    value={form.dob}
+    onChange={handleInputChange}
+    className="p-3 text-sm border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none"
+    required
+    max={getYesterdayDate()} 
+
+  />
+</div>
+
+
 
           {/* Navigation */}
-          <div className="flex justify-between">
+          <div className="flex mt-5 justify-between">
             <button
               type="button"
               onClick={handlePrevious}
@@ -335,7 +346,7 @@ const NextOfKin = ({ onNext, onPrevious }) => {
               onClick={handleNext}
               className="bg-[#F2B807] py-2 px-5 text-sm rounded-lg"
             >
-              Next
+              Save & Continue
             </button>
           </div>
         </div>

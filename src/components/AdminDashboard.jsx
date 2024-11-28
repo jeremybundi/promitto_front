@@ -5,7 +5,7 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="p-6 max-w-lg mx-auto mt-2 bg-white rounded-xl md:mb-12 shadow space-y-4">
+    <div className="p-6 max-w-lg mx-auto mt-2 bg-white rounded-xl md:mb-12 font-poppins shadow space-y-4">
       <h2 className="text-2xl font-semibold font-lufga text-center">Admin Dashboard</h2>
       <div className="space-y-4 mb-6 font-semibold">
         {/* First Row */}

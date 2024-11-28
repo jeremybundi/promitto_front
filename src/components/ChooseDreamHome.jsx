@@ -4,6 +4,7 @@ import sizeIcon from '../assets/images/icons8-full-screen-100.jpg';
 import typeIcon from '../assets/images/key_4838168.jpg';     
 import bedroomsIcon from '../assets/images/icons8-bed-96.jpg'; 
 import ownhome from '../assets/images/ownhome.png'; 
+import eyeIcon from '../assets/images/eye.png'; 
 import enrollIcon from '../assets/images/enroll.jpg'; 
 import dropdownIcon from '../assets/icons/dropdown.svg'; 
 
@@ -112,21 +113,21 @@ const handleSortChange = (option) => {
                     <hr className="border-t-2 border-[#F2B807] mb-4" />
                     {/* Links to bedroom types */}
                     <div className="mb-4">
-                        <a href="#" className="text-sm font-semibold text-gray-600 block mb-4">2 Bedrooms</a>
+                        <a href="#" className="text-sm font-extralight text-gray-500 font-lufga block mb-4">2 Bedrooms</a>
                         <hr className="border-t border-[#F8F8F8]" />
-                        <a href="#" className="text-sm font-semibold text-gray-600 block my-4">3 Bedrooms</a>
+                        <a href="#" className="text-sm font-extralight text-gray-500 font-lufga block my-4">3 Bedrooms</a>
                         <hr className="border-t border-[#F8F8F8]" />
-                        <a href="#" className="text-sm font-semibold text-gray-600 block mt-4 mb-4">Perimeter Walls</a>
+                        <a href="#" className="text-sm font-extralight text-gray-500 font-lufga block mt-4 mb-4">Perimeter Walls</a>
                         <hr className="border-t border-[#F8F8F8]" />
-                        <a href="#" className="text-sm font-semibold text-gray-600 block mt-4 mb-4">3 Bedroom With Floor Plan</a>
+                        <a href="#" className="text-sm font-extralight text-gray-500  font-lufga block mt-4 mb-4">3 Bedroom With Floor Plan</a>
                         <hr className="border-t border-[#F8F8F8]" />
-                        <a href="#" className="text-sm font-semibold text-gray-600 block mt-4 mb-4">Commercial Buildings</a>
+                        <a href="#" className="text-sm font-extralight text-gray-500 font-lufga block mt-4 mb-4">Commercial Buildings</a>
                         <hr className="border-t border-[#F8F8F8]" />
-                        <a href="#" className="text-sm font-semibold text-gray-600 block mt-4 mb-4">4 Bedroom With Floor Plan</a>
+                        <a href="#" className="text-sm font-extralight text-gray-500  font-lufga block mt-4 mb-4">4 Bedroom With Floor Plan</a>
                         <hr className="border-t border-[#F8F8F8]" />
-                        <a href="#" className="text-sm font-semibold text-gray-600 block mt-4 mb-4">Studio/DSQ</a>
+                        <a href="#" className="text-sm font-extralight text-gray-500 font-lufga block mt-4 mb-4">Studio/DSQ</a>
                         <hr className="border-t border-[#F8F8F8]" />
-                        <a href="#" className="text-sm font-semibold text-gray-600 block mt-4 mb-4">Rentals/Commercial Buildings</a>
+                        <a href="#" className="text-sm font-extralight text-gray-500 font-lufga block mt-4 mb-4">Rentals/Commercial Buildings</a>
                         <hr className="border-t border-[#F8F8F8]" />
                     </div>
                 </div>
@@ -136,7 +137,7 @@ const handleSortChange = (option) => {
                 <h2 className="md:text-4xl text-xl text-[#F2B807] font-lufga font-bold mt-0 mb-2 md:mb-4" >
                     Choose Your Dream Home
                 </h2>
-                <h3 className="font-semibold md:text-sm text-xs mb-2 md:mb-9" data-aos="fade-up">
+                <h3 className="font-normal font-lufga md:text-sm text-xs mb-2 md:mb-9" data-aos="fade-up">
                     Discover Your Dream Home in Kenya with Promitto Ltd.
                 </h3>
 
@@ -147,19 +148,19 @@ const handleSortChange = (option) => {
                             onMouseEnter={handleMouseEnter}
                             onMouseLeave={handleMouseLeave}
                         >
-                            <span className="text-sm font-semibold md:mr-2">Sort By</span>
+                            <span className="text-sm  font-lufga md:mr-2">Sort By</span>
                             <img src={dropdownIcon} alt="Dropdown Icon" className="w-4 h-4" />
                             
                             {isDropdownVisible && (
                             <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg transition-opacity duration-300">
                                 <ul className="py-2 text-sm text-gray-700">
-                                <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer">Most Popular</li>
+                                <li className="hover:bg-gray-100 px-4 py-2 font-lufga cursor-pointer">Most Popular</li>
 
-                                <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer" >Best Rating</li>
+                                <li className="hover:bg-gray-100 px-4 py-2 font-lufga cursor-pointer" >Best Rating</li>
 
-                                    <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer" onClick={() => handleSortChange('newest')}>Newest</li>
-                                    <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer" onClick={() => handleSortChange('price-low-high')}>Price: Low to high</li>
-                                    <li className="hover:bg-gray-100 px-4 py-2 cursor-pointer" onClick={() => handleSortChange('price-high-low')}>Price: High to low</li>
+                                    <li className="hover:bg-gray-100 px-4 py-2 font-lufga cursor-pointer" onClick={() => handleSortChange('newest')}>Newest</li>
+                                    <li className="hover:bg-gray-100 px-4 py-2 font-lufga cursor-pointer" onClick={() => handleSortChange('price-low-high')}>Price: Low to high</li>
+                                    <li className="hover:bg-gray-100 px-4 py-2 font-lufga cursor-pointer" onClick={() => handleSortChange('price-high-low')}>Price: High to low</li>
                                 </ul>
                             </div>
                             )}
@@ -176,26 +177,29 @@ const handleSortChange = (option) => {
                                     className="w-full h-100% object-cover"
                                 />
                                 <div className="p-4">
-                                    <p className="font-bold ml-3 mb-3 mt-2">{house.description}</p>
+                                    <p className="font-bold ml-3 font-lufga mb-3 mt-2">{house.description}</p>
                                     <div className="flex justify-between items-center mb-7">
                                         <div className="flex ml-3 items-center">
                                             <img src={sizeIcon} alt="Size" className="w-4 h-4 mr-1" />
-                                            <span className='text-[11px] font-bold text-gray-600'>{house.size}</span>
+                                            <span className='md:text-[11px] text-[9px] font-manrope font-bold text-[#5E5E5E]'>{house.size}</span>
                                         </div>
                                         <div className="flex items-center">
                                             <img src={typeIcon} alt="Type" className="w-5 h-5 mr-1" />
-                                            <span className='text-[11px] font-bold text-gray-600'>{house.type}</span>
+                                            <span className='md:text-[11px] text-[9px] font-bold font-manrope text-[#5E5E5E]'>{house.type}</span>
                                         </div>
                                         <div className="flex items-center">
                                             <img src={bedroomsIcon} alt="Bedrooms" className="w-5 h-5 mr-1" />
-                                            <span className='text-[11px] font-bold text-gray-600'>{house.bedrooms} bedrooms</span>
+                                            <span className='md:text-[11px] text-[9px] font-manrope font-bold text-[#5E5E5E]'>{house.bedrooms} bedrooms</span>
                                         </div>
                                     </div>
                                     <div className="flex items-center justify-between">
-                                        <button className="bg-[#F2B807] text-white py-2 mt-2 md:mt-0 px-4 md:py-2 text-xs md:text-sm font-semibold rounded-lg">View House</button>
+                                        <button className="bg-[#F2B807] flex text-white font-lufga py-2 mt-2 md:mt-0 md:px-4 px-2 md:py-3 text-xs md:text-sm font-semibold rounded-lg">View House
+                                            <span className='ml-3'> <img src={eyeIcon} alt="Eye" className="w-5 h-5 mr-1" />
+                                            </span>
+                                        </button>
                                         <div className="flex flex-col ml-3 items-end">
-                                            <span className="mr-20 font-semibold">Pay</span>
-                                            <span className="text-sm"> {house.price}/= Per Month</span>
+                                            <span className="mr-20 font-manrope md:text-sm text-xs font-semibold">Pay</span>
+                                            <span className="md:text-sm text-xs font-manrope"> {house.price}/=  <span className='md:text-sm text-[9px]'>Per Month</span></span>
                                         </div>
                                     </div>
                                 </div>
@@ -247,8 +251,8 @@ const handleSortChange = (option) => {
           </div>
         </div>
         <div className="flex flex-col items-center text-center">
-          <h3 className='text-[#F2B807] md:text-3xl text-2xl font-semibold mt-8 mb-3' data-aos="fade-down"> Our Ongoing Projects </h3>
-          <p className='text-sm' data-aos="fade-up">Some of our ongoing projects at various stages</p>
+          <h3 className='text-[#F2B807] md:text-3xl text-2xl  font-lugha font-semibold mt-8 mb-3' data-aos="fade-down"> Our Ongoing Projects </h3>
+          <p className='text-sm font-poppins ' data-aos="fade-up">Some of our ongoing projects at various stages</p>
         </div>
         {/* Ongoing Projects */}
         <div className="mt-10">
@@ -261,8 +265,8 @@ const handleSortChange = (option) => {
                             className="w-full h-56 md:h-64 lg:h-72 object-cover"
                         />
                         <div className="p-4">
-                            <p className="font-bold">{house.description}</p>
-                            <p className="text-sm text-gray-600">{house.location}</p>
+                            <p className="font-bold font-lufga">{house.description}</p>
+                            <p className="text-sm font-poppins text-gray-500">{house.location}</p>
                         </div>
                     </div>
                 ))}
@@ -273,7 +277,7 @@ const handleSortChange = (option) => {
                 <div className="flex justify-center mt-8">
                     <button 
                         onClick={handleViewMoreOngoing} 
-                        className="bg-[#F2B807] text-white py-1 px-4 md:py-2 text-xs md:text-sm font-sans font-semibold rounded-2xl"  data-aos="fade-down"
+                        className="bg-[#F2B807] text-white py-1 px-4 md:py-2 text-xs md:text-sm font-poppins font-semibold rounded-2xl"  data-aos="fade-down"
                     >
                         View More Ongoing Projects 
                     </button>

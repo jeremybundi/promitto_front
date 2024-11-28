@@ -49,13 +49,13 @@ const Register = () => {
 
   return (
     <div className="flex flex-col items-center mx-2 md:mx-40">
-      <div className="bg-white rounded-xl shadow-2xl p-8 w-full">
-        <h1 className="text-2xl font-bold text-center text-[#F2B807] mb-4">Register Now?</h1>
-        <p className="text-lg font-semibold mb-4 text-center" data-aos="fade-up">Membership Registration Form</p>
+      <div className="bg-gray-50 rounded-xl shadow-2xl p-8 w-full">
+        <h1 className="text-2xl font-bold font-lufga text-center text-[#F2B807] mb-4">Register Now?</h1>
+        <p className="text-lg font-semibold text-gray-500 font-poppins mb-4 text-center" data-aos="fade-up">Membership Registration Form</p>
 
         <div className="flex flex-col">
           {/* Scrollable Tabs */}
-          <div className="flex flex-nowrap overflow-x-auto space-x-4 md:font-light font-semibold md:text-sm text-[12px] font-poppins md:mx-36 justify-start md:p-2 relative">
+          <div className="flex flex-nowrap overflow-x-auto space-x-4  text-gray-500  md:text-sm text-[12px] font-poppins md:mx-20 justify-start md:p-2 relative">
             {['Personal Details', 'Next Of Kin', 'Employment Details', 'Business Details', 'Property Details', 'Remittance Details', 'Review'].map(tab => (
               <button
                 key={tab}
@@ -69,7 +69,7 @@ const Register = () => {
           </div>
 
           {/* Show Completion Percentage */}
-          <div className="text-left mb-2 md:ml-40">
+          <div className="text-left mb-2 font-poppins md:ml-40">
             {calculateCompletionPercentage()}%
             <span className="font-semibold ml-2">Complete</span>
           </div>

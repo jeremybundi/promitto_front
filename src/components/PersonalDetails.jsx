@@ -67,15 +67,22 @@ const PersonalDetails = ({ onNext }) => {
     dispatch(savePersonalDetails(formData));
     onNext(); // Move to next tab
   };
+     // Helper function to get yesterday's date in YYYY-MM-DD format
+     const getYesterdayDate = () => {
+      const today = new Date();
+      today.setDate(today.getDate() - 1); // Subtract 1 day
+      return today.toISOString().split('T')[0]; // Get date in YYYY-MM-DD format
+    };
+  
 
   return (
-    <div className="md:py-6  text-xs font-semibold rounded-lg">
+    <div className="md:py-6  text-sm bg-gray-50  rounded-lg">
       <form className="md:space-y-6 space-y-2" onSubmit={handleSubmit}>
         <div className="grid grid-cols-2 md:grid-cols-3 md:gap-6">
           {/* First Name */}
           
           <div className="flex flex-col mb-4">
-            <label htmlFor="firstName" className="text-gray-700  mb-1">
+            <label htmlFor="firstName" className="text-gray-600 font-poppins font-semibold mb-2 ">
               First Name <span className="text-[#F2B807]">*</span>
             </label>
             <input
@@ -83,7 +90,7 @@ const PersonalDetails = ({ onNext }) => {
               id="firstName"
               name="firstName"
               placeholder="First Name"
-              className="p-3 border border-gray-500  rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]  "
+              className="p-3 border border-gray-500 font-poppins  rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]  "
               required
               value={formData.firstName}
               onChange={handleChange}
@@ -92,7 +99,7 @@ const PersonalDetails = ({ onNext }) => {
 
           {/* Middle Name */}
           <div className="flex flex-col mb-4">
-            <label htmlFor="middleName" className="text-gray-700 mb-1">
+            <label htmlFor="middleName" className="text-gray-600 font-poppins font-semibold mb-2">
               Middle Name <span className="text-[#F2B807]">*</span>
             </label>
             <input
@@ -100,7 +107,7 @@ const PersonalDetails = ({ onNext }) => {
               id="middleName"
               name="middleName"
               placeholder="Middle Name"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
+              className="p-3 border border-gray-500 rounded-lg font-poppins focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
               required
               value={formData.middleName}
               onChange={handleChange}
@@ -109,7 +116,7 @@ const PersonalDetails = ({ onNext }) => {
 
           {/* Last Name */}
           <div className="flex flex-col mb-4">
-            <label htmlFor="lastName" className="text-gray-700 mb-1">
+            <label htmlFor="lastName" className="text-gray-600 font-poppins font-semibold mb-2">
               Last Name <span className="text-[#F2B807]">*</span>
             </label>
             <input
@@ -117,7 +124,7 @@ const PersonalDetails = ({ onNext }) => {
               id="lastName"
               name="lastName"
               placeholder="Last Name"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
+              className="p-3 border border-gray-500 rounded-lg font-poppins focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
               required
               value={formData.lastName}
               onChange={handleChange}
@@ -126,18 +133,18 @@ const PersonalDetails = ({ onNext }) => {
 
           {/* Gender */}
           <div className="flex flex-col mb-4">
-            <label htmlFor="gender" className="text-gray-700 mb-1">
+            <label htmlFor="gender" className="text-gray-600 font-poppins font-semibold mb-2">
               Gender <span className="text-[#F2B807]">*</span>
             </label>
             <div className="relative">
               <div
-                className="p-3 bg-gray-200 border border-gray-500 rounded-lg md:w-full w-[80%] cursor-pointer"
+                className="p-3 bg-gray-200 border border-gray-500 font-poppins rounded-lg md:w-full w-[80%] cursor-pointer"
                 onClick={() => setIsGenderOpen(!isGenderOpen)}
               >
                 <span>{formData.gender || 'Select'}</span>
               </div>
               {isGenderOpen && (
-                <ul className="absolute z-10 mt-1 md:w-full w-[80%] bg-white border border-gray-300 rounded-lg shadow-lg ">
+                <ul className="absolute z-10 mt-1 md:w-full w-[80%] font-poppins bg-white border border-gray-300 rounded-lg shadow-lg ">
                   {genderOptions.map((option) => (
                     <li
                       key={option}
@@ -154,18 +161,18 @@ const PersonalDetails = ({ onNext }) => {
 
           {/* Marital Status */}
           <div className="flex flex-col mb-4">
-            <label htmlFor="marital" className="text-gray-700 mb-1">
+            <label htmlFor="marital" className="text-gray-600 font-poppins font-semibold mb-2">
               Marital Status <span className="text-[#F2B807]">*</span>
             </label>
             <div className="relative">
               <div
-                className="p-3 bg-gray-200 border border-gray-500 md:w-full w-[80%] rounded-lg cursor-pointer"
+                className="p-3 bg-gray-200 border border-gray-500 md:w-full w-[80%] font-poppins rounded-lg cursor-pointer"
                 onClick={() => setIsMaritalOpen(!isMaritalOpen)}
               >
                 <span>{formData.marital || 'Select'}</span>
               </div>
               {isMaritalOpen && (
-                <ul className="absolute z-10 mt-1 md:w-full w-[80%] bg-white border border-gray-300 rounded-lg shadow-lg">
+                <ul className="absolute z-10 mt-1 md:w-full w-[80%] bg-white border font-poppins border-gray-300 rounded-lg shadow-lg">
                   {maritalOptions.map((option) => (
                     <li
                       key={option}
@@ -182,23 +189,24 @@ const PersonalDetails = ({ onNext }) => {
 
           {/* Date of Birth */}
           <div className="flex flex-col mb-4">
-            <label htmlFor="dob" className="text-gray-700 mb-1">
+            <label htmlFor="dob" className="text-gray-600 font-poppins font-semibold mb-2">
               Date of Birth <span className="text-[#F2B807]">*</span>
             </label>
             <input
               type="date"
               id="dob"
               name="dob"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] font-poppins focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
               required
               value={formData.dob}
               onChange={handleChange}
+              max={getYesterdayDate()}
             />
           </div>
 
           {/* National ID/Passport */}
           <div className="flex flex-col mb-4">
-            <label htmlFor="idNumber" className="text-gray-700 mb-1">
+            <label htmlFor="idNumber" className="text-gray-600 font-poppins font-semibold mb-2">
               National ID/Passport <span className="text-[#F2B807]">*</span>
             </label>
             <input
@@ -206,7 +214,7 @@ const PersonalDetails = ({ onNext }) => {
               id="idNumber"
               name="idNumber"
               placeholder="National ID/Passport"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] font-poppins focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
               required
               value={formData.idNumber}
               onChange={handleChange}
@@ -215,7 +223,7 @@ const PersonalDetails = ({ onNext }) => {
 
           {/* KRA PIN */}
           <div className="flex flex-col mb-4">
-            <label htmlFor="kraPin" className="text-gray-700 mb-1">
+            <label htmlFor="kraPin" className="text-gray-600 font-poppins font-semibold mb-2">
               KRA PIN <span className="text-[#F2B807]">*</span>
             </label>
             <input
@@ -232,7 +240,7 @@ const PersonalDetails = ({ onNext }) => {
 
           {/* Valid Address */}
           <div className="flex flex-col mb-4">
-            <label htmlFor="validAddress" className="text-gray-700 mb-1">
+            <label htmlFor="validAddress" className="ttext-gray-600 font-poppins font-semibold mb-2">
               Valid Address <span className="text-[#F2B807]">*</span>
             </label>
             <input
@@ -240,7 +248,7 @@ const PersonalDetails = ({ onNext }) => {
               id="validAddress"
               name="validAddress"
               placeholder="Valid Address"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] font-poppins focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
               required
               value={formData.validAddress}
               onChange={handleChange}
@@ -249,7 +257,7 @@ const PersonalDetails = ({ onNext }) => {
 
           {/* Postal Code */}
           <div className="flex flex-col mb-4">
-            <label htmlFor="postalCode" className="text-gray-700 mb-1">
+            <label htmlFor="postalCode" className="text-gray-600 font-poppins font-semibold mb-2">
               Postal Code <span className="text-[#F2B807]">*</span>
             </label>
             <input
@@ -257,7 +265,7 @@ const PersonalDetails = ({ onNext }) => {
               id="postalCode"
               name="postalCode"
               placeholder="Postal Code"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] font-poppins focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
               required
               value={formData.postalCode}
               onChange={handleChange}
@@ -266,7 +274,7 @@ const PersonalDetails = ({ onNext }) => {
 
           {/* City */}
           <div className="flex flex-col mb-4">
-            <label htmlFor="city" className="text-gray-700 mb-1">
+            <label htmlFor="city" className="text-gray-600 font-poppins font-semibold mb-2">
               City <span className="text-[#F2B807]">*</span>
             </label>
             <input
@@ -274,7 +282,7 @@ const PersonalDetails = ({ onNext }) => {
               id="city"
               name="city"
               placeholder="City"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] font-poppins focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
               required
               value={formData.city}
               onChange={handleChange}
@@ -283,7 +291,7 @@ const PersonalDetails = ({ onNext }) => {
 
           {/* County */}
           <div className="flex flex-col mb-4">
-            <label htmlFor="county" className="text-gray-700 mb-1">
+            <label htmlFor="county" className="text-gray-600 font-poppins font-semibold mb-2">
               County <span className="text-[#F2B807]">*</span>
             </label>
             <input
@@ -291,7 +299,7 @@ const PersonalDetails = ({ onNext }) => {
               id="county"
               name="county"
               placeholder="County"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] font-poppins focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
               required
               value={formData.county}
               onChange={handleChange}
@@ -300,7 +308,7 @@ const PersonalDetails = ({ onNext }) => {
 
           {/* Country */}
           <div className="flex flex-col mb-4">
-            <label htmlFor="country" className="text-gray-700 mb-1">
+            <label htmlFor="country" className="text-gray-600 font-poppins font-semibold mb-2">
               Country <span className="text-[#F2B807]">*</span>
             </label>
             <input
@@ -308,7 +316,7 @@ const PersonalDetails = ({ onNext }) => {
               id="country"
               name="country"
               placeholder="Country"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] font-poppins focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
               required
               value={formData.country}
               onChange={handleChange}
@@ -317,7 +325,7 @@ const PersonalDetails = ({ onNext }) => {
 
           {/* Phone Number */}
           <div className="flex flex-col mb-4">
-            <label htmlFor="phoneNumber" className="text-gray-700 mb-1">
+            <label htmlFor="phoneNumber" className="text-gray-600 font-poppins font-semibold mb-2">
               Phone Number <span className="text-[#F2B807]">*</span>
             </label>
             <input
@@ -325,7 +333,7 @@ const PersonalDetails = ({ onNext }) => {
               id="phoneNumber"
               name="phoneNumber"
               placeholder="Phone Number"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] font-poppins focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
               required
               value={formData.phoneNumber}
               onChange={handleChange}
@@ -334,7 +342,7 @@ const PersonalDetails = ({ onNext }) => {
 
           {/* Email Address */}
           <div className="flex flex-col mb-4">
-            <label htmlFor="emailAddress" className="text-gray-700 mb-1">
+            <label htmlFor="emailAddress" className="text-gray-600 font-poppins font-semibold mb-2">
               Email Address <span className="text-[#F2B807]">*</span>
             </label>
             <input
@@ -342,7 +350,7 @@ const PersonalDetails = ({ onNext }) => {
               id="emailAddress"
               name="emailAddress"
               placeholder="Email Address"
-              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
+              className="p-3 border border-gray-500 rounded-lg focus:border-[#F2B807] font-poppins focus:ring-2 focus:ring-[#F2B807] outline-none md:w-full w-[80%]"
               required
               value={formData.emailAddress}
               onChange={handleChange}
@@ -352,18 +360,18 @@ const PersonalDetails = ({ onNext }) => {
 
         {/* Housing Details */}
         <div className="flex flex-col mb-4">
-          <label htmlFor="housingDetails" className="text-gray-700 mb-1">
+          <label htmlFor="housingDetails" className="text-gray-600 font-poppins font-semibold mb-2">
             Housing Details <span className="text-[#F2B807]">*</span>
           </label>
           <div className="relative">
             <div
-      className="p-3 bg-gray-200 border border-gray-500 rounded-lg cursor-pointer w-[40%]  md:w-[320px]"
+      className="p-3 bg-gray-200 border border-gray-500 rounded-lg  font-poppins cursor-pointer w-[40%]  md:w-[320px]"
       onClick={() => setIsHousingOpen(!isHousingOpen)}
             >
               <span>{formData.housingDetails || 'Select'}</span>
             </div>
             {isHousingOpen && (
-      <ul className="relative z-10 mt-1 md:w-[320px] w-[40%] bg-white border border-gray-300 rounded-lg shadow-lg">
+      <ul className="relative z-10 mt-1 md:w-[320px] w-[40%] bg-white border font-poppins border-gray-300 rounded-lg shadow-lg">
                 {housingOptions.map((option) => (
                   <li
                     key={option}
@@ -380,9 +388,9 @@ const PersonalDetails = ({ onNext }) => {
      <div className=''>
         <button
           type="submit"
-          className="w-auto px-8 bg-[#F2B807] text-white py-3 text-center rounded-lg hover:bg-yellow-600 transition-colors"
+          className="w-auto px-8 bg-[#F2B807] text-white py-3 text-center rounded-lg font-poppins hover:bg-yellow-600 transition-colors"
         >
-          Save and Continue
+          Save & Continue
         </button>
         </div>
       </form>

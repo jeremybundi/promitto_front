@@ -60,7 +60,7 @@ const handleVerifyOtp = async () => {
         navigate('/public/view');  
       }
 
-      console.log(response.data);
+      //console.log(response.data);
     } else {
       setErrorMessage(response.data.message || 'OTP verification failed');
     }
@@ -72,10 +72,10 @@ const handleVerifyOtp = async () => {
 
   return (
     <div className="flex items-center justify-center">
-      <div className="flex bg-white rounded-2xl mt-6 shadow-lg mb-36 md:mb-0 overflow-hidden w-3/4 max-w-4xl">
+      <div className="flex bg-white rounded-2xl mt-6 shadow-lg mb-36 md:mb-16 overflow-hidden w-3/4 max-w-4xl">
         {/* Left Side - Form */}
         <div className="md:p-16 p-4 w-full ">
-          <h2 className="text-lg  font-medium text-gray-600 mb-4">Login</h2>
+          <h2 className="md:text-2xl text-lg font-poppins  font-semibold text-[#F2B807] mb-4">Login</h2>
 
           {/* Email input form */}
           {!showOtpForm ? (
@@ -85,7 +85,7 @@ const handleVerifyOtp = async () => {
                 id="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="mt-1 p-2 md:w-3/4 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-300"
+                className="mt-1 p-2 md:w-3/4 w-full border  font-poppins rounded-md focus:outline-none focus:ring-2 focus:ring-yellow-300"
                 placeholder="Enter your email"
               />
               <div className="flex mt-4">
@@ -113,14 +113,14 @@ const handleVerifyOtp = async () => {
                 value={otp}
                 onChange={(e) => setOtp(e.target.value)}
                 className="mt-1 p-2 w-full border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
-                placeholder="Enter OTP"
+                placeholder="Enter the 6 digit code"
               />
               <div className="flex mt-4">
                 <button
                   onClick={handleVerifyOtp}
-                  className="md:px-16 px-4 py-1 bg-[#F2B807] font-bold text-black rounded-xl text-xs hover:bg-yellow-300 transition-colors"
+                  className="md:px-16 px-3 py-2 bg-[#F2B807] font-bold text-black rounded-lg text-sm hover:bg-yellow-300 transition-colors"
                 >
-                  Verify OTP
+                  Submit
                 </button>
               </div>
             </>
