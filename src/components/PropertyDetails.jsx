@@ -187,14 +187,14 @@ const PropertyDetails = ({ onNext, onPrevious }) => {
         <button
           type="button"
           onClick={handleBack}
-          className="bg-gray-300  font-bold py-2 px-6 text-sm rounded "
+          className="bg-gray-300  font-medium py-2 md:px-6 px-2 text-sm rounded "
         >
           Previous
         </button>
         <button
           type="button"
           onClick={handleSave}
-          className="text-sm bg-[#F2B807] rounded font-bold py-2 px-6 text-white"
+          className="text-sm bg-[#F2B807] rounded font-medium py-2 md:px-6 px-2 text-white"
         >
           Save & Continue
         </button>

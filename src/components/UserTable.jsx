@@ -77,12 +77,12 @@ const UserTable = () => {
   return (
     <div className="p-6 mb-4">
         <div className='flex'>
-      <h1 className="text-xl text-yellow-500 font-semibold mb-4">Users List</h1>
+      <h1 className="text-xl text-yellow-500 font-poppins font-semibold mb-4">Users List</h1>
       <button
           onClick={() => navigate("/admin")}
-          className="bg-yellow-700 hover:bg-yelow-600 font-semibold text-white md:px-4 px-2 md:py-2 text-xs md:text-sm  ml-auto mb-4 rounded-lg shadow-md"
+          className="bg-yellow-700 hover:bg-yelow-600 font-poppins font-semibold text-white md:px-4 px-2 md:py-2 text-xs md:text-sm  ml-auto mb-4 rounded-lg shadow-md"
         >
-          Go to Dashboard
+          Dashboard
         </button>
         </div>
       
@@ -101,22 +101,22 @@ const UserTable = () => {
         <table className="min-w-full bg-white border rounded border-gray-200">
           <thead>
             <tr>
-              <th className="py-3 px-4 border-b border-gray-200 bg-gray-50 text-left text-yellow-700 text-sm font-semibold">
+              <th className="py-3 px-4 border-b border-gray-200 ffont-manrope bg-gray-50 text-left text-yellow-700 text-sm font-semibold">
                 ID
               </th>
-              <th className="py-3 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-yellow-700">
+              <th className="py-3 px-4 border-b border-gray-200 font-manrope bg-gray-50 text-left text-sm font-semibold text-yellow-700">
                 Name
               </th>
-              <th className="py-3 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-yellow-700">
+              <th className="py-3 px-4 border-b border-gray-200 font-manrope bg-gray-50 text-left text-sm font-semibold text-yellow-700">
                 Role
               </th>
-              <th className="py-3 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-yellow-700">
+              <th className="py-3 px-4 border-b border-gray-200 font-manrope bg-gray-50 text-left text-sm font-semibold text-yellow-700">
                 Email
               </th>
-              <th className="py-3 px-4 border-b border-gray-200 bg-gray-50 text-left text-sm font-semibold text-yellow-700">
+              <th className="py-3 px-4 border-b border-gray-200 font-manrope bg-gray-50 text-left text-sm font-semibold text-yellow-700">
                 Created At
               </th>
-              <th className="py-3 px-4 border-b border-gray-200 bg-gray-50 text-center text-sm font-semibold text-yellow-700">
+              <th className="py-3 px-4 border-b border-gray-200 font-manrope bg-gray-50 text-center text-sm font-semibold text-yellow-700">
                 Delete
               </th>
             </tr>
@@ -129,12 +129,12 @@ const UserTable = () => {
                   index % 2 === 0 ? 'bg-gray-100' : 'bg-white'
                 }`}
               >
-                <td className="py-2 px-4 border-b text-sm border-gray-200 text-gray-700">{user.id}</td>
-                <td className="py-2 px-4 border-b text-sm border-gray-200 text-gray-700">{user.name}</td>
-                <td className="py-2 px-4 border-b text-sm border-gray-200 text-gray-700">{user.role}</td>
-                <td className="py-2 px-4 border-b text-sm border-gray-200 text-gray-900">{user.email}</td>
-                <td className="py-2 px-4 border-b text-sm border-gray-200 text-gray-700">{user.created_at}</td>
-                <td className="py-2 px-4 border-b text-sm border-gray-200 text-center">
+                <td className="py-2 px-4 border-b text-sm font-poppins border-gray-200 text-gray-700">{user.id}</td>
+                <td className="py-2 px-4 border-b text-sm font-poppins border-gray-200 text-gray-700">{user.name}</td>
+                <td className="py-2 px-4 border-b text-sm font-poppins border-gray-200 text-gray-700">{user.role}</td>
+                <td className="py-2 px-4 border-b text-sm font-poppins border-gray-200 text-gray-900">{user.email}</td>
+                <td className="py-2 px-4 border-b text-sm font-poppins border-gray-200 text-gray-700">{user.created_at}</td>
+                <td className="py-2 px-4 border-b text-sm font-poppins border-gray-200 text-center">
                   <button
                     onClick={() => handleDeleteClick(user.id)}
                     className="text-red-500 hover:text-red-700"

@@ -91,11 +91,11 @@ const handleVerifyOtp = async () => {
               <div className="flex mt-4">
                 <button
                   onClick={handleSendOtp}
-                  className="md:px-6 px-2 py-1 md:py-3 bg-[#F2B807]  font-bold text-black rounded-md md:text-sm text-[10px] hover:bg-yellow-400 transition-colors"
+                  className="md:px-8 px-2 py-1 md:py-1 bg-[#F2B807]  font-bold text-black rounded-md md:text-xs text-[10px] hover:bg-yellow-400 transition-colors"
                 >
                   Get code
                 </button>
-                <p className="md:text-sm text-[9px] mt-2  md:ml-4 ml-2">
+                <p className="md:text-sm text-[9px] mt-2  md:ml-3 ml-2">
                     Do not have an account?{" "}
                     <a href="/register" className="text-[#F2B807] underline">
                       Register

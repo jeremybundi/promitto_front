@@ -40,7 +40,7 @@ const Navbar = () => {
           </div>
 
           {/* Navigation links for large screens */}
-          <div className="hidden md:flex md:ml-24 flex-grow font-lufga  justify-center space-x-14">
+          <div className="hidden md:flex md:ml-24 flex-grow font-lufga  justify-center space-x-10">
             {[
               { label: 'Home', path: 'https://promittoltd.com/' },
               { label: 'About Us', path: 'https://promittoltd.com/about-us' },
@@ -51,7 +51,7 @@ const Navbar = () => {
               <Link
                 key={path}
                 to={path}
-                className={`relative font-lufga text-[16px]  transition duration-200 ${
+                className={`relative font-lufga font-medium text-[16px]  transition duration-200 ${
                   activeLink === path ? 'text-yellow-500' : ' text-gray-400 hover:text-yellow-500'
                 }`}
                 onClick={() => handleLinkClick(path)}
@@ -82,19 +82,18 @@ const Navbar = () => {
               <>
                 <Link
                   to="/login"
-                  className="bg-gray-200 text-gray-600  text-xs py-2 px-6 font-lufga shadow-lg rounded flex items-center hover:bg-gray-100 transition duration-200"
+                  className="bg-gray-200 text-gray-600  text-xs md:text-[16px] font-poppins py-2 md:py-3 px-6 font-lufga shadow-lg rounded flex items-center hover:bg-gray-100 transition duration-200"
                   onClick={() => handleLinkClick('/login')}
                 >
                   Login
                 </Link>
                 <Link
                   to="/register"
-                  className="bg-yellow-500 text-gray-700 text-xs shadow-lg font-semibold font-lufga py-2 px-4 rounded flex items-center hover:bg-yellow-600 transition duration-200"
+                  className="bg-yellow-500  text-xs md:text-[16px] text-white shadow-lg  font-lufga py-2 md:py-3 px-4 rounded flex items-center hover:bg-yellow-600 hover:text-white transition duration-200"
                   onClick={() => handleLinkClick('/register')}
                 >
                   Create Account
                   <span>
-                  <img src={dropdownIcon} alt="Dropdown Icon" className="w-4  ml-2 h-4" />
 
                   </span>
                 </Link>
@@ -129,18 +128,20 @@ const Navbar = () => {
                   {label}
                 </Link>
               ))}
+
+              <div className='flex justify-center mb-3 font-poppins'>
                       {/* Login or Logout button for small screens */}
                       {token ? (
                 <button
                   onClick={handleLogout}
-                  className="block w-full text-left text-gray-800 py-2 hover:text-yellow-500 transition duration-200"
+                  className="block bg-gray-300 font-medium mr-8 px-6 text-sm rounded text-gray-800 py-2 hover:text-yellow-500 transition duration-200"
                 >
                   Logout
                 </button>
               ) : (
                 <Link
                   to="/login"
-                  className="block text-gray-800 py-2 hover:text-yellow-500 transition duration-200"
+                  className="block text-gray-600 text-sm mr-8 font-semibold rounded  bg-gray-300 px-6 py-2  transition duration-200"
                   onClick={() => handleLinkClick('/login')}
                 >
                   Login
@@ -150,11 +151,12 @@ const Navbar = () => {
               {/* Create Account (always visible) */}
               <Link
                 to="/register"
-                className="block text-gray-800 py-2 hover:text-yellow-500 transition duration-200"
+                className="block text-white font-medium bg-yellow-900 py-2 px-2 rounded transition duration-200"
                 onClick={() => handleLinkClick('/register')}
               >
                 Create Account
               </Link>
+              </div>
              
 
             </div>

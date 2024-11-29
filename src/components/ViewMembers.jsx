@@ -227,14 +227,14 @@ const ViewMembers = () => {
   
 
   return (
-    <div className="p-4 font-poppins relative"> {/* Set relative position on the parent */}
+    <div className="p-4  relative"> {/* Set relative position on the parent */}
     <div className='flex'>
-      <h1 className=" text-xl text-yellow-500 text-center  mb-4">View Membership Information</h1>
+      <h1 className=" md:text-xl text-lg font-semibold text-yellow-500 font-poppins text-center  mb-4">Membership Information</h1>
       <button
           onClick={() => navigate("/admin")}
-          className="bg-yellow-700 hover:bg-yelow-600 text-white md:px-4 px-2 md:py-2 ml-auto mb-1 rounded-lg shadow-md"
+          className="bg-yellow-700 hover:bg-yelow-600 font-lufga text-white md:px-4 px-2 md:py-2 ml-auto mb-1 text-xs md:text-sm py-0 rounded-lg shadow-md"
         >
-          Go to Dashboard
+          Dashboard
         </button>
         </div>
      
@@ -242,17 +242,17 @@ const ViewMembers = () => {
         <table className="md:min-w-full w-auto  bg-white shadow-md rounded-lg overflow-hidden">
           <thead>
             <tr className="bg-[#FFFCF2]">
-              <th className="md:px-6 px-1 md:py-3 py-1 ml-1 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">No.</th>
-              <th className="md:px-6 px-1 md:py-3 py-1  ml-1 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Full Name</th>
-              <th className="md:px-6 px-1 md:py-3 py-1  ml-1 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">DOB</th>
-              <th className="md:px-6 px-1 md:py-3 py-1 ml-1  text-left text-xs font-bold text-gray-500 uppercase tracking-wider">ID / Passport No.</th>
-              <th className="md:px-6 px-1 md:py-3 py-1 ml-1 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">KRA PIN No.</th>
-              <th className="md:px-6 px-1 md:py-3 py-1 ml-1 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">County</th>
-              <th className="md:px-6 px-1 md:py-3 py-1 ml-1 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Phone Number</th>
-              <th className="md:px-6 px-1 md:py-3 py-1 ml-1 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Project Type</th>
-              <th className="md:px-6 px-1 md:py-3 py-1 ml-1 text-center text-xs font-bold text-[#F2B807] uppercase tracking-wider">Update</th>
-              <th className="md:px-6 px-1 md:py-3 py-1 ml-1 text-center text-xs font-bold text-red-600 uppercase tracking-wider">Delete</th>
-              <th className="md:px-6 px-1 md:py-3 py-1 ml-1 text-center text-xs font-bold text-green-600 uppercase tracking-wider">Download</th>
+              <th className="md:px-6 px-1 md:py-3 py-1 ml-1 text-left text-xs font-lufga font-bold text-gray-500 uppercase tracking-wider">No.</th>
+              <th className="md:px-6 px-1 md:py-3 py-1  ml-1 text-left text-xs font-lufga font-bold text-gray-500 uppercase tracking-wider">Full Name</th>
+              <th className="md:px-6 px-1 md:py-3 py-1  ml-1 text-left text-xs font-lufga font-bold text-gray-500 uppercase tracking-wider">DOB</th>
+              <th className="md:px-6 px-1 md:py-3 py-1 ml-1  text-left text-xs font-lufga font-bold text-gray-500 uppercase tracking-wider">ID / Passport No.</th>
+              <th className="md:px-6 px-1 md:py-3 py-1 ml-1 text-left text-xs font-lufga font-bold text-gray-500 uppercase tracking-wider">KRA PIN No.</th>
+              <th className="md:px-6 px-1 md:py-3 py-1 ml-1 text-left text-xs font-lufga font-bold text-gray-500 uppercase tracking-wider">County</th>
+              <th className="md:px-6 px-1 md:py-3 py-1 ml-1 text-left text-xs font-lufga font-bold text-gray-500 uppercase tracking-wider">Phone Number</th>
+              <th className="md:px-6 px-1 md:py-3 py-1 ml-1 text-left text-xs font-lufga font-bold text-gray-500 uppercase tracking-wider">Project Type</th>
+              <th className="md:px-6 px-1 md:py-3 py-1 ml-1 text-center text-xs font-lufga font-bold text-[#F2B807] uppercase tracking-wider">Update</th>
+              <th className="md:px-6 px-1 md:py-3 py-1 ml-1 text-center text-xs font-lufga font-bold text-red-600 uppercase tracking-wider">Delete</th>
+              <th className="md:px-6 px-1 md:py-3 py-1 ml-1 text-center text-xs font-lufga font-bold text-green-600 uppercase tracking-wider">Download</th>
             </tr>      
           </thead>
           <tbody>
@@ -269,28 +269,28 @@ const ViewMembers = () => {
                   <td className="md:px-6 text-center md:py-4 whitespace-nowrap md:text-sm text-xs font-medium text-gray-900">
                     {(currentPage - 1) * recordsPerPage + index + 1}
                   </td>
-                  <td className="md:px-6 md:py-4  ml-2 whitespace-nowrap md:text-sm text-xs font-medium text-gray-900">
+                  <td className="md:px-6 md:py-4  ml-2 whitespace-nowrap font-poppins md:text-sm text-xs font-medium text-gray-900">
                     {fullName}
                   </td>
-                  <td className="md:px-6 md:py-4 ml-2 whitespace-nowrap md:text-sm text-xs text-gray-500">
+                  <td className="md:px-6 md:py-4 ml-2 whitespace-nowrap font-poppins md:text-sm text-xs text-gray-500">
                     {personal_details.dob}
                   </td>
-                  <td className="md:px-6 md:py-4 ml-2 whitespace-nowrap md:text-sm text-xs text-gray-500">
+                  <td className="md:px-6 md:py-4 ml-2 whitespace-nowrap font-poppins md:text-sm text-xs text-gray-500">
                     {personal_details.id_number}
                   </td>
-                  <td className="md:px-6 md:py-4 ml-2 whitespace-nowrap md:text-sm text-xs text-gray-500">
+                  <td className="md:px-6 md:py-4 ml-2 whitespace-nowrap font-poppins md:text-sm text-xs text-gray-500">
                     {personal_details.kra_pin}
                   </td>
-                  <td className="md:px-6 md:py-4 ml-2 whitespace-nowrap md:text-sm text-xs text-gray-500">
+                  <td className="md:px-6 md:py-4 ml-2 whitespace-nowrap font-poppins md:text-sm text-xs text-gray-500">
                     {personal_details.county}
                   </td>
-                  <td className="md:px-6 md:py-4 ml-2 whitespace-nowrap md:text-sm text-xs text-gray-500">
+                  <td className="md:px-6 md:py-4 ml-2 whitespace-nowrap font-poppins md:text-sm text-xs text-gray-500">
                     {personal_details.phone_number}
                   </td>
-                  <td className="md:px-6 md:py-4 ml-2 whitespace-nowrap md:text-sm text-xs text-gray-500">
+                  <td className="md:px-6 md:py-4 ml-2 whitespace-nowrap font-poppins md:text-sm text-xs text-gray-500">
                     {projectType}
                   </td>
-                  <td className="md:px-6 md:py-4 ml-2 whitespace-nowrap text-center md:text-sm  text-xs font-medium">
+                  <td className="md:px-6 md:py-4 ml-2 whitespace-nowrap font-poppins text-center md:text-sm  text-xs font-medium">
                     <button
                       onClick={() => handleEditClick(member)}
                       className="text-[#F2B807] hover:text-[#F2B807]"

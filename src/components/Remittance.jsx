@@ -106,8 +106,8 @@ const Remittance = ({ onNext, onPrevious }) => {
             <div className="h-12 w-52 border border-[#53C064] py-7 bg-[#F1FCFB] rounded-md flex items-center justify-center">
               <img src={userIcon} alt="User Icon" className="h-6 w-6" />
               <div className='ml-2 font-semibold text-xs text-start'>
-                <p className='text-[#3AB54B]'>Account Number</p>
-                <p className='text-xs'> ID/Passport Number</p>
+                <p className='text-[#3AB54B] text-xs '>Account No. </p>
+                <p className='text-xs'> ID/Passport No.</p>
               </div>
             </div>
           </div>
@@ -184,12 +184,12 @@ const Remittance = ({ onNext, onPrevious }) => {
             
       )} 
       <div className='flex md:mx-56 md:space-x-[200px] justify-between'>
-        <button class=" bg-gray-200 text-sm  mt-8  font-bold py-2 px-4 rounded flex justify-center  "
+        <button class=" bg-gray-200 text-sm  mt-8  font-medium  py-2 md:px-4 px-2 rounded flex justify-center  "
                            onClick={onPrevious}
              >
                 Previous
             </button>
-            <button class= " text-sm  bg-[#F2B807] mt-8 rounded font-bold py-2 px-4  flex justify-center  text-white"
+            <button class= " text-sm  bg-[#F2B807] mt-8 rounded font-medium py-2 md:px-4 px-2 flex justify-center  text-white"
                            onClick={handleConfirmPayment}
              >
                 Save & Continue

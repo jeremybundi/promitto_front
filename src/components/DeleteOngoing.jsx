@@ -56,12 +56,12 @@ const DeleteOngoing = () => {
   return (
     <div className="container mx-auto p-4">
         <div className="flex">
-      <h1 className="text-xl text-yellow-500 font-bold mb-4">Ongoing Houses</h1>
+      <h1 className="text-xl text-yellow-500 font-manrope font-bold mb-4">Ongoing Houses</h1>
       <button
           onClick={() => navigate("/admin")}
-          className="bg-yellow-700 hover:bg-yelow-600 text-white md:px-4 px-2 md:py-2 ml-auto mb-1 rounded-lg shadow-md"
+          className="bg-yellow-700 hover:bg-yelow-600 font-manrope text-white md:px-4 px-2 md:py-2 ml-auto mb-1 rounded-lg shadow-md"
         >
-          Go to Dashboard
+          Dashboard
         </button>
         </div>
       <div className="space-y-6">
@@ -76,22 +76,22 @@ const DeleteOngoing = () => {
               <img
                 src={house.image_url}
                 alt={house.description}
-                className="w-full h-32 object-cover rounded-lg shadow-sm mb-2"
+                className="w-full h-32 object-cover font-poppins rounded-lg shadow-sm mb-2"
               />
              
             </div>
 
             {/* Location */}
             <div className="md:ml-4">
-              <p className="text-gray-800 text-sm mb-1"><span className="font-semibold">Location:</span> {house.location}</p>
-              <h2 className="text-sm mb-1  ">
+              <p className="text-gray-800 text-sm font-poppins  mb-1"><span className="font-semibold">Location:</span> {house.location}</p>
+              <h2 className="font-poppins  text-sm mb-1  ">
                <span className="text-gray-800 font-semibold">Description:</span>  {house.description}
               </h2>
             </div>
 
             {/* Created At */}
             <div className="md:text-center">
-              <p className="text-gray-600 text-sm">
+              <p className="text-gray-600 font-poppins  text-sm">
                 <span className="font-semibold" >Created At: </span>{new Date(house.created_at).toLocaleDateString()}
               </p>
             </div>

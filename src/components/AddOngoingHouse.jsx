@@ -76,12 +76,12 @@ const AddOngoingHouse = () => {
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-md">
         <div className='flex'>
-      <h2 className="text-xl font-semibold text-yellow-500 mb-4">Add Ongoing Projects</h2>
+      <h2 className="text-xl font-semibold text-yellow-500 font-poppins mb-4">Add Ongoing Projects</h2>
       <button
           onClick={() => navigate("/admin")}
-          className="bg-yellow-700 hover:bg-yelow-600 text-white md:px-4 px-2 md:py-2 ml-auto mb-1 rounded-lg shadow-md"
+          className="bg-yellow-700 hover:bg-yelow-600 font-poppins text-white md:px-4 px-2 md:py-2 ml-auto mb-1 rounded-lg shadow-md"
         >
-          Go to Dashboard
+           Dashboard
         </button>
         </div>
 
@@ -91,7 +91,7 @@ const AddOngoingHouse = () => {
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Description */}
         <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="description" className="block text-sm font-poppins font-medium text-gray-700">
             Description
           </label>
           <textarea
@@ -100,13 +100,13 @@ const AddOngoingHouse = () => {
             value={formData.description}
             onChange={handleChange}
             rows="3"
-            className="mt-1 block w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-300"
+            className="mt-1 block w-full px-4 py-2 font-poppins bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-300"
           />
         </div>
 
         {/* Location */}
         <div>
-          <label htmlFor="location" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="location" className="block text-sm  font-poppins font-medium text-gray-700">
             Location
           </label>
           <input
@@ -115,13 +115,13 @@ const AddOngoingHouse = () => {
             name="location"
             value={formData.location}
             onChange={handleChange}
-            className="mt-1 block w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-300"
+            className="mt-1 block w-full px-4 py-2 bg-gray-100 border font-poppins border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-300"
           />
         </div>
 
         {/* Image Upload */}
         <div>
-          <label htmlFor="image" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="image" className="block text-sm font-poppins font-medium text-gray-700">
             Image
           </label>
           <input
@@ -135,7 +135,7 @@ const AddOngoingHouse = () => {
 
         <button
           type="submit"
-          className="w-full py-2 px-4 bg-yellow-500 text-white font-semibold rounded-lg hover:bg-yellow-400 transition duration-300"
+          className="w-full py-2 px-4 bg-yellow-500 text-white  font-poppins font-semibold rounded-lg hover:bg-yellow-400 transition duration-300"
         >
           Submit
         </button>

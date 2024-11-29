@@ -114,7 +114,7 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
           )
         ))}
 
-        <div className="flex md:mt-3 mt-5 md:mb-0 mb-2 flex-col">
+        <div className="flex md:mt-3 mt-1 md:mb-0 mb-2 flex-col">
           <label
             htmlFor="termsOfEmployment"
             className="font-semibold md:text-sm text-xs text-gray-600 md:mb-"
@@ -171,13 +171,13 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
 
       <div className="flex justify-between md:mx-48 md:space-x-[350px]">
         <button
-          className="bg-gray-300 text-sm mt-8 font-bold py-2 px-4 rounded "
+          className="bg-gray-300 text-sm mt-8 font-medium py-2 px-4 rounded "
           onClick={handlePrevious}
         >
           Previous
         </button>
         <button
-          className="bg-[#F2B807] text-sm mt-8 font-bold py-2 px-4 rounded text-white"
+          className="bg-[#F2B807] text-sm mt-8 font-medium py-2 px-4 rounded text-white"
           onClick={handleNext}
         >
           Save & Continue

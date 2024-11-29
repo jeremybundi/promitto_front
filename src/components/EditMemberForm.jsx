@@ -140,7 +140,7 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
                 name={name}
                 value={formData.personalDetails[name] || ''}
                 onChange={handleChange}
-                className="border p-2 rounded mb-2 w-auto"
+                className="border p-2 rounded mb-2 w-[95%] md:w-auto"
               />
             </div>
           ))}
@@ -149,7 +149,7 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
         {/* Next of Kin */}
         <h3 className="text-xs text-[#F2B807] font-bold mb-2">Next of Kin</h3>
         {formData.nextOfKin.map((kin, index) => (
-          <div key={index} className="grid grid-cols-2 ml-2 md:mb-4 md:flex md:space-x-24 border md:p-4 rounded">
+        <div className="grid md:grid-cols-5 grid-cols-2  border p-4 rounded text-xs gap-4 mb-4">
             {[
               { name: 'first_name', label: 'First Name' },
               { name: 'middle_name', label: 'Middle Name' },
@@ -167,8 +167,8 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
                   name={name}
                   value={kin[name] || ''}
                   onChange={(e) => handleNextOfKinChange(index, e)}
-                  className="border p-2 rounded mb-2  text-xs w-auto"
-                />
+                  className="border p-2 rounded mb-2 w-[95%] md:w-auto"
+                  />
               </div>
             ))}
           </div>
@@ -197,8 +197,8 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
                   name={name}
                   value={employment[name] || ''}
                   onChange={(e) => handleEmploymentChange(index, e)}
-                  className="border p-2 rounded mb-2 w-auto"
-                />
+                  className="border p-2 rounded mb-2 w-[95%] md:w-auto"
+                  />
               </div>
             ))}
           </div>
@@ -217,7 +217,7 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
               { name: 'email', label: 'Business Email' },
 
 
-              {name:'date_of_registration', label: 'Date of Registration'},
+              {name:'date_of_registration', label: 'Date of Registration' },
 
 
               { name: 'nature_of_business', label: 'Business Type' }
@@ -230,8 +230,8 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
                   name={name}
                   value={business[name] || ''}
                   onChange={(e) => handleBusinessChange(index, e)}
-                  className="border p-2 rounded mb-2 w-auto"
-                />
+                  className="border p-2 rounded mb-2 w-[95%] md:w-auto"
+                  />
               </div>
             ))}
           </div>
@@ -257,8 +257,8 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
                   name={name}
                   value={property[name] || ''}
                   onChange={(e) => handlePropertyChange(index, e)}
-                  className="border p-2 rounded mb-2 w-auto"
-                />
+                  className="border p-2 font-poppins rounded mb-2 w-[95%] md:w-auto"
+                  />
               </div>
             ))}
           </div>
@@ -279,8 +279,8 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
                   name={name}
                   value={remittance[name] || ''}
                   onChange={(e) => handleRemittanceChange(index, e)}
-                  className="border p-2  text-xs rounded mb-2 w-auto"
-                />
+                  className="border p-2 rounded mb-2 text-xs font-poppins w-[95%] md:w-auto"
+                  />
               </div>
             ))}
           </div>
@@ -291,7 +291,7 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
           <button
             type="button"
             onClick={onClose}
-            className="bg-gray-300 px-4 py-2 rounded"
+            className="bg-gray-300 md:px-4 px-2 text-sm md:text-sm font-poppins md:py-2 py-1 rounded-lg"
           >
             Cancel
           </button>
@@ -307,7 +307,7 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
         )}
           <button
             type="submit"
-            className="bg-[#F2B807] text-white px-4 py-2 rounded-xl hover:bg-yellow-300"
+            className="bg-[#F2B807] text-white md:px-4 px-2 font-poppins py-2 rounded-lg hover:bg-yellow-300"
           >
             Update Member
           </button>

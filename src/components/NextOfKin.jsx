@@ -337,14 +337,14 @@ const NextOfKin = ({ onNext, onPrevious }) => {
             <button
               type="button"
               onClick={handlePrevious}
-              className="bg-gray-300 px-3 py-2 text-sm rounded-lg"
+              className="bg-gray-300 md:px-3 md:py-2 px-2 py-2 text-sm font-medium rounded-lg"
             >
               Previous
             </button>
             <button
               type="button"
               onClick={handleNext}
-              className="bg-[#F2B807] py-2 px-5 text-sm rounded-lg"
+              className="bg-[#F2B807] py-2 md:px-5 px-2 text-sm text-white font-medium rounded-lg"
             >
               Save & Continue
             </button>

@@ -134,10 +134,10 @@ const handleSortChange = (option) => {
 
                 {/* Second Column */}
                 <div className="md:w-[75%] p-4">
-                <h2 className="md:text-4xl text-xl text-[#F2B807] font-lufga font-bold mt-0 mb-2 md:mb-4" >
+                <h2 className="md:text-5xl text-2xl text-[#F2B807] font-lufga font-bold mt-0 mb-2 md:mb-4" >
                     Choose Your Dream Home
                 </h2>
-                <h3 className="font-normal font-lufga md:text-sm text-xs mb-2 md:mb-9" data-aos="fade-up">
+                <h3 className="font-normal md:ml-16 text-gray-500 md:text-lg text-sm font-lufga  mb-2 md:mb-9" data-aos="fade-up">
                     Discover Your Dream Home in Kenya with Promitto Ltd.
                 </h3>
 
@@ -221,16 +221,16 @@ const handleSortChange = (option) => {
                 </div>
             </div>
           {/* New Row for Two Columns at the Bottom */}
-          <div className="flex h-[380px] md:mx-8">
+          <div className="flex  md:mx-8">
             {/* Column 1 - 60% Width */}
-            <div className="w-[55%] bg-[#F2B807] rounded-tl-2xl rounded-br-2xl p-5">
-              <h3 className="md:text-6xl md:mt-12 text-xl mt-3 font-lufga font-semibold mb-4">Become a home owner today by Enrolling as a member.</h3>
+            <div className="w-[55%] bg-[#F2B807] rounded-tl-2xl rounded-br-2xl md:py-24 p-5">
+              <h3 className="md:text-7xl md:mt-8 text-xl mt-3 font-lufga font-semibold mb-4">Become a home owner today by Enrolling as a member.</h3>
               <p className='md:text-sm text-xs font-light font-poppins'>Here at Promitto Ltd we to turn your dreams into reality, as we pride ourselves on delivering extraordinary service, 
                 impeccable quality, and unforgettable living experiences.</p>
 
 
                     {/* Enroll Now Button */}
-                    <button className="flex items-center border bg-gray-100 border-black text-black px-4 py-2 mt-5 rounded-lg"  data-aos="fade-up">
+                    <button className="flex items-center border bg-gray-100 border-black text-black px-4 py-2 mt-5 md:mt-12 rounded-lg"  data-aos="fade-up">
                     Enroll Now
                     <img src={enrollIcon} alt="Enroll Icon" className="ml-2 w-5 h-5" /> 
                   
@@ -251,11 +251,11 @@ const handleSortChange = (option) => {
           </div>
         </div>
         <div className="flex flex-col items-center text-center">
-          <h3 className='text-[#F2B807] md:text-3xl text-2xl  font-lugha font-semibold mt-8 mb-3' data-aos="fade-down"> Our Ongoing Projects </h3>
-          <p className='text-sm font-poppins ' data-aos="fade-up">Some of our ongoing projects at various stages</p>
+          <h3 className='text-[#F2B807] md:text-4xl text-2xl  font-lugha font-semibold mt-8 md:mt-24 mb-4' data-aos="fade-down"> Our Ongoing Projects </h3>
+          <p className='text-lg text-gray-500 font-poppins ' data-aos="fade-up">Some of our ongoing projects at various stages</p>
         </div>
         {/* Ongoing Projects */}
-        <div className="mt-10">
+        <div className="mt-10 md:mt-14">
             <div className="grid grid-cols-1 sm:grid-cols-2 md:mx-11 md:grid-cols-4 gap-4">
                 {ongoingHouses.slice(0, visibleOngoingCount).map((house) => (
                     <div key={house.id} className="rounded-xl shadow-md overflow-hidden">

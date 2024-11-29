@@ -216,14 +216,14 @@ const BusinessDetails = ({ onNext, onPrevious }) => {
         <button
           type="button"
           onClick={handleBack}
-          className="bg-gray-300 text-sm font-bold py-2 px-4 rounded flex justify-center "
+          className="bg-gray-300 text-sm  py-2 px-4 font-medium rounded flex justify-center "
         >
           Previous
         </button>
         <button
           type="button"
           onClick={handleSave}
-          className="text-sm bg-[#F2B807] rounded font-bold py-2 px-4 flex justify-center text-white"
+          className="text-sm bg-[#F2B807] rounded font-medium py-2 px-4 flex justify-center text-white"
         >
           Save & Continue
         </button>
