@@ -47,10 +47,19 @@ const NextOfKin = ({ onNext, onPrevious }) => {
   };
 
   const handleNext = () => {
+    // Check if all fields are filled
+    const isFormValid = Object.values(form).every((value) => value.trim() !== '');
+  
+    if (!isFormValid) {
+      alert('Please fill in all required fields before proceeding.');
+      return;
+    }
+  
     // Save data to store
     dispatch(saveNextOfKin(form));
     onNext(); // Proceed to the next step
   };
+  
 
   const handlePrevious = () => {
     // Save data before going back (optional)

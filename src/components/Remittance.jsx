@@ -13,6 +13,12 @@ const Remittance = ({ onNext, onPrevious }) => {
   const dispatch = useDispatch();
 
   const handleConfirmPayment = () => {
+    // Check if both fields are filled
+    if (!phoneNumber || !transactionCode) {
+      alert("Please enter both your phone number and transaction code.");
+      return; // Don't proceed if any field is empty
+    }
+
     const remittanceData = {
      // paymentMethod,
       phoneNumber,

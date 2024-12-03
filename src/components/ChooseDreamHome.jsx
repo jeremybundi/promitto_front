@@ -7,6 +7,8 @@ import ownhome from '../assets/images/ownhome.png';
 import eyeIcon from '../assets/images/eye.png'; 
 import enrollIcon from '../assets/images/enroll.jpg'; 
 import dropdownIcon from '../assets/icons/dropdown.svg'; 
+import { useNavigate } from 'react-router-dom';
+
 
 
 
@@ -17,6 +19,12 @@ const ChooseDreamHome = () => {
     const [visibleCount, setVisibleCount] = useState(4); 
     const [isDropdownVisible, setDropdownVisible] = useState(false);
     const [sortOption, setSortOption] = useState('newest'); 
+    const navigate = useNavigate();
+
+  const handleViewImages = (id) => {
+    // Navigate to the house details page
+    navigate(`/view/ongoing/${id}`);
+  };
 
     let hideTimeout;
 
@@ -73,14 +81,14 @@ const handleSortChange = (option) => {
     
   //done houses
     const handleViewMore = () => {
-        setVisibleCount((prevCount) => prevCount + 4); 
+        setVisibleCount((prevCount) => prevCount + 8); 
     };
 
   //ongoing houses
   const [visibleOngoingCount, setVisibleOngoingCount] = useState(8); 
 
   const handleViewMoreOngoing = () => {
-      setVisibleOngoingCount((prevCount) => prevCount + 4); 
+      setVisibleOngoingCount((prevCount) => prevCount + 12); 
   };
     //fetching ongoingHouses fromapi
     const [ongoingHouses, setOngoingHouses] = useState([]); 
@@ -154,9 +162,6 @@ const handleSortChange = (option) => {
                             {isDropdownVisible && (
                             <div className="absolute right-0 top-full mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg transition-opacity duration-300">
                                 <ul className="py-2 text-sm text-gray-700">
-                                <li className="hover:bg-gray-100 px-4 py-2 font-lufga cursor-pointer">Most Popular</li>
-
-                                <li className="hover:bg-gray-100 px-4 py-2 font-lufga cursor-pointer" >Best Rating</li>
 
                                     <li className="hover:bg-gray-100 px-4 py-2 font-lufga cursor-pointer" onClick={() => handleSortChange('newest')}>Newest</li>
                                     <li className="hover:bg-gray-100 px-4 py-2 font-lufga cursor-pointer" onClick={() => handleSortChange('price-low-high')}>Price: Low to high</li>
@@ -167,52 +172,68 @@ const handleSortChange = (option) => {
                         </div>
                     </div>
 
-                         {/* Render sorted houses */}
-                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {sortedHouses.slice(0, visibleCount).map((house) => (
-                            <div key={house.id} className="rounded-xl md:w-[400px] shadow-md overflow-hidden">
-                                <img 
-                                    src={house.image_url} 
-                                    alt={house.name} 
-                                    className="w-full h-100% object-cover"
-                                />
-                                <div className="p-4">
+                 {/* Render sorted houses */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:mb-8 gap-2">
+                    {sortedHouses.slice(0, visibleCount).map((house) => (
+                        <div key={house.id} className="rounded-xl md:w-[90%] shadow-md overflow-hidden flex flex-col">
+                            <img 
+                                src={house.image_url} 
+                                alt={house.name} 
+                                className="w-full h-100% object-cover"
+                            />
+                            <div className="p-4 flex flex-col justify-between flex-grow">
+                                <div>
                                     <p className="font-bold ml-3 font-lufga mb-3 mt-2">{house.description}</p>
-                                    <div className="flex justify-between items-center mb-7">
-                                        <div className="flex ml-3 items-center">
+                                    <div className="flex justify-between items-center mb-4">
+                                        <div className="flex ml-1 items-center">
                                             <img src={sizeIcon} alt="Size" className="w-4 h-4 mr-1" />
-                                            <span className='md:text-[11px] text-[9px] font-manrope font-bold text-[#5E5E5E]'>{house.size}</span>
+                                            <span className="md:text-[11px] text-[9px] font-manrope font-bold text-[#5E5E5E]">
+                                                {house.size} <span>SqFt</span>
+                                            </span>
                                         </div>
                                         <div className="flex items-center">
                                             <img src={typeIcon} alt="Type" className="w-5 h-5 mr-1" />
-                                            <span className='md:text-[11px] text-[9px] font-bold font-manrope text-[#5E5E5E]'>{house.type}</span>
+                                            <span className="md:text-[11px] text-[9px] font-bold font-manrope text-[#5E5E5E]">
+                                                {house.type}
+                                            </span>
                                         </div>
                                         <div className="flex items-center">
                                             <img src={bedroomsIcon} alt="Bedrooms" className="w-5 h-5 mr-1" />
-                                            <span className='md:text-[11px] text-[9px] font-manrope font-bold text-[#5E5E5E]'>{house.bedrooms} bedrooms</span>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center justify-between">
-                                        <button className="bg-[#F2B807] flex text-white font-lufga py-2 mt-2 md:mt-0 md:px-4 px-2 md:py-3 text-xs md:text-sm font-semibold rounded-lg">View House
-                                            <span className='ml-3'> <img src={eyeIcon} alt="Eye" className="w-5 h-5 mr-1" />
+                                            <span className="md:text-[11px] text-[9px] font-manrope font-bold text-[#5E5E5E]">
+                                                {house.bedrooms} bedrooms
                                             </span>
-                                        </button>
-                                        <div className="flex flex-col ml-3 items-end">
-                                            <span className="mr-20 font-manrope md:text-sm text-xs font-semibold">Pay</span>
-                                            <span className="md:text-sm text-xs font-manrope"> {house.price}/=  <span className='md:text-sm text-[9px]'>Per Month</span></span>
                                         </div>
                                     </div>
                                 </div>
+                                <div className="flex items-center justify-between mt-auto">
+                                    <button className="bg-[#F2B807] flex text-white font-lufga py-2 md:px-4 lg:px-2 px-2 md:py-3 lg:py-1 text-xs md:text-sm lg:text-xs font-semibold rounded-lg">
+                                        View House
+                                        <span className="ml-3 lg:mt-1">
+                                            <img src={eyeIcon} alt="Eye" className="w-5 h-5 mr-1" />
+                                        </span>
+                                    </button>
+                                    <div className="flex flex-col ml-3 items-end">
+                                        <span className="mr-20 font-manrope md:text-sm lg:text-sm text-xs font-semibold">Pay</span>
+                                        <span className="md:text-sm text-xs lg:text-xs font-manrope">
+                                            <span className="font-semibold">Ksh.</span> {house.price}/=  
+                                            <span className="md:text-sm lg:text-xs text-[9px]">
+                                                Per Month <span className="font-medium">For 7 Years</span>
+                                            </span>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
+                </div>
+
                     
                     {/* "View More" Button */}
                     {visibleCount < houses.length && (
                         <div className="flex justify-center mt-6">
                             <button 
                                 onClick={handleViewMore} 
-                                className="bg-[#F2B807] text-white py-2 px-6 rounded-xl" data-aos="fade-up"
+                                className="bg-[#F2B807] text-white py-2 px-6  rounded-xl" data-aos="fade-up"
                             >
                                 View More Houses 
                             </button>
@@ -256,21 +277,38 @@ const handleSortChange = (option) => {
         </div>
         {/* Ongoing Projects */}
         <div className="mt-10 md:mt-14">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:mx-11 md:grid-cols-4 gap-4">
-                {ongoingHouses.slice(0, visibleOngoingCount).map((house) => (
-                    <div key={house.id} className="rounded-xl shadow-md overflow-hidden">
-                        <img 
-                            src={house.image_url} 
-                            alt={house.description} 
-                            className="w-full h-56 md:h-64 lg:h-72 object-cover"
-                        />
-                        <div className="p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:mx-11 md:grid-cols-4 lg:grid-cols-5 gap-2">
+            {ongoingHouses.slice(0, visibleOngoingCount).map((house) => (
+                <div key={house.id} className="rounded-xl shadow-md overflow-hidden flex flex-col">
+
+                    <img 
+                        src={house.images[0]}  // Access the first image
+                        alt={house.description} 
+                        className="w-full h-56 md:h-64 lg:h-72 object-cover"
+                        onClick={() => handleViewImages(house.id)} // Trigger view images on click
+
+                    />
+                    <div className="p-4 flex flex-col justify-between flex-grow">
+                        <div>
                             <p className="font-bold font-lufga">{house.description}</p>
                             <p className="text-sm font-poppins text-gray-500">{house.location}</p>
                         </div>
+                        <div className="flex mt-4">
+                            <button
+                              onClick={() => handleViewImages(house.id)} 
+                            className="bg-[#F2B807] flex text-white ml-auto font-lufga py-2 md:px-4 lg:px-1 px-2 md:py-3 lg:py-2 text-xs md:text-sm lg:text-xs font-semibold rounded-lg">
+                                View Images
+                                <span className="ml-1">
+                                    <img src={eyeIcon} alt="Eye" className="w-4 h-4 mr-1 font-semibold" />
+                                </span>
+                            </button>
+                        </div>
                     </div>
-                ))}
-            </div>
+                </div>
+            ))}
+        </div>
+
+
 
             {/* "View More" Button */}
             {visibleOngoingCount < ongoingHouses.length && (

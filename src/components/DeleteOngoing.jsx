@@ -74,7 +74,7 @@ const DeleteOngoing = () => {
             <div>
             
               <img
-                src={house.image_url}
+                src={house.images[0]}
                 alt={house.description}
                 className="w-full h-32 object-cover font-poppins rounded-lg shadow-sm mb-2"
               />

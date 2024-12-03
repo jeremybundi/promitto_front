@@ -66,7 +66,7 @@ const Review = ({ onEditClick }) => {
       }
 
       // Optional: Display a user-friendly error message
-      alert('An error occurred while submitting the data. Please try again.');
+      alert('An error occurred while submitting the data. Please try again. Ensure you have filled all the required fields');
     }
   };
 

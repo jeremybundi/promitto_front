@@ -53,23 +53,25 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
 
   const handleNext = () => {
     const newErrors = {};
-    Object.keys(formData).forEach((key) => {
-      if (!formData[key] && key !== 'contractPeriod') {
-        newErrors[key] = `${key.replace(/([A-Z])/g, ' $1').trim()} is required`;
-      }
-    });
 
+    // Validate only if termsOfEmployment is "Contract"
     if (formData.termsOfEmployment === 'Contract' && !formData.contractPeriod) {
       newErrors.contractPeriod = 'Contract period is required';
     }
 
-    if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
-      return;
-    }
+    setErrors(newErrors);
 
-    dispatch(saveEmploymentDetails(formData));
-    onNext();
+    // Allow save and proceed even if there are errors
+    if (Object.keys(newErrors).length === 0) {
+      dispatch(saveEmploymentDetails(formData));
+      console.log(saveEmploymentDetails(formData))
+      onNext();
+    } else {
+      // Dispatch data regardless of validation to save incomplete data
+      dispatch(saveEmploymentDetails(formData));
+      console.log(saveEmploymentDetails(formData))
+
+    }
   };
 
   const handlePrevious = () => {
@@ -78,49 +80,48 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
   };
 
   return (
-    <div className="employment-details-form md:p-6 bg-gray-50  rounded-lg">
+    <div className="employment-details-form md:p-6 bg-gray-50 rounded-lg">
       <form className="grid grid-cols-2 md:gap-6 md:mx-36">
-        {Object.keys(formData).map((key) => (
-          key !== 'termsOfEmployment' && (
-            <div key={key} className="flex flex-col">
-              <label
-                htmlFor={key}
-                className="font-semibold text-sm mt-4 md:mt-3 font-poppins text-gray-600 "
-              >
-                {key === 'contractPeriod'
-                  ? 'Contract Period'
-                  : key
-                      .replace(/([A-Z])/g, ' $1')
-                      .trim()
-                      .replace(/\b\w/g, (c) => c.toUpperCase())}
-                {key !== 'contractPeriod' && <span className="text-[#F2B807] ml-2">*</span>}
-              </label>
-              <input
-                type="text"
-                id={key}
-                name={key}
-                value={formData[key]}
-                placeholder={`Enter ${key
-                  .replace(/([A-Z])/g, ' $1')
-                  .trim()
-                  .toLowerCase()}`}
-                onChange={handleChange}
-                className="font-poppins input-field w-[90%] md:w-[300px] border mt-2 text-sm font-poppins focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none border-gray-500 rounded-md p-3"
-              />
-              {errors[key] && (
-                <p className="text-red-500 text-xs mt-1">{errors[key]}</p>
-              )}
-            </div>
-          )
-        ))}
+        {Object.keys(formData).map(
+          (key) =>
+            key !== 'termsOfEmployment' && (
+              <div key={key} className="flex flex-col">
+                <label
+                  htmlFor={key}
+                  className="font-semibold text-sm mt-4 md:mt-3 font-poppins text-gray-600"
+                >
+                  {key === 'contractPeriod'
+                    ? 'Contract Period'
+                    : key
+                        .replace(/([A-Z])/g, ' $1')
+                        .trim()
+                        .replace(/\b\w/g, (c) => c.toUpperCase())}
+                </label>
+                <input
+                  type="text"
+                  id={key}
+                  name={key}
+                  value={formData[key]}
+                  placeholder={`Enter ${key
+                    .replace(/([A-Z])/g, ' $1')
+                    .trim()
+                    .toLowerCase()}`}
+                  onChange={handleChange}
+                  className="font-poppins input-field w-[90%] md:w-[300px] border mt-2 text-sm font-poppins focus:border-[#F2B807] focus:ring-2 focus:ring-[#F2B807] outline-none border-gray-500 rounded-md p-3"
+                />
+                {errors[key] && (
+                  <p className="text-red-500 text-xs mt-1">{errors[key]}</p>
+                )}
+              </div>
+            )
+        )}
 
         <div className="flex md:mt-3 mt-1 md:mb-0 mb-2 flex-col">
           <label
             htmlFor="termsOfEmployment"
-            className="font-semibold md:text-sm text-xs text-gray-600 md:mb-"
+            className="font-semibold md:text-sm text-xs text-gray-600"
           >
             Terms Of Employment
-            <span className="text-[#F2B807] ml-2">*</span>
           </label>
           <select
             id="termsOfEmployment"
@@ -134,11 +135,6 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
             <option value="Probation">Probation</option>
             <option value="Contract">Contract</option>
           </select>
-          {errors.termsOfEmployment && (
-            <p className="text-red-500 text-xs mt-1">
-              {errors.termsOfEmployment}
-            </p>
-          )}
         </div>
 
         {formData.termsOfEmployment === 'Contract' && (
@@ -148,8 +144,7 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
               className="font-semibold text-xs text-gray-700 mb-1"
             >
               Contract Period
-              <span className="text-[#F2B807] ml-2">*</span>
-              </label>
+            </label>
             <input
               type="text"
               id="contractPeriod"
@@ -171,7 +166,7 @@ const EmploymentDetails = ({ onNext, onPrevious }) => {
 
       <div className="flex justify-between md:mx-48 md:space-x-[350px]">
         <button
-          className="bg-gray-300 text-sm mt-8 font-medium py-2 px-4 rounded "
+          className="bg-gray-300 text-sm mt-8 font-medium py-2 px-4 rounded"
           onClick={handlePrevious}
         >
           Previous

@@ -18,6 +18,7 @@ import DeleteHousesOngoing from './components/DeleteOngoing';
 import AddUser from './components/AddUser';
 import UserTable from './components/UserTable';
 import PublicView from './components/PublicMembers'
+import HousesOngoingImages from './components/HousesOngoingImages'
 
 // Define all your app routes here
 const AppRoutes = () => {
@@ -33,6 +34,8 @@ const AppRoutes = () => {
       <Route path="/employ" element={<EmploymentDetails />} />  
       <Route path="/business" element={<BusinessDetails />} /> 
       <Route path="/login" element={<Login />} />  
+      <Route path="/view/ongoing/:id" element={<HousesOngoingImages/>} />
+
 
 
       {/* Protected routes */}
