@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import { useSelector } from 'react-redux'; // Import useSelector to access the Redux store
+import { useSelector } from 'react-redux'; 
 
 const AddOngoingHouse = () => {
   const [formData, setFormData] = useState({
     description: '',
     location: '',
-    images: [], // Store multiple images
+    images: [], 
   });
 
   const [message, setMessage] = useState('');
@@ -26,10 +26,10 @@ const AddOngoingHouse = () => {
   };
 
   const handleFileChange = (e) => {
-    const files = Array.from(e.target.files); // Convert FileList to an array
+    const files = Array.from(e.target.files); 
     setFormData((prevData) => ({
       ...prevData,
-      images: [...prevData.images, ...files], // Add new files to the existing list
+      images: [...prevData.images, ...files],  
     }));
   };
 
@@ -42,14 +42,23 @@ const AddOngoingHouse = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
+    // Check if at least one image is uploaded
+    if (formData.images.length === 0) {
+      setError('Please upload at least one image.');
+      setMessage('');
+      return; 
+    }
+  
     const form = new FormData();
     form.append('description', formData.description);
     form.append('location', formData.location);
+  
+    // Append each image to the FormData object with proper filename
     formData.images.forEach((image, index) => {
-      form.append(`images[${index}]`, image); // Append multiple images
+      form.append(`images[${index}]`, image, image.name); 
     });
-
+  
     try {
       const response = await axios.post(
         'https://api3.promittoltd.com/house-ongoing/create',
@@ -57,10 +66,11 @@ const AddOngoingHouse = () => {
         {
           headers: {
             'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`, 
+            Authorization: `Bearer ${token}`,
           },
         }
       );
+      console.log(formData.images);
 
       if (response.data.status === 'success') {
         setMessage(response.data.message);
@@ -78,8 +88,10 @@ const AddOngoingHouse = () => {
     } catch (error) {
       setError('Something went wrong');
       setMessage('');
+      console.log(error);
     }
   };
+  
 
   return (
     <div className="max-w-2xl mx-auto p-6 bg-white rounded-xl shadow-md">

@@ -18,6 +18,7 @@ const DeleteHousesDone = () => {
       try {
         const response = await axios.get("https://api3.promittoltd.com/houses/done");
         setHouses(response.data);
+        console.log(response.data)
         setLoading(false);
       } catch (err) {
         setError("Failed to fetch houses data. Please try again later.");
@@ -73,7 +74,7 @@ const DeleteHousesDone = () => {
                 {house.description}
               </h2>
               <img
-                src={house.image_url}
+                src={house.images[0]}
                 alt={house.description}
                 className="w-full h-32 object-cover rounded-lg shadow-sm mb-2"
               />

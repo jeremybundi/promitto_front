@@ -21,10 +21,15 @@ const ChooseDreamHome = () => {
     const [sortOption, setSortOption] = useState('newest'); 
     const navigate = useNavigate();
 
+  const handleViewDoneImages = (id) => {
+
+    navigate(`/view/done/${id}`);
+  };
   const handleViewImages = (id) => {
-    // Navigate to the house details page
+
     navigate(`/view/ongoing/${id}`);
   };
+
 
     let hideTimeout;
 
@@ -58,11 +63,11 @@ const ChooseDreamHome = () => {
     }
 };
 
-const sortedHouses = sortHouses(houses); // Apply sorting
+const sortedHouses = sortHouses(houses); 
 
 const handleSortChange = (option) => {
     setSortOption(option);
-    setDropdownVisible(false); // Hide dropdown after selecting an option
+    setDropdownVisible(false); 
 };
 
         // Show dropdown
@@ -90,7 +95,7 @@ const handleSortChange = (option) => {
   const handleViewMoreOngoing = () => {
       setVisibleOngoingCount((prevCount) => prevCount + 12); 
   };
-    //fetching ongoingHouses fromapi
+    //fetching ongoingHouses from api
     const [ongoingHouses, setOngoingHouses] = useState([]); 
 
     useEffect(() => {
@@ -177,13 +182,15 @@ const handleSortChange = (option) => {
                     {sortedHouses.slice(0, visibleCount).map((house) => (
                         <div key={house.id} className="rounded-xl md:w-[90%] shadow-md overflow-hidden flex flex-col">
                             <img 
-                                src={house.image_url} 
+                                src={house.images[0]} 
                                 alt={house.name} 
                                 className="w-full h-100% object-cover"
+                                onClick={() => handleViewDoneImages(house.id)} // Trigger view images on click
+
                             />
                             <div className="p-4 flex flex-col justify-between flex-grow">
                                 <div>
-                                    <p className="font-bold ml-3 font-lufga mb-3 mt-2">{house.description}</p>
+                                    <p className="font-bold ml-3 font-lufga mb-3 mt-2">{house.title}</p>
                                     <div className="flex justify-between items-center mb-4">
                                         <div className="flex ml-1 items-center">
                                             <img src={sizeIcon} alt="Size" className="w-4 h-4 mr-1" />
@@ -206,7 +213,9 @@ const handleSortChange = (option) => {
                                     </div>
                                 </div>
                                 <div className="flex items-center justify-between mt-auto">
-                                    <button className="bg-[#F2B807] flex text-white font-lufga py-2 md:px-4 lg:px-2 px-2 md:py-3 lg:py-1 text-xs md:text-sm lg:text-xs font-semibold rounded-lg">
+                                    <button
+                                    onClick={() => handleViewDoneImages(house.id)} 
+                                    className="bg-[#F2B807] flex text-white font-lufga py-2 md:px-4 lg:px-2 px-2 md:py-3 lg:py-1 text-xs md:text-sm lg:text-xs font-semibold rounded-lg">
                                         View House
                                         <span className="ml-3 lg:mt-1">
                                             <img src={eyeIcon} alt="Eye" className="w-5 h-5 mr-1" />

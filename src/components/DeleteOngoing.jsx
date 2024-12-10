@@ -20,6 +20,7 @@ const DeleteOngoing = () => {
           "https://api3.promittoltd.com/house-ongoing"
         );
         setHouses(response.data);
+         //console.log(response.data)
         setLoading(false);
       } catch (err) {
         setError("Failed to fetch houses data. Please try again later.");

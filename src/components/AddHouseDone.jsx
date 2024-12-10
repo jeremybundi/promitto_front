@@ -5,13 +5,13 @@ import { useSelector } from 'react-redux';
 
 const AddHouseDone = () => {
   const [formData, setFormData] = useState({
-    description: '',
+    title: '',
+    info: '',
     size: '',
     type: '',
     bedrooms: '',
     price: '',
-    location: '',
-    image: null,
+    images: [], // Changed to an array for multiple images
   });
 
   const [message, setMessage] = useState('');
@@ -30,9 +30,11 @@ const AddHouseDone = () => {
   };
 
   const handleFileChange = (e) => {
+    // Update images array with selected files
+    const files = Array.from(e.target.files);
     setFormData((prevData) => ({
       ...prevData,
-      image: e.target.files[0],
+      images: [...prevData.images, ...files], // Append new files to the images array
     }));
   };
 
@@ -40,13 +42,17 @@ const AddHouseDone = () => {
     e.preventDefault();
 
     const form = new FormData();
-    form.append('description', formData.description);
+    form.append('title', formData.title);
     form.append('size', formData.size);
     form.append('type', formData.type);
     form.append('bedrooms', formData.bedrooms);
     form.append('price', formData.price);
-    form.append('location', formData.location);
-    form.append('image', formData.image);
+    form.append('info', formData.info);
+
+    // Append all images to the FormData
+    formData.images.forEach((image) => {
+      form.append('images[]', image); // 'images[]' for handling multiple files
+    });
 
     try {
       const response = await axios.post(
@@ -55,24 +61,23 @@ const AddHouseDone = () => {
         {
           headers: {
             'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`, 
+            Authorization: `Bearer ${token}`,
           },
         }
       );
 
       if (response.data.status === 'success') {
         setMessage(response.data.message);
-        //console.log(formData);
         console.log('House added successfully');
         setError('');
         setFormData({
-          description: '',
+          title: '',
+          info: '',
           size: '',
           type: '',
           bedrooms: '',
           price: '',
-          location: '',
-          image: null,
+          images: [], // Reset the images array
         });
       } else {
         setError(response.data.message);
@@ -90,7 +95,7 @@ const AddHouseDone = () => {
       <h2 className="text-xl text-yellow-500 font-poppins font-semibold mb-4">Add a New House</h2>
       <button
           onClick={() => navigate("/admin")}
-          className="bg-yellow-700 hover:bg-yelow-600 font-poppins text-white md:px-4 px-2 md:py-2 ml-auto mb-1 rounded-lg shadow-md"
+          className="bg-yellow-700 hover:bg-yellow-600 font-poppins text-white md:px-4 px-2 md:py-2 ml-auto mb-1 rounded-lg shadow-md"
         >
           Dashboard
         </button>
@@ -100,13 +105,13 @@ const AddHouseDone = () => {
       {error && <div className="text-red-500 mb-4">{error}</div>}
 
       <form onSubmit={handleSubmit} className="grid sm:grid-cols-1 md:grid-cols-2 gap-4">
-        {/* Description field */}
+        {/*  field */}
         <div className="col-span-2">
-          <label htmlFor="description" className="block text-sm font-poppins font-medium text-gray-700">Description</label>
+          <label htmlFor="info" className="block text-sm font-poppins font-medium text-gray-700">More Information</label>
           <textarea
-            id="description"
-            name="description"
-            value={formData.description}
+            id="info"
+            name="info"
+            value={formData.info}
             onChange={handleChange}
             rows="4"
             className="mt-1 block w-full px-4 py-2 bg-gray-100 border font-poppins border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-300"
@@ -114,6 +119,17 @@ const AddHouseDone = () => {
         </div>
 
         {/* Other fields */}
+        <div>
+          <label htmlFor="title" className="block text-sm font-medium font-poppins text-gray-700">Title</label>
+          <input
+            type="text"
+            id="title"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            className="mt-1 block w-full px-4 py-2 bg-gray-100 border font-poppins border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-300"
+          />
+        </div>
         <div>
           <label htmlFor="size" className="block text-sm font-medium font-poppins text-gray-700">Size</label>
           <input
@@ -163,23 +179,12 @@ const AddHouseDone = () => {
         </div>
 
         <div>
-          <label htmlFor="location" className="block text-sm font-medium font-poppins text-gray-700">Location</label>
-          <input
-            type="text"
-            id="location"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            className="mt-1 block w-full px-4 py-2 bg-gray-100 border font-poppins border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-300"
-          />
-        </div>
-
-        <div >
-          <label htmlFor="image" className="block text-sm font-medium font-poppins text-gray-700">Image</label>
+          <label htmlFor="images" className="block text-sm font-medium font-poppins text-gray-700">Images</label>
           <input
             type="file"
-            id="image"
-            name="image"
+            id="images"
+            name="images"
+            multiple
             onChange={handleFileChange}
             className="mt-1 block w-full px-4 py-2 bg-gray-100 border border-gray-300 rounded-md focus:outline-none focus:ring-1 focus:ring-yellow-300"
           />
