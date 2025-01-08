@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
+
 const HousesDoneImages = ({ houseId }) => {
   const [house, setHouse] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,6 +24,8 @@ const HousesDoneImages = ({ houseId }) => {
     fetchHouseData();
   }, [houseId]);
 
+  
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
   if (!house) return <div>No house data found.</div>;
@@ -39,12 +42,13 @@ const HousesDoneImages = ({ houseId }) => {
          {/* Right Column: Images */}
          <div>
           {/* Larger main image */}
-          <div className="mb-4">
+          <div className="mb-4 ">
             <img
               src={house.images[currentImageIndex]}
               alt={`House image ${currentImageIndex + 1}`}
               className="md:w-[85%] md:h-[500px] lg:w-[90%] lg:h-[550px] w-[95%] h-[400px] object-cover rounded-lg"
             />
+            
           </div>
            {/* Vertical smaller images */}
            <div className="flex space-x-4 overflow-x-auto">

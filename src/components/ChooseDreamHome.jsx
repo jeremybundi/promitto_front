@@ -178,7 +178,7 @@ const handleSortChange = (option) => {
                     </div>
 
                  {/* Render sorted houses */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:mb-8 gap-2">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 md:mb-8 gap-2">
                     {sortedHouses.slice(0, visibleCount).map((house) => (
                         <div key={house.id} className="rounded-xl md:w-[90%] shadow-md overflow-hidden flex flex-col">
                             <img 
@@ -286,7 +286,7 @@ const handleSortChange = (option) => {
         </div>
         {/* Ongoing Projects */}
         <div className="mt-10 md:mt-14">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:mx-11 md:grid-cols-4 lg:grid-cols-5 gap-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:mx-11 md:grid-cols-4 lg:grid-cols-4 gap-5">
             {ongoingHouses.slice(0, visibleOngoingCount).map((house) => (
                 <div key={house.id} className="rounded-xl shadow-md overflow-hidden flex flex-col">
 
