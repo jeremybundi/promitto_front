@@ -23,7 +23,7 @@ const ViewMembers = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://api3.promittoltd.com/data', {
+        const response = await axios.get('https://api4.promittoltd.com/data', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -81,7 +81,7 @@ const ViewMembers = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axios.delete(`https://api3.promittoltd.com/data/${id}`, {
+      const response = await axios.delete(`https://api4.promittoltd.com/data/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`, // Include the token here
         },

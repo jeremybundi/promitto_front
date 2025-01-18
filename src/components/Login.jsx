@@ -17,7 +17,7 @@ function Login() {
 const handleSendOtp = async () => {
   setErrorMessage(''); 
   try {
-    const response = await axios.post('https://api3.promittoltd.com/users/login', 
+    const response = await axios.post('https://api4.promittoltd.com/users/login', 
       { email },
       {
         headers: {
@@ -40,7 +40,7 @@ const handleSendOtp = async () => {
 const handleVerifyOtp = async () => {
   setErrorMessage('');
   try {
-    const response = await axios.post('https://api3.promittoltd.com/users/verify-otp', 
+    const response = await axios.post('https://api4.promittoltd.com/users/verify-otp', 
       { email, otp },
       {
         headers: {

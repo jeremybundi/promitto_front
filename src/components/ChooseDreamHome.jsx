@@ -36,7 +36,7 @@ const ChooseDreamHome = () => {
     useEffect(() => {
         const fetchHouses = async () => {
             try {
-                const response = await axios.get('https://api3.promittoltd.com/houses/done');
+                const response = await axios.get('https://api4.promittoltd.com/houses/done');
                 setHouses(response.data);
                 console.log(response.data); 
             } catch (error) {
@@ -101,9 +101,9 @@ const handleSortChange = (option) => {
     useEffect(() => {
         const fetchOngoingHouses = async () => {
             try {
-                const response = await axios.get('https://api3.promittoltd.com/house-ongoing'); 
+                const response = await axios.get('https://api4.promittoltd.com/house-ongoing'); 
                 setOngoingHouses(response.data);
-                console.log(response.data);
+                console.log('Houses Ongoing are', response.data);
             } catch (error) {
                 console.error('Error fetching ongoing houses:', error);
             }
@@ -195,7 +195,7 @@ const handleSortChange = (option) => {
                                         <div className="flex ml-1 items-center">
                                             <img src={sizeIcon} alt="Size" className="w-4 h-4 mr-1" />
                                             <span className="md:text-[11px] text-[9px] font-manrope font-bold text-[#5E5E5E]">
-                                                {house.size} <span>SqFt</span>
+                                                {house.size} <span>SqMtrs</span>
                                             </span>
                                         </div>
                                         <div className="flex items-center">

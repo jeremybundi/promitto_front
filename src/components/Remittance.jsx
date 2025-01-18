@@ -1,31 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import userIcon from '../assets/icons/user.svg';
 import tickIcon from '../assets/icons/dropdown.svg';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { saveRemittanceDetails } from '../formSlice';
 
 const Remittance = ({ onNext, onPrevious }) => {
-  const [showPaymentDetails, setShowPaymentDetails] = useState(false);
-  //const [paymentMethod, setPaymentMethod] = useState('Mpesa');
+  const [showPaymentDetails, setShowPaymentDetails] = useState(true);
   const [phoneNumber, setPhoneNumber] = useState('');
   const [transactionCode, setTransactionCode] = useState('');
 
   const dispatch = useDispatch();
 
+  // Access Redux store state
+  const { phoneNumber: storedPhoneNumber, transactionCode: storedTransactionCode } = useSelector(
+    (state) => state.form.remittanceDetails || {}
+  );
+
+  useEffect(() => {
+    // Set initial state from Redux store
+    if (storedPhoneNumber) setPhoneNumber(storedPhoneNumber);
+    if (storedTransactionCode) setTransactionCode(storedTransactionCode);
+  }, [storedPhoneNumber, storedTransactionCode]);
+
   const handleConfirmPayment = () => {
-    // Check if both fields are filled
     if (!phoneNumber || !transactionCode) {
-      alert("Please enter both your phone number and transaction code.");
-      return; // Don't proceed if any field is empty
+      alert('Please enter both your phone number and transaction code.');
+      return;
     }
 
     const remittanceData = {
-     // paymentMethod,
       phoneNumber,
       transactionCode,
     };
 
-    // Dispatch the action to save remittance details in Redux store
+    // Dispatch action to save remittance details in Redux store
     dispatch(saveRemittanceDetails(remittanceData));
     console.log(remittanceData);
 
@@ -33,15 +41,11 @@ const Remittance = ({ onNext, onPrevious }) => {
     onNext();
   };
 
-  // Handler for M-Pesa button click
   const handleMpesaClick = () => {
     setShowPaymentDetails(true);
   };
 
-  // Handler for TUMA button click
-  const handleTumaClick = () => {
-    setShowPaymentDetails(false); // Adjust based on TUMA implementation
-  };
+
 
   return (
     <div className="md:p-6 p-2 text-center items-center w-auto space-y-3 font-poppins rounded-lg">
@@ -63,13 +67,7 @@ const Remittance = ({ onNext, onPrevious }) => {
           />
         </button>
 
-        {/* Payment Button with TUMA Logo */}
-        <div 
-          className="border border-[#a29eee] h-12 w-44 bg-[#F1F2FC] px-4 rounded-3xl font-bold font-serif text-purple-500 flex items-center justify-center space-x-2"
-          onClick={handleTumaClick}
-        >
-          TUMA
-        </div>
+      
       </div>
 
       {/* Payment Details Section */}
@@ -77,7 +75,7 @@ const Remittance = ({ onNext, onPrevious }) => {
         <div className="md:w-[600px] w-full h-auto border border-[#53C064] items-center md:py-11 md:px-16 p-3 rounded-3xl md:mx-auto bg-[#f9f9f9]">
           <p className='text-start font-bold mb-2'>Payment Details</p>
           <div className='flex mb-3'>
-            <div className="md:h-12 md:w-52 md:mr-8 mr-4 border border-[#53C064] bg-[#F1FCFB] md:py-7 px-1 rounded-md flex items-center justify-center">
+            <div className="md:h-12 md:w-52 md:mr-8  mr-4 border border-[#53C064] bg-[#F1FCFB] md:py-7 px-3 rounded-md flex items-center justify-center">
               <svg
                 width="32"
                 height="32"
@@ -118,11 +116,11 @@ const Remittance = ({ onNext, onPrevious }) => {
             </div>
           </div>
           <div className='text-start mb-5'>
-            <p className='font-bold'>Instructions</p>
+            <p className='font-semibold'>Instructions</p>
             <div className='text-xs '>
             <div className="flex items-start mt-3">
               <img src={tickIcon} alt="Tick" className="h-4 w-4 mr-2" style={{ fill: '#3AB54B' }} />
-              <p>Use the above Paybill Number (4091763) to pay KES 30,000/= to Promitto Ltd.</p>
+              <p>Use the above Paybill Number <span className='font-semibold'>4091763</span> to pay <span className='font-semibold'>KES 30,000/=</span> to Promitto Ltd.</p>
             </div>
 
             <div className="flex items-start mt-2">
@@ -130,10 +128,10 @@ const Remittance = ({ onNext, onPrevious }) => {
               <p>Once you have received a message from MPesa, enter your phone number and the 10 digit Transaction code e.g. AD00098FR1</p>
             </div>
 
-            <div className="flex items-start mt-2">
+           {/*} <div className="flex items-start mt-2">
               <img src={tickIcon} alt="Tick" className="h-4 w-4 mr-2" style={{ fill: '#3AB54B' }} />
               <p>Click Confirm Payment button to finish.</p>
-            </div>
+            </div>*/}
           </div>
           </div>
                
@@ -173,7 +171,7 @@ const Remittance = ({ onNext, onPrevious }) => {
 
             </div>
   
-           
+           {/*
             <button class=" bg-white border text-xs border-[#53C064] mt-8  font-bold md:py-3 py-2 md:px-4 px-1 rounded-3xl flex justify-center  text-[#3AB54B]"
                            onClick={handleConfirmPayment}
              >
@@ -184,7 +182,7 @@ const Remittance = ({ onNext, onPrevious }) => {
               alt="M-Pesa Logo" 
               className="h-5 w-16"
             />
-            </button>
+            </button> */}
             </div>
 
             

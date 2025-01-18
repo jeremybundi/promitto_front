@@ -7,7 +7,7 @@ const BoardMembers = () => {
   useEffect(() => {
     const fetchBoardMembers = async () => {
       try {
-        const response = await axios.get('https://api3.promittoltd.com/board-members'); // Replace with your API endpoint
+        const response = await axios.get('https://api4.promittoltd.com/board-members'); // Replace with your API endpoint
         setBoardMembers(response.data);
         console.log(response.data);
       } catch (error) {

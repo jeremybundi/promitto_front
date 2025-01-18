@@ -12,7 +12,7 @@ const HousesDoneImages = ({ houseId }) => {
   useEffect(() => {
     const fetchHouseData = async () => {
       try {
-        const response = await axios.get(`https://api3.promittoltd.com/houses/done/${houseId}`);
+        const response = await axios.get(`https://api4.promittoltd.com/houses/done/${houseId}`);
         setHouse(response.data);
       } catch (err) {
         setError('Failed to load house data');

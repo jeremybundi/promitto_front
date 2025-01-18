@@ -20,7 +20,7 @@ const UserTable = () => {
     // Fetch data from the API
     const fetchData = async () => {
       try {
-        const response = await axios.get('https://api3.promittoltd.com/users', {
+        const response = await axios.get('https://api4.promittoltd.com/users', {
           headers: {
             Authorization: `Bearer ${token}`, // Include the token in the headers
           },
@@ -43,7 +43,7 @@ const UserTable = () => {
 
   const handleDelete = async () => {
     try {
-      await axios.delete(`https://api3.promittoltd.com/users/${userIdToDelete}`, {
+      await axios.delete(`https://api4.promittoltd.com/users/${userIdToDelete}`, {
         headers: {
           Authorization: `Bearer ${token}`, // Include the token in the headers
         },

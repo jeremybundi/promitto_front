@@ -81,7 +81,7 @@ const EditMemberForm = ({ member, onUpdate, onClose }) => {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `https://api3.promittoltd.com/update/${formData.personalDetails.id}`,
+        `https://api4.promittoltd.com/update/${formData.personalDetails.id}`,
         {
           personal_details: formData.personalDetails,
           next_of_kin: formData.nextOfKin,

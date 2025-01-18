@@ -23,7 +23,7 @@ const AddUser = () => {
 
     try {
       const response = await axios.post(
-        'https://api3.promittoltd.com/users/create',
+        'https://api4.promittoltd.com/users/create',
         {
           name,
           role,

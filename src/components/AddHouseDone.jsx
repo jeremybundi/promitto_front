@@ -56,7 +56,7 @@ const AddHouseDone = () => {
 
     try {
       const response = await axios.post(
-        'https://api3.promittoltd.com/houses/done',
+        'https://api4.promittoltd.com/houses/done',
         form,
         {
           headers: {

@@ -16,7 +16,7 @@ const DeleteHousesDone = () => {
     // Fetch data from API
     const fetchHouses = async () => {
       try {
-        const response = await axios.get("https://api3.promittoltd.com/houses/done");
+        const response = await axios.get("https://api4.promittoltd.com/houses/done");
         setHouses(response.data);
         console.log(response.data)
         setLoading(false);
@@ -32,7 +32,7 @@ const DeleteHousesDone = () => {
   const handleDelete = async (id) => {
     try {
       // Call delete endpoint with Authorization header
-      await axios.delete(`https://api3.promittoltd.com/houses/done/${id}`, {
+      await axios.delete(`https://api4.promittoltd.com/houses/done/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`, 
         },

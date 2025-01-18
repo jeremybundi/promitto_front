@@ -15,7 +15,7 @@ const HousesOngoingImages = ({ houseId }) => {
     const fetchHouseData = async () => {
       try {
         const response = await axios.get(
-          `https://api3.promittoltd.com/house-ongoing/images/${houseId}`
+          `https://api4.promittoltd.com/house-ongoing/images/${houseId}`
         );
         setHouse(response.data.data);
       } catch (err) {
@@ -65,7 +65,7 @@ const HousesOngoingImages = ({ houseId }) => {
       // Create a temporary link to trigger the download
       const link = document.createElement("a");
       link.href = blobUrl;
-      link.download = `image-${currentImageIndex + 1}.jpg`; // Customize file name
+      link.download = `image-${currentImageIndex + 1}.jpg`; 
       document.body.appendChild(link);
       link.click();
   
