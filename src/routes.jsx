@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import Dreams from './components/ChooseDreamHome'; 
 import BoardMembers from './components/BoardMembers';
+import AboutUs from './components/AboutUs';
 import WelcomeMember from './components/WelcomeMember';
 import Register from './components/Register';
 import CardColor from './components/CardColor';
@@ -29,6 +30,7 @@ const AppRoutes = () => {
       {/* Public routes */}
       <Route path="/" element={<Dreams />} />  
       <Route path="/boardmembers" element={<BoardMembers />} /> 
+      <Route path="/aboutus" element={<AboutUs />} /> 
       <Route path="/welcome" element={<WelcomeMember />} /> 
       <Route path="/register" element={<Register />} /> 
       <Route path="/color" element={<CardColor />} />  

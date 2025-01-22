@@ -51,13 +51,13 @@ const HousesDoneImages = ({ houseId }) => {
             
           </div>
            {/* Vertical smaller images */}
-           <div className="flex space-x-4 overflow-x-auto">
+           <div className="flex space-x-2 overflow-x-auto pr-2">
             {house.images.map((image, index) => (
               <img
                 key={index}
                 src={image}
                 alt={`House image ${index + 1}`}
-                className={`object-cover md:w-36 md:h-36 lg:w-40 lg:h-40 h-24 w-24 mb-4 rounded-lg cursor-pointer ${
+                className={`object-cover md:w-36 md:h-36 lg:w-40 lg:h-40 h-24 w-24 mb-4  rounded-lg cursor-pointer ${
                   index === currentImageIndex ? 'border-4 border-yellow-500' : ''
                 }`}
                 onClick={() => handleImageClick(index)}
@@ -68,7 +68,7 @@ const HousesDoneImages = ({ houseId }) => {
 
 
         {/* Left Column: Details */}
-        <div className="space-y-4 mb-4 ">
+        <div className="space-y-4 mb-4 p-4 ">
           <p className="text-sm  md:text-lg lg:text-lg text-gray-600">
             <span className="text-yellow-700 font-semibold mr-4">More information: </span>{house.info}
           </p>

@@ -104,7 +104,7 @@ const Remittance = ({ onNext, onPrevious }) => {
               </svg>
               <div className='ml-2 font-semibold text-start'>
                 <p className='text-xs text-[#3AB54B]'>Paybill No.</p>
-                <p className='text-xs'>4091763</p>
+                <p className='text-xs'>6746402</p>
               </div>
             </div>
             <div className="h-12 w-52 border border-[#53C064] py-7 bg-[#F1FCFB] rounded-md flex items-center justify-center">
@@ -120,7 +120,7 @@ const Remittance = ({ onNext, onPrevious }) => {
             <div className='text-xs '>
             <div className="flex items-start mt-3">
               <img src={tickIcon} alt="Tick" className="h-4 w-4 mr-2" style={{ fill: '#3AB54B' }} />
-              <p>Use the above Paybill Number <span className='font-semibold'>4091763</span> to pay <span className='font-semibold'>KES 30,000/=</span> to Promitto Ltd.</p>
+              <p>Use the above Paybill Number <span className='font-semibold'>6746402</span> to pay <span className='font-semibold'>KES 30,000/=</span> to Promitto Ltd.</p>
             </div>
 
             <div className="flex items-start mt-2">

@@ -101,16 +101,19 @@ const handleSortChange = (option) => {
     useEffect(() => {
         const fetchOngoingHouses = async () => {
             try {
-                const response = await axios.get('https://api4.promittoltd.com/house-ongoing'); 
-                setOngoingHouses(response.data);
-                console.log('Houses Ongoing are', response.data);
+                const response = await axios.get('https://api4.promittoltd.com/house-ongoing');
+                // Sort houses by created_at in descending order
+                const sortedOngoingHouses = response.data.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                setOngoingHouses(sortedOngoingHouses);
+                console.log('Sorted Ongoing Houses:', sortedOngoingHouses);
             } catch (error) {
                 console.error('Error fetching ongoing houses:', error);
             }
         };
-
+    
         fetchOngoingHouses();
     }, []);
+    
 
     if (loading) {
         return <div>Loading...</div>;
@@ -299,8 +302,8 @@ const handleSortChange = (option) => {
                     />
                     <div className="p-4 flex flex-col justify-between flex-grow">
                         <div>
-                            <p className="font-bold font-lufga">{house.description}</p>
-                            <p className="text-sm font-poppins text-gray-500">{house.location}</p>
+                            <p className="font-semibold text-sm font-lufga">{house.description}</p>
+                            <p className="text-lg font-semibold mt-1 font-poppins text-gray-600">{house.location}</p>
                         </div>
                         <div className="flex mt-4">
                             <button
