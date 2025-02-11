@@ -30,6 +30,10 @@ const AboutUs = () => {
     const handleEnrollNow = () => {
         navigate('/register'); 
       };
+      const handleMoreAboutMeClick = (memberId) => {
+        console.log("Navigating to board member with id:", memberId);
+        navigate(`/board-member/${memberId}`);  // Replace with the correct route where you want to show more details
+      };
 
     // Fetch data from API
     useEffect(() => {
@@ -78,10 +82,10 @@ const AboutUs = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
         {/* First Column */}
         <div className="bg-gray-50 md:px-12 px-3 md:pt-32 pt-3 border-t rounded-tr-lg rounded-bl-lg shadow-md">
-          <h1 className="md:text-6xl text-2xl font-semibold font-lufga text-yellow-500 md:mb-8 mb-2">
+          <h1 className="md:text-6xl text-2xl font-semibold font-lufga text-yellow-500 md:mb-8 mb-2" data-aos="fade-down">
             About Us
           </h1>
-          <p className="text-gray-700 md:mb-12 mb-4 text-sm md:text-lg leading-relaxed">
+          <p className="text-gray-700 md:mb-12 mb-4 text-sm md:text-lg leading-relaxed" data-aos="fade-up">
             Promitto is a real estate company with a distinctive aim to boost
             and support individuals to achieve their dreams of homeownership
             through provision of affordable construction loans at competitive
@@ -135,8 +139,8 @@ const AboutUs = () => {
             <span >
                 <img src={visionSvg} alt="Vision Icon" className="md:w-16 md:h-16 w-10 h-10 md:mt-8 mt-3 md:mb-4 mb-3  rounded-full md:p-3 p-1 bg-yellow-400" />
                 </span>
-                <h2 className="md:text-lg text-sm text-yellow-500 fonf-lufga font-medium md:mb-4 mb-1">Our Vision</h2>
-                <p className="text-gray-600 md:text-sm text-sm  md:mb-8 mb-5 leading-relaxed">
+                <h2 className="md:text-lg text-sm text-yellow-500 fonf-lufga font-medium md:mb-4 mb-1" data-aos="fade-down">Our Vision</h2>
+                <p className="text-gray-600 md:text-sm text-sm  md:mb-8 mb-5 leading-relaxed" data-aos="fade-up">
                 To be your trusted partner to home ownership.
                 </p>
             </div>
@@ -173,8 +177,8 @@ const AboutUs = () => {
                     />
                 </span>
 
-                <h2 className="md:text-lg text-sm  fonf-lufga font-medium md:mb-2 mb-1">Our Mission</h2>
-                <p className="text-gray-800 text-sm mb-7 leading-relaxed">
+                <h2 className="md:text-lg text-sm  fonf-lufga font-medium md:mb-2 mb-1" data-aos="fade-down">Our Mission</h2>
+                <p className="text-gray-800 text-sm mb-7 leading-relaxed" data-aos="fade-up">
                 Empower individuals to become home owners.
                 </p>
             </div>
@@ -183,7 +187,7 @@ const AboutUs = () => {
       </div>
       <div className="shadow bg-gray-50 pb-4 rounded-md">
       {/* Main Title */}
-      <p className="text-yellow-500 text-4xl mt-12 ml-2 font-medium text-center pt-10">Our Team</p>
+      <p className="text-yellow-500 text-4xl mt-12 ml-2 font-medium text-center pt-10" data-aos="fade-down">Our Team</p>
       
       {/* Description */}
       <p className="md:text-center text-gray-500 text-left text-sm md:mt-4 px-4 md:mx-40 md:px-36">
@@ -198,33 +202,36 @@ const AboutUs = () => {
 
       {/* Board Members */}
       <div className="mt-6 grid grid-cols-1 md:grid-cols-5 gap-3">
-  {boardMembers.map(member => (
-    <div key={member.id} className="relative bg-white  overflow-hidden">
-      {/* Image */}
-    
-      <img
-        src={member.image_url}
-        alt={member.name}
-        className="w-full md:h-80 h-auto object-cover rounded-2xl" 
-      />
-  
-      {/* Member Details */}
-      <div className="absolute md:bottom-2 bottom-4 left-1/2 transform -translate-x-1/2 w-3/4 bg-white px-1 py-1 rounded-md z-10 text-center">
-        <h2 className="text-sm text-yellow-500 font-semibold">{member.name}</h2>
-        <p className=" text-sm font-medium">{member.role}</p>
-        <a
-          href="#"
-          className="text-blue-500 text-xs underline mt-1 inline-block"
-        >
-          More about me
-        </a>
+         {boardMembers.map(member => (
+            <div key={member.id} className="relative bg-white  overflow-hidden">
+            {/* Image */}
+            
+            <img
+                src={member.image_url}
+                alt={member.name}
+                className="w-full md:h-80 h-auto object-cover rounded-2xl" 
+            />
+        
+            {/* Member Details */}
+            <div className="absolute md:bottom-2 bottom-4 left-1/2 transform -translate-x-1/2 w-3/4 bg-white px-1 py-1 rounded-md z-10 text-center">
+                <h2 className="text-sm text-yellow-500 font-semibold">{member.name}</h2>
+                <p className=" text-sm font-medium">{member.role}</p>
+                <a
+                href="#"
+                className="text-blue-500 text-xs underline mt-1 inline-block"
+                onClick={() => handleMoreAboutMeClick(member.id)}
+
+                >
+                More about me
+                </a>
       </div>
     </div>
   ))}
 </div>
 <div>
   <h1 className="text-center  items-center mt-8 text-2xl font-semibold">Operations Team</h1>
-  <div className="mt-6 grid grid-cols-1 md:grid-cols-7 gap-2 justify-between">
+  <div className="">
+  <div className="mt-6 grid grid-cols-1 md:grid-cols-7 gap-2 justify-center w-full">
     {operationsTeam.slice(
       0,
       showAll || 
@@ -250,8 +257,11 @@ const AboutUs = () => {
             {member.email}
           </a>
         </div>
+    
       </div>
+    
     ))}
+  </div>
   </div>
 
   {/* Show More Button */}
@@ -270,37 +280,37 @@ const AboutUs = () => {
 
     </div>
     <div className=" md:mt-12 mt-6 md:text-center ">
-    <p className=" text-yellow-500 font-lufga text-center font-medium md:text-4xl"> Ongoing Projects</p>
+    <p className=" text-yellow-500 font-lufga text-center font-medium md:text-4xl" data-aos="fade-down"> Ongoing Projects</p>
     <p className="md:text-sm text-[10px] text-gray-600  md:mx-60 md:px-24 px-2 md:mt-4 mt-1 ">At Promitto LTD, our clients are at the heart of everything we do.
          From first-time homebuyers to seasoned investors, our diverse clientele 
         has entrusted us with their real estate needs, and we have delivered outstanding results time and time again.</p>
 </div>
 <div>
 <div>
-      <div className="grid grid-cols-1 md:mx-28 mt-4 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:mx-28 mt-4 ml-3 md:grid-cols-3 gap-6">
         {displayedProjects.map((project) => (
           <div
             key={project.id}
-            className="flex flex-col md:flex-row items-center bg-white overflow-hidden"
+            className="flex flex-row items-center bg-white overflow-hidden"
           >
             {/* Left Column - Image */}
-            <div className="flex-shrink-0 w-full md:w-1/3">
+            <div className="flex-shrink-0 w-1/3">
               <img
                 src={project.images[0]}
                 alt={`Project in ${project.location}`}
-                className="w-full h-32 rounded-lg object-cover"
+                className="w-full h-24 rounded-lg object-cover"
               />
             </div>
 
             {/* Right Column - Project Details */}
             <div className="p-4 md:w-2/3">
               <span className="flex flex-col">
-                <h2 className="text-sm text-gray-600 font-medium mt-1">Project Type:</h2>
-                <p className="text-xs mt-1 font-semibold">{project.description}</p>
+                <h2 className="md:text-sm text-xs text-gray-600 font-medium mt-1">Project Type:</h2>
+                <p className="md:text-xs text-[9px] md:mt-1 font-semibold">{project.description}</p>
               </span>
               <div className="flex flex-col">
-                <p className="text-gray-600 text-sm font-medium mt-2">Location:</p>
-                <p className="text-xs font-semibold">{project.location}</p>
+                <p className="text-gray-600 text-xs md:text-sm font-medium md:mt-2 mt-1">Location:</p>
+                <p className="text-[9px] md:text-xs font-semibold">{project.location}</p>
               </div>
             </div>
           </div>
@@ -312,7 +322,7 @@ const AboutUs = () => {
         <div className="text-center mt-4">
           <button
             onClick={toggleDisplayAll}
-            className="px-4 py-1 bg-yellow-600 text-white rounded-md hover:bg-yellow-400"
+            className="px-4 py-1 bg-yellow-600 text-sm font-semibold text-white rounded-md hover:bg-yellow-400"
           >
             {displayAll ? 'Show Less' : 'Show More'}
           </button>
@@ -321,81 +331,81 @@ const AboutUs = () => {
     </div>
 
 </div>
-<div> 
-    <h1 className="text-yellow-500 text-center md:mt-12 font-lufga text-4xl  font-medium md:mb-6 mb-2"> Our Core Values</h1>
-    <p className="text-center md:mx-60 font-poppins text-gray-600 md:px-24 text-sm "> At Promitto LTD, our core values serve as the guiding principles that shape every aspect of our business.
+<div className="md:block hidden "> 
+    <h1 className="text-yellow-500 text-center md:mt-12 mt-4 font-lufga text-lg md:text-4xl font-medium md:mb-6 " data-aos="fade-down"> Our Core Values</h1>
+    <p className="text-center md:mx-60 font-poppins text-gray-600 md:px-24 md:text-sm text-xs "> At Promitto LTD, our core values serve as the guiding principles that shape every aspect of our business.
     These core values are not just words; they are the essence of XYZ Real Estate, shaping our culture and ensuring that we
      consistently deliver the highest standard of service and results. </p>
 </div>
-<div class="container mx-auto px-4">
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<div class="container md:block hidden  md:mx-auto md:px-4">
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-">
    
-    <div class="p-6  flex ">
+    <div class="md:p-6  flex ">
         
-      <div class="text-4xl font-medium font-manrope mr-2 text-yellow-500">01</div>
+      <div class="md:text-4xl text-xl font-medium font-manrope mr-2 text-yellow-500">01.</div>
       <div>
-      <h3 class="text-xl font-lufga font-semibold ">Trust.</h3>
-      <p class="mt-1 text-xs text-gray-500">Trust is a fundamental core value at Promitto LTD. We understand that trust is the cornerstone of
+      <h3 class="text-sm md:text-xl font-lufga font-semibold ">Trust.</h3>
+      <p class="md:mt-1 text-[9px] md:text-xs text-gray-500">Trust is a fundamental core value at Promitto LTD. We understand that trust is the cornerstone of
          any successful relationship, and we work diligently to earn and maintain the trust of our clients.</p>
          </div>
     </div>
-    <div class="p-6  flex">
-      <div class="text-4xl font-medium font-manrope mr-2 text-yellow-500">02</div>
+    <div class="md:p-6   flex">
+      <div class="md:text-4xl text-sm font-medium font-manrope mr-2 text-yellow-500">02.</div>
       <div>
-      <h3 class="text-xl font-lufga font-semibold ">Customer Satisfaction.</h3>
-      <p class="mt-1 text-xs text-gray-500">We are committed to providing exceptional customer service, 
+      <h3 class="text-sm md:text-sm font-lufga font-semibold ">Customer Satisfaction.</h3>
+      <p class="md:mt-1 text-[9px] md:text-xs text-gray-500">We are committed to providing exceptional customer service, 
         treating each client with respect, and ensuring their satisfaction throughout their real estate journey.</p>
         </div>
     </div>
-    <div class="p-6  flex">
-      <div class="text-4xl font-medium font-manrope mr-2 text-yellow-500">03</div>
+    <div class="md:p-6  flex">
+      <div class="md:text-4xl text-sm font-medium font-manrope mr-2 text-yellow-500">03.</div>
       <div>
-      <h3 class="text-xl font-lufga font-semibold ">Innovation.</h3>
-      <p class="mt-1 text-xs text-gray-500">Our dedication to excellence drives us to constantly improve, 
+      <h3 class="text-sm md:text-xl font-lufga font-semibold ">Innovation.</h3>
+      <p class="md:mt-1 text-[9px] md:text-xs text-gray-500">Our dedication to excellence drives us to constantly improve, 
         staying at the forefront of industry trends and delivering outstanding quality in every interaction.</p>
         </div>
     </div>
-    <div class="p-6  flex">
-      <div class="text-4xl font-medium font-manrope mr-2 text-yellow-500">04</div>
+    <div class="md:p-6   flex">
+      <div class="md:text-4xl text-sm font-medium font-manrope mr-2 text-yellow-500">04.</div>
       <div>
-      <h3 class="text-xl font-lufga font-semibold ">Inclusion.</h3>
-      <p class="mt-1 text-xs text-gray-500">We embrace collaboration, working closely with our clients, 
+      <h3 class="text-sm md:text-xl font-lufga font-semibold ">Inclusion.</h3>
+      <p class="md:mt-1 text-[9px] md:text-xs text-gray-500">We embrace collaboration, working closely with our clients, 
         partners, and team members to foster strong relationships and achieve mutual success.</p>
         </div>
     </div>
-    <div class="p-6  flex">
-      <div class="text-4xl font-medium font-manrope mr-2 text-yellow-500">05</div>
+    <div class="md:p-6   flex">
+      <div class="md:text-4xl text-sm font-medium font-manrope mr-2 text-yellow-500">05.</div>
       <div>
-      <h3 class="text-xl font-lufga font-semibold ">Impact.</h3>
-      <p class="mt-1 text-xs text-gray-500">We work together, across boundaries, to meet the needs of our clients.</p>
+      <h3 class="text-sm md:text-xl font-lufga font-semibold ">Impact.</h3>
+      <p class="md:mt-1 text-[9px] md:text-xs text-gray-500">We work together, across boundaries, to meet the needs of our clients.</p>
       </div>
     </div>
-    <div class="p-6  flex">
-      <div class="text-4xl font-medium font-manrope mr-2 text-yellow-500">06</div>
+    <div class="md:p-6   flex">
+      <div class="md:text-4xl text-sm font-medium font-manrope mr-2 text-yellow-500">06.</div>
       <div>
-      <h3 class="text-xl font-lufga font-semibold ">Integrity.</h3>
-      <p class="mt-1 text-xs text-gray-500">Integrity is the foundation upon which we operate, as we believe in transparent
+      <h3 class="text-sm md:text-xl font-lufga font-semibold ">Integrity.</h3>
+      <p class="md:mt-1 text-[9px] md:text-xs text-gray-500">Integrity is the foundation upon which we operate, as we believe in transparent
          and ethical practices, always putting the best interests of our clients first. </p>
          </div>
     </div>
   </div>
 
 </div>
-<h1 className="text-center text-3xl md:my-16 font-medium text-yellow-500 font-lufga">Our Packages</h1>
+<h1 className="text-center md:text-3xl text-xl mt-4 md:my-16 font-medium text-yellow-500 font-lufga" data-aos="fade-down">Our Packages</h1>
 
 <div>
 </div>
-<div class="container mx-auto px-4">
+<div class="container md:mx-auto md:px-4">
   <div class="flex flex-wrap">
     <div class="w-full md:w-1/3 p-4">
-      <div class="border rounded-3xl p-6 shadow-lg">
+      <div class="border md:rounded-3xl rounded-lg md:p-6 p-3 md:shadow-lg">
         <div className="flex pb-4 border-b-2  border-yellow-300">
             <div>
-             <h1 className="text-2xl font-medium font-manrope mr-2 text-yellow-500">01.</h1>
+             <h1 className="md:text-2xl text-xl font-medium font-manrope mr-2 text-yellow-500">01.</h1>
             </div>
             <div>
-            <h2 class="text-lg font-lufga font-semibold">Residential/Commercial Package</h2>
-            <p class="text-gray-500 text-sm mt-1">
+            <h2 class="md:text-lg text-sm font-lufga font-semibold">Residential/Commercial Package</h2>
+            <p class="text-gray-500 text-xs mt-1" data-aos="fade-right">
             We Finance the construction of both Residential and Commercial/Rental projects.
             The repayment period ranges from 7-10yrs respectively with an interest of 12% on reducing balance.
             </p>
@@ -404,11 +414,11 @@ const AboutUs = () => {
         </div>
         <div className="flex pb-4 border-b-2 mt-4 border-yellow-300">
             <div>
-             <h1 className="text-2xl font-medium font-manrope mr-2 text-yellow-500">02.</h1>
+             <h1 className="md:text-2xl text-xl font-medium font-manrope mr-2 text-yellow-500">02.</h1>
             </div>
             <div>
-            <h2 class="text-lg font-lufga font-semibold">Perimeter Walls</h2>
-            <p class="text-gray-500 text-sm mt-1">
+            <h2 class="md:text-lg text-sm font-lufga font-semibold">Perimeter Walls</h2>
+            <p class="text-gray-500 md:text-sm text-xs mt-1" data-aos="fade-right">
             We Finance the construction of perimeter walls on your plot.
             The repayment period is 2 years with an interest of 12% on reducing balance.
             </p>
@@ -417,11 +427,11 @@ const AboutUs = () => {
         </div>
         <div className="flex pb-4 border-b-2 mt-4 border-yellow-300">
             <div>
-             <h1 className="text-2xl font-medium font-manrope mr-2 text-yellow-500">03.</h1>
+             <h1 className="md:text-2xl text-xl font-medium font-manrope mr-2 text-yellow-500">03.</h1>
             </div>
             <div>
-            <h2 class="text-lg font-lufga font-semibold">Renovations/Finishings</h2>
-            <p class="text-gray-500 text-sm mt-1">
+            <h2 class="text-sm md:text-lg font-lufga font-semibold">Renovations/Finishings</h2>
+            <p class="text-gray-500 md:text-sm text-xs mt-1" data-aos="fade-right">
             We Finance doing renovations and/or finishings for our clients.
              The repayment period is 5yrs with an interest of 12% interest on reducing balance.
             </p>
@@ -433,8 +443,8 @@ const AboutUs = () => {
     </div>
 
     <div class="hidden md:block w-full md:w-2/3 p-4">
-      <div class="border bg-yellow-400 rounded-3xl p-12 shadow-lg">
-        <h2 class="md:text-5xl text-3xl md:mt-12 md:ml-6 font-lufga font-semibold">Become a home owner today by Enrolling as a member</h2>
+      <div class="border bg-yellow-400 rounded-3xl p-8 shadow-lg">
+        <h2 class="md:text-5xl text-3xl md:mt-12 md:ml-6 font-lufga font-semibold" data-aos="fade-left">Become a home owner today by Enrolling as a member</h2>
         <p class="text-gray-800 md:mt-8 md:ml-6 ">
         Here at Promitto Ltd we to turn your dreams into reality, as 
         we pride ourselves on delivering extraordinary service, impeccable quality, and unforgettable living experiences.
@@ -492,32 +502,33 @@ const AboutUs = () => {
       className="object-contain w-72 h- rounded-lg"  
     />
   </div>
-  <div className="rounded-lg border md:pb-4 md:pt-2 md:px-4 shadow-md">
-  <h2 className="text-2xl text-center font-medium font-lufga mb-3 text-yellow-400">
+  <div className="rounded-lg border md:pb-4 pb-2 pt-2 md:px-4 shadow-md"  data-aos="fade-left"
+  >
+  <h2 className="md:text-2xl text-xl text-center font-medium font-lufga mb-3 text-yellow-600">
     Requirements for Registration
   </h2>
-  <ul className="pl-5 list-inside">
-    <li className="text-lg border-b-2 border-yellow-400 pb-2 pr-3 px-3 text-gray-700 text-medium mt-2 flex items-center">
+  <ul className="pl-5 text-sm md:text-lg pb-2 pr-2 md:pr-3 list-inside">
+    <li className="md:border-b-2 border-b border-yellow-400 pb-2 pr-3 px-3 text-gray-700 text-medium mt-2 flex items-center">
       <span className="inline-block w-1.5 h-1.5 mr-3  rounded-full bg-yellow-400"></span>
       Copy of National ID
     </li>
-    <li className="text-lg text-gray-700 text-medium border-b-2 border-yellow-400 pb-2 pr-3 px-3  mt-2 flex items-center">
+    <li className=" text-gray-700 text-medium md:border-b-2 border-b border-yellow-400 pb-2 pr-3 px-3  mt-2 flex items-center">
       <span className="inline-block w-1.5 h-1.5  mr-3 rounded-full bg-yellow-400"></span>
       Copy of KRA certificate
     </li>
-    <li className="text-lg text-gray-700 text-medium border-b-2 border-yellow-400 pb-2 pr-3 px-3  mt-2 flex items-center">
+    <li className=" text-gray-700 text-medium md:border-b-2 border-b border-yellow-400 pb-2 pr-3 px-3  mt-2 flex items-center">
       <span className="inline-block w-1.5 h-1.5  mr-3 rounded-full bg-yellow-400"></span>
       Copy of Title Deed
     </li>
-    <li className="text-lg text-gray-700 text-medium border-b-2 border-yellow-400 pb-2 pr-3 px-3  mt-2 flex items-center">
+    <li className=" text-gray-700 text-medium md:border-b-2 border-b border-yellow-400 pb-2 pr-3 px-3  mt-2 flex items-center">
       <span className="inline-block w-1.5 h-1.5  mr-3 rounded-full bg-yellow-400"></span>
       PIN of site location
     </li>
-    <li className="text-lg text-gray-700 text-medium border-b-2 border-yellow-400 pb-2 pr-3 px-3  mt-2 flex items-center">
+    <li className=" text-gray-700 text-medium md:border-b-2 border-b border-yellow-400 pb-2 pr-3 px-3  mt-2 flex items-center">
       <span className="inline-block w-1.5 h-1.5  mr-3 rounded-full bg-yellow-400"></span>
       House Design
     </li>
-    <li className="text-lg text-gray-700 text-medium border-b-2 border-yellow-400 pb-2 pr-3 px-3  mt-2 flex items-center">
+    <li className=" text-gray-700 text-medium md:border-b-2 border-b border-yellow-400 pb-2 pr-3 px-3  mt-2 flex items-center">
       <span className="inline-block w-1.5 h-1.5  mr-3 rounded-full bg-yellow-400"></span>
       Evaluation fee of Ksh. 30,000 
     </li>

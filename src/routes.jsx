@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Dreams from './components/ChooseDreamHome'; 
-import BoardMembers from './components/BoardMembers';
+import BoardMember from './components/BoardMember';
 import AboutUs from './components/AboutUs';
 import WelcomeMember from './components/WelcomeMember';
 import Register from './components/Register';
@@ -17,6 +17,8 @@ import AddOngoingHouse from './components/AddOngoingHouse';
 import DeleteHousesDone from './components/DeleteHousesDone';
 import DeleteHousesOngoing from './components/DeleteOngoing';
 import AddUser from './components/AddUser';
+import AddDesign from './components/HouseDesignCreate';
+import AddDesigned from './components/HouseDesignForm';
 import UserTable from './components/UserTable';
 import PublicView from './components/PublicMembers'
 import HousesOngoingImages from './components/HousesOngoingImages'
@@ -29,7 +31,7 @@ const AppRoutes = () => {
     <Routes>
       {/* Public routes */}
       <Route path="/" element={<Dreams />} />  
-      <Route path="/boardmembers" element={<BoardMembers />} /> 
+      <Route path="/board-member/:memberId" element={<BoardMember />} /> 
       <Route path="/aboutus" element={<AboutUs />} /> 
       <Route path="/welcome" element={<WelcomeMember />} /> 
       <Route path="/register" element={<Register />} /> 
@@ -45,6 +47,22 @@ const AppRoutes = () => {
 
 
       {/* Protected routes */}
+      <Route 
+        path="/add/design" 
+        element={
+          <PrivateRoute>
+            <AddDesign />
+          </PrivateRoute>
+        } 
+      /> 
+       <Route 
+        path="/add/designed" 
+        element={
+          <PrivateRoute>
+            <AddDesigned />
+          </PrivateRoute>
+        } 
+      />
       <Route 
         path="/house/done" 
         element={
