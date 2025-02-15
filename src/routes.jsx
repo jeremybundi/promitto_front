@@ -20,9 +20,11 @@ import AddUser from './components/AddUser';
 import AddDesign from './components/HouseDesignCreate';
 import AddDesigned from './components/HouseDesignForm';
 import UserTable from './components/UserTable';
+import AddTerms from './components/LoanTermsForm';
 import PublicView from './components/PublicMembers'
 import HousesOngoingImages from './components/HousesOngoingImages'
 import HousesDoneImages from './components/HousesDoneImages'
+import HowToOwn from './components/HowToOwn';
 
 
 // Define all your app routes here
@@ -33,6 +35,7 @@ const AppRoutes = () => {
       <Route path="/" element={<Dreams />} />  
       <Route path="/board-member/:memberId" element={<BoardMember />} /> 
       <Route path="/aboutus" element={<AboutUs />} /> 
+      <Route path="/how/to/own" element={<HowToOwn />} /> 
       <Route path="/welcome" element={<WelcomeMember />} /> 
       <Route path="/register" element={<Register />} /> 
       <Route path="/color" element={<CardColor />} />  
@@ -52,6 +55,14 @@ const AppRoutes = () => {
         element={
           <PrivateRoute>
             <AddDesign />
+          </PrivateRoute>
+        } 
+      /> 
+      <Route 
+        path="/Add/loans" 
+        element={
+          <PrivateRoute>
+            <AddTerms />
           </PrivateRoute>
         } 
       /> 
