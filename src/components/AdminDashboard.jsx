@@ -5,7 +5,7 @@ const AdminDashboard = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="p-6 max-w-lg mx-auto mt-2 bg-white rounded-xl md:mb-12 font-poppins shadow space-y-4">
+    <div className="p-6 max-w-xl mx-auto mt-2 bg-white rounded-xl md:mb-12 font-poppins shadow space-y-4">
       <h2 className="text-2xl font-semibold font-lufga text-center">Admin Dashboard</h2>
       <div className="space-y-4 mb-6 font-semibold">
         {/* First Row */}
@@ -39,7 +39,7 @@ const AdminDashboard = () => {
           </button>
         </div>
         {/* Third Row */}
-        <div className="flex space-x-5 mt-3 ">
+        <div className="flex space-x-5 mt-3">
           <button
             onClick={() => navigate('/add/user')}
             className="w-full md:py-3 md:px-4 p-2 text-xs font-medium md:text-lg bg-purple-500 font-poppins text-white rounded-lg hover:bg-purple-600 transition duration-300"
@@ -51,6 +51,36 @@ const AdminDashboard = () => {
             className="w-full md:py-3 md:px-4 p-2 font-medium text-xs md:text-lg bg-red-500 font-poppins text-white rounded-lg hover:bg-red-600 transition duration-300"
           >
             Manage Users
+          </button>
+        </div>
+        {/* New Row for File Management */}
+        <div className="flex space-x-5 mt-3">
+          <button
+            onClick={() => navigate('/upload/file')}
+            className="w-full md:py-3 md:px-4 p-2 text-xs font-medium md:text-lg bg-teal-500 font-poppins text-white rounded-lg hover:bg-teal-600 transition duration-300"
+          >
+            Add File
+          </button>
+          <button
+            onClick={() => navigate('/delete/file')}
+            className="w-full md:py-3 md:px-4 p-2 text-xs font-medium md:text-lg bg-indigo-500 font-poppins text-white rounded-lg hover:bg-indigo-600 transition duration-300"
+          >
+            Manage Files
+          </button>
+        </div>
+        {/* New Row for House Designs */}
+        <div className="flex space-x-5 mt-3">
+          <button
+            onClick={() => navigate('/add/design')}
+            className="w-full md:py-3 md:px-4 p-2 text-xs font-medium md:text-lg bg-green-600 font-poppins text-white rounded-lg hover:bg-green-700 transition duration-300"
+          >
+            Add House Designs
+          </button>
+          <button
+            onClick={() => navigate('/delete/house')}
+            className="w-full md:py-3 md:px-4 p-2 text-xs font-medium md:text-lg bg-blue-600 font-poppins text-white rounded-lg hover:bg-blue-700 transition duration-300"
+          >
+            Manage Designs
           </button>
         </div>
       </div>

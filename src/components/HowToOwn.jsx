@@ -4,6 +4,11 @@ import axios from "axios";
 import image1 from "../../src/assets/images/image1.png";
 import sail from "../../src/assets/images/sail.png";
 import path from "../../src/assets/images/Path.png";
+import HouseDesignFeatures from "./HouseDesignFeatures"; 
+import ConstructionProcess from "./ConstructionProcess";
+import Download from "./Download";
+
+
 
 
 export default function HowToOwn() {
@@ -14,7 +19,7 @@ export default function HowToOwn() {
     axios
       .get("https://api4.promittoltd.com/loan-terms/getAll")
       .then((response) => {
-        console.log("API Response:", response.data); // Log response
+        console.log("API Response:", response.data); 
         setTerms(response.data);
       })
       .catch((error) => {
@@ -123,110 +128,128 @@ className="ml-1"
   
       </div>
      {/* Terms and Conditions Section */}
-     <div className="mt-10 p-6 mx-20">
-        <h2 className="text-4xl font-medium text-center text-yellow-400 mb-12">Our Terms and Conditions</h2>
-        {terms.length > 0 ? (
-          terms.map((term) => (
-            <div key={term.id} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="px-6">
-                <h3 className="text-3xl font-medium text-yellow-400 mb-6">01. Loan Security.</h3>
-                <p className="font-semibold mb-4">Borrower agrees that on or before the date of this agreement shall deliver the following document to the lender;</p>
+<div className="mt-10 p-6 ">
+  <h2 className="text-4xl font-medium text-center text-yellow-400 mb-12">
+    Our Terms and Conditions
+  </h2>
+  {terms.length > 0 ? (
+    terms.map((term) => (
+      <div key={term.id} className="space-y-6">
+        {/* Loan Security & Image - Same Row */}
+        <div className="grid grid-cols-1 mx-16 md:grid-cols-2 gap-6">
+          {/* Loan Security */}
+          <div className="px-6 mb-">
+            <h3 className="text-3xl font-medium text-yellow-400 mb-6">01. Loan Security.</h3>
+            <p className="font-semibold mb-4">
+              Borrower agrees that on or before the date of this agreement shall
+              deliver the following document to the lender;
+            </p>
+            <ul className="list-disc pl-6 text-sm mb-20 text-gray-700">
+              {term.loan_security
+                ?.replace(/\\n/g, "\n")
+                .split("\n")
+                .map(line => line.replace(/^-?\s*/, ""))
+                .filter(line => line.trim() !== "")
+                .map((security, index) => (
+                  <li key={index}>{security}</li>
+                ))}
+            </ul>
+          </div>
 
-<ul className="list-disc pl-6 text-sm text-gray-700">
-  {term.loan_security
-    ?.replace(/\\n/g, "\n") 
-    .split("\n")
-    .map(line => line.replace(/^-?\s*/, "")) 
-    .filter(line => line.trim() !== "") 
-    .map((security, index) => (
-      <li key={index}>{security}</li>
-    ))}
-</ul>
+          {/* Image */}
+          <div className="px-6">
+            <img src={path} alt="Loan Security" className="w-full mt-5 mb-4" />
+          </div>
+        </div>
 
+        {/* Other Terms in Two Columns (Different Divs) */}
+        <div className="grid grid-cols-1 bg-gray-100 mx-8 px-12 shadow-lg rounded-2xl  py-24 md:grid-cols-2 gap-6">
+          {/* Left Column */}
+          <div className="px-6">
+          <h3 className="text-3xl font-medium text-yellow-400 mb-6">02. Loan Terms.</h3>
 
+          <h3 className="text-xl font-semibold text-gray-800 mb-4">(A). Deposits</h3>
+            <ul className="list-disc pl-6 text-sm text-gray-700">
+              {term.deposits
+                ?.replace(/\\n/g, "\n")
+                .split("\n")
+                .map(line => line.replace(/^-?\s*/, ""))
+                .filter(line => line.trim() !== "")
+                .map((deposit, index) => (
+                  <li key={index}>{deposit}</li>
+                ))}
+            </ul>
 
-  
+            <h3 className="text-xl my-4 font-semibold text-gray-800 mb-2">(C). Expenses</h3>
+            <ul className="list-disc pl-6 text-sm text-gray-700">
+              {term.expenses
+                ?.replace(/\\n/g, "\n")
+                .split("\n")
+                .map(line => line.replace(/^-?\s*/, ""))
+                .filter(line => line.trim() !== "")
+                .map((expense, index) => (
+                  <li key={index}>{expense}</li>
+                ))}
+            </ul>
+          </div>
 
-<h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">Expenses</h3>
-<ul className="list-disc pl-6 text-gray-700">
-  {term.expenses
-    ?.replace(/\\n/g, "\n") 
-    .split("\n")
-    .map(line => line.replace(/^-?\s*/, "")) 
-    .filter(line => line.trim() !== "") 
-    .map((expense, index) => (
-      <li key={index}>{expense}</li>
-    ))}
-</ul>
+          {/* Right Column */}
+          <div className="px-6">
+        
+          <h3 className="text-xl font-semibold text-gray-800 mt-16 mb-3">(B). Loan Repayment Term</h3>
+            <ul className="list-disc pl-6 text-sm text-gray-700">
+              {term.loan_repayment_term
+                ?.replace(/\\n/g, "\n")
+                .split("\n")
+                .map(line => line.replace(/^-?\s*/, ""))
+                .filter(line => line.trim() !== "")
+                .map((item, index) => (
+                  <li key={index}>{item}</li>
+                ))}
+            </ul>
 
-<h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">Loan Repayment Term</h3>
-<ul className="list-disc pl-6 text-gray-700">
-  {term.loan_repayment_term
-    ?.replace(/\\n/g, "\n") 
-    .split("\n")
-    .map(line => line.replace(/^-?\s*/, "")) 
-    .filter(line => line.trim() !== "") 
-    .map((item, index) => (
-      <li key={index}>{item}</li>
-    ))}
-</ul>
-</div>
+            <h3 className="text-xl font-semibold text-yellow-500 mt-4 mb-2">A customer can default a loan in three ways:</h3>
+            <ul className="list-disc pl-6 text-sm text-gray-700">
+              {term.default_a_loan
+                ?.replace(/\\n/g, "\n")
+                .split("\n")
+                .map(line => line.replace(/^-?\s*/, ""))
+                .filter(line => line.trim() !== "")
+                .map((defaultItem, index) => (
+                  <li key={index}>{defaultItem}</li>
+                ))}
+            </ul>
 
-<div className="px-6">
-    <div>
-
-    <img src={path} alt="path" className="w-full mt-5 mb-4" />
-
-    </div>
-
-    <h3 className="text-xl font-semibold text-gray-800 mb-2">Deposits</h3>
-<ul className="list-disc pl-6 text-gray-700">
-  {term.deposits
-    ?.replace(/\\n/g, "\n") // Converts escaped "\n" into real newlines
-    .split("\n")
-    .map(line => line.replace(/^-?\s*/, "")) // Removes leading "-" or spaces
-    .filter(line => line.trim() !== "") // Removes empty lines
-    .map((deposit, index) => (
-      <li key={index}>{deposit}</li>
-    ))}
-</ul>
-
-
-
-              
-              <h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">Defaulting a Loan</h3>
-<ul className="list-disc pl-6 text-gray-700">
-  {term.default_a_loan
-    .replace(/\\n/g, "\n") // Converts escaped "\n" into real newlines
-    .split("\n")
-    .map(line => line.replace(/^-?\s*/, "")) // Removes leading "-" or extra spaces
-    .filter(line => line.trim() !== "") // Filters out empty lines
-    .map((defaultItem, index) => (
-      <li key={index}>{defaultItem}</li>
-    ))}
-</ul>
-
-              
-              <h3 className="text-xl font-semibold text-gray-800 mt-4 mb-2">Actionables</h3>
-<ul className="list-disc pl-6 text-gray-700">
-  {term.actionables
-    .replace(/\\n/g, "\n") // Converts literal "\n" into actual newlines
-    .split("\n")
-    .map(action => action.replace(/^-?\s*/, "")) // Remove leading "- " or "-"
-    .filter(line => line.trim() !== "")
-    .map((action, index) => (
-      <li key={index}>{action}</li>
-    ))}
-</ul>
-</div>
-
-
-            </div>
-          ))
-        ) : (
-          <p className="text-gray-500">Loading terms...</p>
-        )}
+            <h3 className="text-xl font-semibold text-yellow-500 mt-4 mb-2">Actionables</h3>
+            <p className="text-sm italic text-gray-500 mb-2">If the client fails to repay any instalment 
+                 within 60 days, the directive will be to:</p>
+            <ul className="list-disc pl-6 text-sm text-gray-700">
+              {term.actionables
+                ?.replace(/\\n/g, "\n")
+                .split("\n")
+                .map(action => action.replace(/^-?\s*/, ""))
+                .filter(line => line.trim() !== "")
+                .map((action, index) => (
+                  <li key={index}>{action}</li>
+                ))}
+            </ul>
+          </div>
+        </div>
       </div>
+    ))
+  ) : (
+    <p className="text-gray-500">Loading terms...</p>
+  )}
+</div>
+
+   {/* Import the HouseDesignFeatures component here */}
+   <HouseDesignFeatures />
+   <ConstructionProcess />
+
+   <Download />
+
+
+
     </div>
       
     );

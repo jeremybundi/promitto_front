@@ -1,39 +1,45 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useSelector } from "react-redux"; // Import the useSelector hook
+import { useNavigate } from "react-router-dom";
+
+
 
 const HouseDesignCreate = () => {
-  const [name, setName] = useState("");
-  const [features, setFeatures] = useState("");
-  const [designs, setDesigns] = useState([{ name: "", features: "", images: [] }]);
-  const [files, setFiles] = useState([]);
+  const [houseType, setHouseType] = useState("");
+  const [designs, setDesigns] = useState([{ name: "", cost: "", features: "", images: [] }]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+    const navigate = useNavigate();
+  
 
   // Get the token from the Redux store
   const token = useSelector((state) => state.auth.token);
 
-  const handleAddDesign = () => {
-    setDesigns([...designs, { name: "", features: "", images: [] }]);
+  const handleHouseTypeChange = (e) => {
+    setHouseType(e.target.value);
   };
 
-  const handleRemoveDesign = (index) => {
-    const newDesigns = [...designs];
-    newDesigns.splice(index, 1);
-    setDesigns(newDesigns);
+  const handleDesignChange = (index, field, value) => {
+    const updatedDesigns = [...designs];
+    updatedDesigns[index][field] = value;
+    setDesigns(updatedDesigns);
   };
 
-  const handleInputChange = (e, index) => {
-    const { name, value } = e.target;
-    const newDesigns = [...designs];
-    newDesigns[index][name] = value;
-    setDesigns(newDesigns);
+  const handleFileChange = (index, event) => {
+    const files = event.target.files;
+    const updatedDesigns = [...designs];
+    updatedDesigns[index].images = files;
+    setDesigns(updatedDesigns);
   };
 
-  const handleFileChange = (e, index) => {
-    const newFiles = [...files];
-    newFiles[index] = e.target.files;
-    setFiles(newFiles);
+  const addDesign = () => {
+    setDesigns([...designs, { name: "", cost: "", features: "", images: [] }]);
+  };
+
+  const removeDesign = (index) => {
+    const updatedDesigns = designs.filter((_, i) => i !== index);
+    setDesigns(updatedDesigns);
   };
 
   const handleSubmit = async (e) => {
@@ -42,19 +48,21 @@ const HouseDesignCreate = () => {
     setError("");
 
     const formData = new FormData();
-    formData.append("name", name);
-    formData.append("designs", JSON.stringify(designs));
-
-    // Append each file to FormData
-    files.forEach((fileSet, index) => {
-      Array.from(fileSet).forEach((file) => {
-        formData.append(`designs[${index}][images][]`, file);
+    formData.append("name", houseType);
+    
+    designs.forEach((design, index) => {
+      formData.append(`designs[${index}][name]`, design.name);
+      formData.append(`designs[${index}][cost]`, design.cost);
+      formData.append(`designs[${index}][features]`, JSON.stringify(design.features.split(",")));
+      
+      Array.from(design.images).forEach((file, fileIndex) => {
+        formData.append(`designs[${index}][images][${fileIndex}]`, file);
       });
     });
 
     try {
       const response = await axios.post(
-        "https://api4.promittoltd.com/house-designs", // Update with the correct API URL
+        "https://api4.promittoltd.com/house-designs", 
         formData,
         {
           headers: {
@@ -63,117 +71,111 @@ const HouseDesignCreate = () => {
           },
         }
       );
-      if (response.data.success) {
-        // Handle success (e.g., redirect or show success message)
-        alert("House designs created successfully");
-        console.log(response.data.success);
-      } else {
-        setError(response.data.error || "An error occurred.");
-      }
+      console.log("Success:", response.data);
+        // Reset the form state after successful submission
+        setHouseType("");
+        setDesigns([{ name: "", cost: "", features: "", images: [] }]);
+
     } catch (error) {
-      setError("An error occurred while creating the house designs.");
+      setError("Error submitting data");
+      console.error("Error submitting data:", error.response?.data || error.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Create House Design</h1>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {/* House Type Name */}
-        <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-            House Type Name
+    <form onSubmit={handleSubmit} className="p-4 space-y-4 bg-white rounded shadow-md">
+           <span className="flex mb-6 mx-6">
+        <h2 className="text-2xl font-semibold font-poppins mt-2 text-yellow-500 mb-4">Add House Designs </h2>
+      <button
+          onClick={() => navigate("/admin")}
+          className="bg-yellow-700 hover:bg-yelow-600 font-poppins text-white md:px-4 px-2 md:py-2 ml-auto mb-4 rounded-lg shadow-md"
+        >
+          Dashboard
+        </button>
+
+        </span> 
+      <label className="block">
+        House Type Name:
+        <input
+          type="text"
+          value={houseType}
+          onChange={handleHouseTypeChange}
+          className="block w-full p-2 border rounded"
+          required
+        />
+      </label>
+      
+      {designs.map((design, index) => (
+        <div key={index} className="p-4 border rounded">
+          <label className="block">
+            Design Name:
+            <input
+              type="text"
+              value={design.name}
+              onChange={(e) => handleDesignChange(index, "name", e.target.value)}
+              className="block w-full p-2 border rounded"
+              required
+            />
           </label>
-          <input
-            id="name"
-            type="text"
-            name="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-          />
-        </div>
-
-        {/* Design Sections */}
-        {designs.map((design, index) => (
-          <div key={index} className="border p-4 rounded-lg space-y-4">
-            <div>
-              <label htmlFor={`design-name-${index}`} className="block text-sm font-medium text-gray-700">
-                Design Name
-              </label>
-              <input
-                id={`design-name-${index}`}
-                type="text"
-                name="name"
-                value={design.name}
-                onChange={(e) => handleInputChange(e, index)}
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
-            <div>
-              <label htmlFor={`design-features-${index}`} className="block text-sm font-medium text-gray-700">
-                Features
-              </label>
-              <textarea
-                id={`design-features-${index}`}
-                name="features"
-                value={design.features}
-                onChange={(e) => handleInputChange(e, index)}
-                required
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
-
-            {/* Images */}
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Images</label>
-              <input
-                type="file"
-                onChange={(e) => handleFileChange(e, index)}
-                multiple
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-              />
-            </div>
-
-            {/* Remove Design Button */}
-            <button
-              type="button"
-              onClick={() => handleRemoveDesign(index)}
-              className="mt-2 text-red-500 hover:text-red-700"
-            >
-              Remove Design
-            </button>
-          </div>
-        ))}
-
-        {/* Add Design Button */}
-        <div>
+          <label className="block">
+            Cost:
+            <input
+              type="text"
+              value={design.cost}
+              onChange={(e) => handleDesignChange(index, "cost", e.target.value)}
+              className="block w-full p-2 border rounded"
+              required
+            />
+          </label>
+          <label className="block">
+            Features (comma-separated):
+            <input
+              type="text"
+              value={design.features}
+              onChange={(e) => handleDesignChange(index, "features", e.target.value)}
+              className="block w-full p-2 border rounded"
+              required
+            />
+          </label>
+          <label className="block">
+            Upload Images:
+            <input
+              type="file"
+              multiple
+              onChange={(e) => handleFileChange(index, e)}
+              className="block w-full p-2 border rounded"
+            />
+          </label>
           <button
             type="button"
-            onClick={handleAddDesign}
-            className="mt-2 px-4 py-2 text-white bg-indigo-600 hover:bg-indigo-700 rounded-md"
+            onClick={() => removeDesign(index)}
+            className="mt-2 text-red-500"
           >
-            Add Another Design
+            Remove Design
           </button>
         </div>
+      ))}
+      
+      <button
+        type="button"
+        onClick={addDesign}
+        className="p-2 bg-blue-500 text-white rounded"
+      >
+        Add Another Design
+      </button>
+      
+      <button
+        type="submit"
+        className="p-2 bg-green-500 text-white rounded"
+        disabled={loading}
+      >
+        {loading ? "Submitting..." : "Submit"}
+      </button>
 
-        {/* Error and Submit Button */}
-        {error && <p className="text-red-500">{error}</p>}
-        <div>
-          <button
-            type="submit"
-            disabled={loading}
-            className="px-4 py-2 text-white bg-blue-600 hover:bg-blue-700 rounded-md disabled:opacity-50"
-          >
-            {loading ? "Creating..." : "Create House Designs"}
-          </button>
-        </div>
-      </form>
-    </div>
+      {error && <p className="text-red-500">{error}</p>}
+    </form>
   );
 };
 

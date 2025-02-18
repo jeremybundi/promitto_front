@@ -1,3 +1,4 @@
+// store.js
 import { configureStore } from '@reduxjs/toolkit';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -26,4 +27,4 @@ const store = configureStore({
 
 const persistor = persistStore(store);
 
-export { store, persistor }; // Export both store and persistor
+export { store, persistor };

@@ -25,6 +25,10 @@ import PublicView from './components/PublicMembers'
 import HousesOngoingImages from './components/HousesOngoingImages'
 import HousesDoneImages from './components/HousesDoneImages'
 import HowToOwn from './components/HowToOwn';
+import FileUpload from './components/FileUpload';
+import FileDelete from './components/FileDelete';
+import HouseDelete from './components/EditHouseDesigns';
+
 
 
 // Define all your app routes here
@@ -50,6 +54,29 @@ const AppRoutes = () => {
 
 
       {/* Protected routes */}
+      <Route 
+        path="/delete/house" 
+        element={
+          <PrivateRoute>
+            <HouseDelete/>
+          </PrivateRoute>
+        } 
+      />        <Route 
+        path="/upload/file" 
+        element={
+          <PrivateRoute>
+            <FileUpload />
+          </PrivateRoute>
+        } 
+      /> 
+      <Route 
+        path="/delete/file" 
+        element={
+          <PrivateRoute>
+            <FileDelete />
+          </PrivateRoute>
+        } 
+      />
       <Route 
         path="/add/design" 
         element={
