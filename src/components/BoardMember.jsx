@@ -47,32 +47,32 @@ const BoardMember = () => {
           className="w-full h-auto object-cover "
         />
         <div className="text-center">
-          <h2 className="text-2xl font-semibold text-gray-800">{member.name}</h2>
-          <p className="text-lg text-yellow-400">{member.role}</p>
+          <h2 className="text-2xl font-semibold font-lufga text-gray-800">{member.name}</h2>
+          <p className="text-lg font-poppins text-yellow-500">{member.role}</p>
         </div>
       </div>
   
       {/* Second Column: About, Career History */}
       <div className="flex flex-col space-y-3 md:space-y-6">
         <div>
-          <h3 className="text-xl font-semibold text-gray-800">About</h3>
-          <p className="text-sm text-gray-600 mt-2">{member.about}</p>
+          <h3 className="text-xl font-semibold font-lufga text-yellow-500">About</h3>
+          <p className="text-lg font-poppins text-gray-500 mt-2">{member.about}</p>
         </div>
         <div>
-          <h3 className="text-xl font-semibold text-gray-800">Career History</h3>
-          <p className="text-sm text-gray-600 mt-2">{member.career_history}</p>
+          <h3 className="text-xl font-semibold font-lufga text-yellow-500">Career History</h3>
+          <p className="text-lg font-poppins text-gray-500 mt-2">{member.career_history}</p>
         </div>
       </div>
   
       {/* Third Column: Achievements, Expertise */}
       <div className="flex flex-col  md:space-y-6">
         <div>
-          <h3 className="text-xl font-semibold text-gray-800">Achievements</h3>
-          <p className="text-sm text-gray-600 mt-2">{member.achievements}</p>
+          <h3 className="text-xl  font-lufga font-semibold text-yellow-500">Achievements</h3>
+          <p className="text-lg font-poppins text-gray-500 mt-2">{member.achievements}</p>
         </div>
         <div>
-          <h3 className="text-xl font-semibold text-gray-800">Expertise</h3>
-          <p className="text-sm text-gray-600 mt-2">{member.expertise}</p>
+          <h3 className="text-xl  font-lufga font-semibold text-yellow-500">Expertise</h3>
+          <p className="text-lg font-poppins text-gray-500 mt-2">{member.expertise}</p>
         </div>
       </div>
     </div>

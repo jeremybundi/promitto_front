@@ -47,17 +47,17 @@ const ConstructionProcess = () => {
   ];
 
   return (
-    <div className="mx-24 p-6">
-      <h1 className="text-4xl font-medium text-center text-yellow-400 mb-6">
+    <div className="md:mx-24 mx-3 md:p-6 p-3">
+      <h1 className="md:text-4xl text-2xl font-medium text-center text-yellow-400 mb-3 md:mb-6" data-aos="fade-down">
         Construction Process
       </h1>
 
       {/* Grid Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
         {steps.map((step, index) => (
           <div
             key={index}
-            className=" p-6  bg-white text-lrft"
+            className=" md:p-6 p-3 bg-white text-lrft"
           >
             {/* Image */}
             <img
@@ -67,12 +67,12 @@ const ConstructionProcess = () => {
             />
             
             {/* Title */}
-            <h2 className="text-xl font-semibold font-lufga text-[#010440] mb-2">
+            <h2 className="md:text-xl text-lg font-semibold font-lufga text-[#010440] mb-2">
               {step.title}
             </h2>
 
             {/* Description */}
-            <p className="text-gray-500 text-sm font-poppins">{step.description}</p>
+            <p className="text-gray-500 md:text-sm text-xs font-poppins">{step.description}</p>
           </div>
         ))}
       </div>

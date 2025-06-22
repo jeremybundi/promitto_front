@@ -36,11 +36,11 @@ export default function HowToOwn() {
     
 
         <div>
-      <div className="flex flex-col md:flex-row font-poppins mt-8  gap-2 p-6">
+      <div className="flex flex-col md:flex-row font-poppins md:mt-8  mt-2 gap-2 p-2 md:p-6">
         {/* First Column */}
-        <div className="w-full md:w-1/2 p-16 pt-36 mx-12 bg-gray-100 rounded-lg shadow-md">
-          <h2 className="text-7xl text-yellow-500 font-bold mb-4">Own a Home</h2>
-          <p className="text-gray-500 text-lg mb-10">
+        <div className="w-full md:w-1/2 md:p-16 p-3 md:pt-24 md:mx-12 bg-gray-100 rounded-lg shadow-md">
+          <h2 className="md:text-7xl text-xl text-center md:text-left text-yellow-500 font-lufga font-bold mb-2 md:mb-8" data-aos="fade-down">Own a Home</h2>
+          <p className="text-gray-400 md:text-lg text-sm md:mb-10 mb-3" data-aos="fade-up">
             At Promitto Ltd, we have streamlined the path to homeownership, making
             it easier and more accessible than ever before. With our innovative
             approach, owning a home becomes an achievable reality. We offer
@@ -50,8 +50,8 @@ export default function HowToOwn() {
           </p>
           <div className="flex items-center space-x-2">
 
-<span className="bg-yellow-400 md:p-2 p-1 md:mb- mb-6 items-center text-sm md:text-lg 
-font-medium cursor-pointer flex hover:bg-yellow-600 rounded-md"
+<span className="bg-yellow-400 md:p-2 p-1 md:mb-6 mb-3 items-center text-sm md:text-lg 
+font-medium cursor-pointer flex hover:bg-yellow-600 rounded-md" data-aos="fade-up"
 onClick={handleEnrollNow}>
 Enroll Now
 <svg
@@ -90,11 +90,11 @@ className="ml-1"
         </div>
   
         {/* Second Column */}
-        <div className="w-full md:w-1/2 p-6 mt-12 bg-white">
-          <h2 className="text-2xl font-bold text-gray-700">Jenga Nyumba Loan</h2>
-          <p className="text-gray-400 mt-4 text-lg">Why You Should Get It!</p>
+        <div className="w-full md:w-1/2 p-6 hidden md:block md:mt-12 bg-white">
+          <h2 className="text-2xl font-bold text-gray-700" data-aos="fade-down">Jenga Nyumba Loan</h2>
+          <p className="text-gray-400 mt-4 text-lg" data-aos="fade-down">Why You Should Get It!</p>
           <div className="flex gap-8 mt-12">
-            <span className="border rounded-3xl shadow-md p-6">
+            <span className="border rounded-3xl shadow-md p-6" data-aos="fade-right">
             <img src={image1} alt="Home" className="w-[80px] mb-4 mt-5 " />
 
 
@@ -109,7 +109,7 @@ className="ml-1"
                 </p>
 
             </span>
-            <span className="border rounded-3xl shadow-md bg-[#F2B807] p-6">
+            <span className="border rounded-3xl shadow-md bg-[#F2B807] p-6" data-aos="fade-left">
             <img src={sail} alt="Sail" className="w-[70px] mt-5 mb-4" />
 
             <h1 className="text-lg font-semibold mb-3">
@@ -128,23 +128,23 @@ className="ml-1"
   
       </div>
      {/* Terms and Conditions Section */}
-<div className="mt-10 p-6 ">
-  <h2 className="text-4xl font-medium text-center text-yellow-400 mb-12">
+<div className="md:mt-10 mt-4 md:p-6 ">
+  <h2 className="md:text-4xl text-2xl font-medium text-center text-yellow-500 md:mb-12 mb-2" data-aos="fade-down">
     Our Terms and Conditions
   </h2>
   {terms.length > 0 ? (
     terms.map((term) => (
       <div key={term.id} className="space-y-6">
         {/* Loan Security & Image - Same Row */}
-        <div className="grid grid-cols-1 mx-16 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:mx-16 md:grid-cols-2 gap-6">
           {/* Loan Security */}
           <div className="px-6 mb-">
-            <h3 className="text-3xl font-medium text-yellow-400 mb-6">01. Loan Security.</h3>
-            <p className="font-semibold mb-4">
+            <h3 className="text-xl md:text-3xl font-medium text-yellow-400 md:mb-6 mb-1" data-aos="fade-down">01. Loan Security.</h3>
+            <p className="font-semibold text-xs md:text-sm mb-4">
               Borrower agrees that on or before the date of this agreement shall
               deliver the following document to the lender;
             </p>
-            <ul className="list-disc pl-6 text-sm mb-20 text-gray-700">
+            <ul className="list-disc pl-6 md:text-sm  text-xs mb-20 text-gray-700">
               {term.loan_security
                 ?.replace(/\\n/g, "\n")
                 .split("\n")
@@ -157,19 +157,19 @@ className="ml-1"
           </div>
 
           {/* Image */}
-          <div className="px-6">
-            <img src={path} alt="Loan Security" className="w-full mt-5 mb-4" />
+          <div className="px-6 hidden md:block">
+            <img src={path} alt="Loan Security" className="w-full mt-5 mb-4" data-aos="fade-left" />
           </div>
         </div>
 
         {/* Other Terms in Two Columns (Different Divs) */}
-        <div className="grid grid-cols-1 bg-gray-100 mx-8 px-12 shadow-lg rounded-2xl  py-24 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 bg-gray-100 md:mx-8 mx-2 md:px-12 px-2 shadow-lg md:rounded-2xl  rounded-md  md:py-24 py-5 md:grid-cols-2 gap-6">
           {/* Left Column */}
           <div className="px-6">
-          <h3 className="text-3xl font-medium text-yellow-400 mb-6">02. Loan Terms.</h3>
+          <h3 className="md:text-3xl text-xl font-medium pt-3 text-yellow-400 mb-6" data-aos="fade-down">02. Loan Terms.</h3>
 
-          <h3 className="text-xl font-semibold text-gray-800 mb-4">(A). Deposits</h3>
-            <ul className="list-disc pl-6 text-sm text-gray-700">
+          <h3 className="text-lg md:text-xl font-semibold text-gray-800 mb-4">(A). Deposits</h3>
+            <ul className="list-disc pl-6 md:text-sm text-xs text-gray-700">
               {term.deposits
                 ?.replace(/\\n/g, "\n")
                 .split("\n")
@@ -180,8 +180,8 @@ className="ml-1"
                 ))}
             </ul>
 
-            <h3 className="text-xl my-4 font-semibold text-gray-800 mb-2">(C). Expenses</h3>
-            <ul className="list-disc pl-6 text-sm text-gray-700">
+            <h3 className="text-lg md:text-xl my-4 hidden md:block font-semibold text-gray-800 mb-2">(C). Expenses</h3>
+            <ul className="list-disc pl-6 text-xs  hidden md:block  md:text-sm text-gray-700">
               {term.expenses
                 ?.replace(/\\n/g, "\n")
                 .split("\n")
@@ -196,8 +196,8 @@ className="ml-1"
           {/* Right Column */}
           <div className="px-6">
         
-          <h3 className="text-xl font-semibold text-gray-800 mt-16 mb-3">(B). Loan Repayment Term</h3>
-            <ul className="list-disc pl-6 text-sm text-gray-700">
+          <h3 className="md:text-xl text-lg font-semibold text-gray-800 md:mt-16 mt-3 mb-3">(B). Loan Repayment Term</h3>
+            <ul className="list-disc pl-6 text-xs md:text-sm text-gray-700">
               {term.loan_repayment_term
                 ?.replace(/\\n/g, "\n")
                 .split("\n")
@@ -208,8 +208,8 @@ className="ml-1"
                 ))}
             </ul>
 
-            <h3 className="text-xl font-semibold text-yellow-500 mt-4 mb-2">A customer can default a loan in three ways:</h3>
-            <ul className="list-disc pl-6 text-sm text-gray-700">
+            <h3 className="md:text-xl  text-lg font-semibold text-yellow-500 mt-4 mb-2">A customer can default a loan in three ways:</h3>
+            <ul className="list-disc pl-6 text-xs md:text-sm text-gray-700">
               {term.default_a_loan
                 ?.replace(/\\n/g, "\n")
                 .split("\n")
@@ -220,8 +220,8 @@ className="ml-1"
                 ))}
             </ul>
 
-            <h3 className="text-xl font-semibold text-yellow-500 mt-4 mb-2">Actionables</h3>
-            <p className="text-sm italic text-gray-500 mb-2">If the client fails to repay any instalment 
+            <h3 className="text-lg md:text-xl font-semibold text-yellow-500 mt-4 mb-2">Actionables</h3>
+            <p className="text-xs md:text-sm italic text-gray-500 mb-2">If the client fails to repay any instalment 
                  within 60 days, the directive will be to:</p>
             <ul className="list-disc pl-6 text-sm text-gray-700">
               {term.actionables

@@ -68,6 +68,7 @@ export default function HouseDesignForm() {
   };
 
   return (
+    <div className="max-w-2xl mx-auto">
     <form onSubmit={handleSubmit} className="space-y-4">
       <input
         type="text"
@@ -125,5 +126,6 @@ export default function HouseDesignForm() {
         Submit
       </button>
     </form>
+    </div>
   );
 }

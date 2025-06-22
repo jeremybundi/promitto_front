@@ -85,9 +85,9 @@ const HouseDesignCreate = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="p-4 space-y-4 bg-white rounded shadow-md">
+    <form onSubmit={handleSubmit} className="p-4  px-8  space-y-4 max-w-2xl mx-auto bg-white rounded shadow-md">
            <span className="flex mb-6 mx-6">
-        <h2 className="text-2xl font-semibold font-poppins mt-2 text-yellow-500 mb-4">Add House Designs </h2>
+        <h2 className="text-2xl font-semibold font-poppins my-4 mb- text-yellow-500 mb-4">Add House Designs </h2>
       <button
           onClick={() => navigate("/admin")}
           className="bg-yellow-700 hover:bg-yelow-600 font-poppins text-white md:px-4 px-2 md:py-2 ml-auto mb-4 rounded-lg shadow-md"
@@ -130,15 +130,16 @@ const HouseDesignCreate = () => {
             />
           </label>
           <label className="block">
-            Features (comma-separated):
-            <input
-              type="text"
+            Features:
+            <textarea
               value={design.features}
               onChange={(e) => handleDesignChange(index, "features", e.target.value)}
               className="block w-full p-2 border rounded"
+              rows="4"
               required
-            />
+            ></textarea>
           </label>
+
           <label className="block">
             Upload Images:
             <input
@@ -157,7 +158,7 @@ const HouseDesignCreate = () => {
           </button>
         </div>
       ))}
-      
+      <div className="flex justify-between">
       <button
         type="button"
         onClick={addDesign}
@@ -173,6 +174,8 @@ const HouseDesignCreate = () => {
       >
         {loading ? "Submitting..." : "Submit"}
       </button>
+      </div>
+     
 
       {error && <p className="text-red-500">{error}</p>}
     </form>

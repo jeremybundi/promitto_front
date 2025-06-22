@@ -37,8 +37,8 @@ const HouseDesignFeatures = () => {
   };
 
   return (
-    <div className="mx-8 p-6 font-poppins">
-      <h1 className="text-4xl font-medium text-center text-yellow-400 mb-8">House Designs</h1>
+    <div className="md:mx-8 mx-1 p-6 font-poppins">
+      <h1 className="text-2xl md:text-4xl font-medium text-center text-yellow-400 md:mb-8 mb-2" data-aos="fade-down">House Designs</h1>
 
       {loading && <p className="text-blue-600">Loading...</p>}
       {error && <p className="text-red-600">{error}</p>}
@@ -46,37 +46,37 @@ const HouseDesignFeatures = () => {
       {houses.length > 0 && (
         <div>
           {houses.map((house, houseIndex) => (
-            <div key={house.id} className="border p-6 px-20 rounded-xl shadow-lg mb-8 bg-white">
-              <h2 className="text-3xl font-semibold text-[#010440] mb- pt-12">
-                {`${String(houseIndex + 1).padStart(2, "0")}. ${house.name}`}
+            <div key={house.id} className="border px-2 md:px-20 rounded-xl shadow-lg md:mb-8 mb-2 bg-white">
+              <h2 className="md:text-3xl text-2xl truncate w-full font-semibold text-[#010440] pt-3 md:pt-12">
+                {` ${house.name}`}
               </h2>
 
               {house.designs.map((design, designIndex) => (
                 <div
                   key={design.id}
-                  className={`flex flex-col md:flex-row gap-8 items-start py-6 rounded-lg ${
+                  className={`flex flex-col md:flex-row gap-8 items-start md:py-6 py-1 rounded-lg ${
                     designIndex % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                   }`}
                 >
                   {/* Design Details */}
-                  <div className="md:w-1/2 mt-8">
+                  <div className="md:w-1/2 md:mt-8 mt-1">
                     <h3 className="text-2xl font-medium text-yellow-500 mb-4">{design.name}</h3>
-                    <div className="flex flex-col">
-                      <span className="font-semibold text-lg">Cost</span>
-                      <p className="text-gray-500 text-sm mt-2 mb-3">{design.cost}</p>
+                    <div className="flex ">
+                      <span className="font-semibold text-lg">Cost: </span>
+                      <p className="text-gray-500 ml-5 text-sm mt-2 mb-3">{design.cost}</p>
                     </div>
                     <div className="flex flex-col">
-                      <span className="font-semibold text-lg">Features</span>
+                      <span className="font-semibold text-lg">Features:</span>
                       <p className="text-gray-500 text-sm mt-2 pr-16">{design.features}</p>
                     </div>
                   </div>
 
                   {/* Images */}
-                  <div className="md:w-1/2">
+                  <div className="md:w-1/2" data-aos="fade-left">
                     <img
                       src={selectedImages[design.id]}
                       alt="Main House Design"
-                      className="w-full h-64 object-cover rounded-2xl shadow-lg mb-4"
+                      className="w-full md:h-64  h-36 object-cover md:rounded-2xl rounded-xl shadow-lg md:mb-4 mb-2"
                     />
 
                     {/* Thumbnails */}
@@ -86,7 +86,7 @@ const HouseDesignFeatures = () => {
                           key={idx}
                           src={image}
                           alt="House Design Thumbnail"
-                          className="w-4/5 h-16 object-cover rounded-md cursor-pointer hover:opacity-80 transition"
+                          className="w-4/5 md:h-16 h-11 object-cover rounded-md cursor-pointer hover:opacity-80 transition"
                           onClick={() => handleImageClick(design.id, image)}
                         />
                       ))}
@@ -97,10 +97,10 @@ const HouseDesignFeatures = () => {
 
               {/* ✅ Add Note Below the Last Design of the First Column */}
               {house.designs.length > 0 && (
-                <div className="md:w-1/2 mt-6">
+                <div className="md:w-1/2 md:mt-6 mt-2">
                   <span>
-                    <h1 className="text-red-500 text-lg font-bold">*Note*</h1>
-                    <p className="font-medium text-sm mb-8 ">
+                    <h1 className="text-red-500 md:text-lg text-sm font-bold">*Note*</h1>
+                    <p className="font-medium md:text-sm text-[9px] md:mb-8 mb-3  ">
                       Excavation shall not be beyond 2 feet of black cotton and the gradient is flat or slightly slanting. 
                       Anything beyond a standard design, a tailored BQ will be prepared.
                     </p>

@@ -29,11 +29,11 @@ const FileDownload = () => {
   };
 
   return (
-    <div className="mx-[30%] p-6 mb-20  bg-white mt-10">
-      <h2 className="text-3xl font-semibold text-center mb-4">
+    <div className="md:mx-[20%] mx-3 md:p-6 p-2 mb-20  bg-white md:mt-10 mt-4 ">
+      <h2 className="text-2xl md:text-3xl font-semibold text-center mb-1 md:mb-4" data-aos="fade-down">
         Document Download (Bronchures)
       </h2>
-      <p className="text-red-500 italic text-center text-sm mb-3">**Download the  document by clicking the link.**</p>
+      <p className="text-red-500 italic text-center md:text-sm text-xs  mb-3">**Download the  document by clicking the link.**</p>
 
       {/* Display error message if any */}
       {error && <p style={{ color: "red" }}>{error}</p>}
@@ -47,7 +47,7 @@ const FileDownload = () => {
               className="py-1  cursor-pointer "
               onClick={() => handleDownload(file.file_name)} // Trigger download on custom name click
             >
-              <span className="text-lg text-yellow-600 underline italic font-semibold">{file.custom_name}</span>
+              <span className="md:text-sm text-xs text-yellow-600 underline italic font-semibold">{file.custom_name}</span>
             </li>
           ))
         ) : (
